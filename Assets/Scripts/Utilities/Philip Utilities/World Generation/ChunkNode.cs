@@ -12,6 +12,14 @@ namespace Philip.WorldGeneration
         public Tilemap WalkableTilemap { private set; get; }
         public Tilemap ColliderTilemap { private set; get; }
 
+        public bool IsVisible
+        {
+            get
+            {
+                return ChunkGameObject.activeSelf;
+            }
+        }
+
         public ChunkNode(Grid<ChunkNode> grid, int x, int y) : base(grid, x, y)
         {
 

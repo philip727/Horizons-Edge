@@ -11,7 +11,7 @@ namespace Philip.WorldGeneration
 {
     public class WorldGenerationHandler : MonoBehaviour
     {
-        public static WorldData s_worldData { private set; get; }
+        public static WorldData WorldData { private set; get; }
         private const int MAP_WIDTH = 1024;
         private const int MAP_HEIGHT = 1024;
         private const int TILE_SIZE = 1;
@@ -52,13 +52,13 @@ namespace Philip.WorldGeneration
             _worldGrid = new Grid<WorldNode>(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE, (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
             _chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
-            s_worldData = new WorldData(_worldGrid, _chunkGrid);
+            WorldData = new WorldData(_worldGrid, _chunkGrid);
 
             GenerateChunkObjects();
             GenerateWater();
             DisplayTilesInChunks();
 
-            s_worldData.FinishInit();
+            WorldData.FinishInit();
         }
 
         public void GenerateChunkObjects()

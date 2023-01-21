@@ -31,4 +31,19 @@ public class WorldData
     {
         ChunkGrid = grid;
     }
+
+    public bool IsValidChunk(Vector2Int coords)
+    {
+        return ChunkGrid.IsValidCoordinate(coords);
+    }
+
+    public bool IsValidChunk(int x, int y)
+    {
+        return ChunkGrid.IsValidCoordinate(x, y);
+    }
+
+    public bool IsValidChunk(Vector3 worldPosition)
+    {
+        return ChunkGrid.IsValidCoordinate(ChunkGrid.GetCoordinate(worldPosition));
+    }
 }
