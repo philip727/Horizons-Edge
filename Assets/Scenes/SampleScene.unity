@@ -417,3 +417,4 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   <ChunkPrefab>k__BackingField: {fileID: 4678267260607809937, guid: 56e5549d830dddb4b838d3b24122a527, type: 3}
   _tile: {fileID: 11400000, guid: bb99f4b40fad76a4687faf5ca11f51ba, type: 2}
+  _waterTile: {fileID: 11400000, guid: 9a8d5d8fd6252a3429c4f38ad52d728d, type: 2}

@@ -35,7 +35,8 @@ namespace Philip.WorldGeneration
 
 
         [SerializeField] private Tile _tile;
-        
+        [SerializeField] private Tile _waterTile;
+
 
         public void Start()
         {
@@ -49,25 +50,24 @@ namespace Philip.WorldGeneration
             _chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
             GenerateChunkObjects();
-            //GenerateWater();
+            GenerateWater();
+            DisplayTilesInChunks();
         }
 
         public void GenerateChunkObjects()
         {
-            Vector3 _offsetOfGrid = new Vector3(0.5f, 0.5f, 0f);
+            Vector3 offsetOfGrid = new Vector3(0.5f, 0.5f, 0f);
             for (int y = 0; y < MAP_HEIGHT / CHUNK_SIZE; y++)
             {
                 for (int x = 0; x < MAP_WIDTH / CHUNK_SIZE; x++)
                 {
                     ChunkNode chunkNode = _chunkGrid.GetGridObject(x, y);
                     Vector3 worldPosition = _chunkGrid.GetWorldPosition(x, y);
-                    GameObject _chunkPrefab = Instantiate(ChunkPrefab, worldPosition + _offsetOfGrid, Quaternion.identity, transform);
-                    _chunkPrefab.name = $"chunk_{x}_{y}";
-                    chunkNode.SetWalkableTilemap(_chunkPrefab.transform.GetChild(0).GetComponent<Tilemap>());
-                    chunkNode.SetColliderTilemap(_chunkPrefab.transform.GetChild(1).GetComponent<Tilemap>());
-
-
-                    chunkNode.WalkableTilemap.SetTile(new Vector3Int(0, 0, 0), _tile);
+                    GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + offsetOfGrid, Quaternion.identity, transform);
+                    chunkPrefab.name = $"chunk_{x}_{y}";
+                    chunkNode.SetWalkableTilemap(chunkPrefab.transform.GetChild(0).GetComponent<Tilemap>());
+                    chunkNode.SetColliderTilemap(chunkPrefab.transform.GetChild(1).GetComponent<Tilemap>());
+                    //chunkNode.WalkableTilemap.SetTile(new Vector3Int(0, 0, 0), _tile);
                 }
             }
         }
@@ -79,15 +79,36 @@ namespace Philip.WorldGeneration
                 for (int x = 0; x < MAP_WIDTH; x++)
                 {
                     float currentHeight = _generatedNoiseMap[x, y];
+
                     if (currentHeight <= 0.4f)
                     {
                         _worldGrid.GetGridObject(x, y).SetIsWater(true);
-                    }
-                    else
-                    {
-                        _worldGrid.GetGridObject(x, y).SetIsWater(false);
+                        continue;
                     }
 
+                    _worldGrid.GetGridObject(x, y).SetIsWater(false);
+                }
+            }
+        }
+
+        public void DisplayTilesInChunks()
+        {
+            for (int y = 0; y < MAP_HEIGHT; y++)
+            {
+                for (int x = 0; x < MAP_WIDTH; x++)
+                {
+                    WorldNode worldNode = _worldGrid.GetGridObject(x, y);
+                    Vector3 worldPosition = _worldGrid.GetWorldPosition(x, y);
+                    ChunkNode chunkNode = _chunkGrid.GetGridObject(worldPosition);
+
+                    Vector3Int tilemapCoordinate = new Vector3Int(x - CHUNK_SIZE * chunkNode.X, y - CHUNK_SIZE * chunkNode.Y);
+                    if(worldNode.IsWater)
+                    {
+                        chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
+                        continue;
+                    }
+
+                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _tile);
                 }
             }
         }
