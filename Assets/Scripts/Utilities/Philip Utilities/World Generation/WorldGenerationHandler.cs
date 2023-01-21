@@ -9,12 +9,13 @@ using UnityEngine.Tilemaps;
 
 namespace Philip.WorldGeneration
 {
-    public class WorldGenerationHandler : MonoBehaviourSingleton<WorldGenerationHandler>
+    public class WorldGenerationHandler : MonoBehaviour
     {
+        public static WorldData s_worldData { private set; get; }
         private const int MAP_WIDTH = 1024;
         private const int MAP_HEIGHT = 1024;
         private const int TILE_SIZE = 1;
-        private const int CHUNK_SIZE = 32;
+        private const int CHUNK_SIZE = 16;
 
 
         [SerializeField, Header("World Randomisation")] private float _noiseScale = 1f;
@@ -46,28 +47,42 @@ namespace Philip.WorldGeneration
         public void GenerateMap()
         {
             _generatedNoiseMap = Noise.GenerateNoiseMap(MAP_WIDTH, MAP_HEIGHT, _seed, _offset, _octaves, _persistance, _lacunarity, _noiseScale);
+            
+            // Creates the required grids
             _worldGrid = new Grid<WorldNode>(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE, (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
             _chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
+
+            s_worldData = new WorldData(_worldGrid, _chunkGrid);
 
             GenerateChunkObjects();
             GenerateWater();
             DisplayTilesInChunks();
+
+            s_worldData.FinishInit();
         }
 
         public void GenerateChunkObjects()
         {
-            Vector3 offsetOfGrid = new Vector3(0.5f, 0.5f, 0f);
+            
+            Vector3 chunkOffset = new Vector3(0.5f, 0.5f, 0f);
+
+            // Creates each chunk
             for (int y = 0; y < MAP_HEIGHT / CHUNK_SIZE; y++)
             {
                 for (int x = 0; x < MAP_WIDTH / CHUNK_SIZE; x++)
                 {
                     ChunkNode chunkNode = _chunkGrid.GetGridObject(x, y);
                     Vector3 worldPosition = _chunkGrid.GetWorldPosition(x, y);
-                    GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + offsetOfGrid, Quaternion.identity, transform);
+
+                    // Creates the chunk at the right position
+                    GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + chunkOffset, Quaternion.identity, transform);
                     chunkPrefab.name = $"chunk_{x}_{y}";
+
+                    // Adds the tilemaps to the chunks
+                    chunkNode.SetChunkGameObject(chunkPrefab);
                     chunkNode.SetWalkableTilemap(chunkPrefab.transform.GetChild(0).GetComponent<Tilemap>());
                     chunkNode.SetColliderTilemap(chunkPrefab.transform.GetChild(1).GetComponent<Tilemap>());
-                    //chunkNode.WalkableTilemap.SetTile(new Vector3Int(0, 0, 0), _tile);
+                    chunkNode.SetVisible(false);
                 }
             }
         }
@@ -80,6 +95,7 @@ namespace Philip.WorldGeneration
                 {
                     float currentHeight = _generatedNoiseMap[x, y];
 
+                    // Sets water tiles at right height
                     if (currentHeight <= 0.4f)
                     {
                         _worldGrid.GetGridObject(x, y).SetIsWater(true);
@@ -101,6 +117,7 @@ namespace Philip.WorldGeneration
                     Vector3 worldPosition = _worldGrid.GetWorldPosition(x, y);
                     ChunkNode chunkNode = _chunkGrid.GetGridObject(worldPosition);
 
+                    // Makes sure the tile is in the right position of its current chunk tilemap
                     Vector3Int tilemapCoordinate = new Vector3Int(x - CHUNK_SIZE * chunkNode.X, y - CHUNK_SIZE * chunkNode.Y);
                     if(worldNode.IsWater)
                     {
@@ -112,27 +129,6 @@ namespace Philip.WorldGeneration
                 }
             }
         }
-
-        //public void DisplayWorld()
-        //{
-        //    WalkableMap.ClearAllTiles();
-        //    ColliderMap.ClearAllTiles();
-        //    for (int y = 0; y < MAP_HEIGHT; y++)
-        //    {
-        //        for (int x = 0; x < MAP_WIDTH; x++)
-        //        {
-        //            Vector3Int currentCell = new Vector3Int(x, y, 0);
-        //            if(_worldGrid.GetGridObject(x, y).IsWater)
-        //            {
-        //                ColliderMap.SetTile(currentCell, colliderTile);
-        //            }
-        //            else
-        //            {
-        //                WalkableMap.SetTile(currentCell, groundTile);
-        //            }
-        //        }
-        //    }
-        //}
 
 
         private void OnValidate()
@@ -147,13 +143,6 @@ namespace Philip.WorldGeneration
                 _octaves = 0;
             }
         }
-    }
-
-    public enum BiomeTypes
-    {
-        Water,
-        Forest,
-        Snow,
     }
 }
 
