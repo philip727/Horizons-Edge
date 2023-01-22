@@ -11,19 +11,8 @@ namespace Philip.WorldGeneration
     public class WorldGenerationHandler : MonoBehaviourSingleton<WorldGenerationHandler>
     {
         public static WorldData s_worldData;
-        private const int MAP_WIDTH = 1024;
-        private const int MAP_HEIGHT = 1024;
-        private const int TILE_SIZE = 1;
-        private const int CHUNK_SIZE = 16;
-
-        [SerializeField, Header("World Randomisation")] private float _noiseScale = 1f;
-
-        [SerializeField] private int _octaves;
-        [SerializeField, Range(0f, 1f)] private float _persistance;
-        [SerializeField] private float _lacunarity;
-
-        [SerializeField] private int _seed;
-        [SerializeField] private Vector2 _offset;
+        [field: SerializeField] public int Seed { private set; get; }
+        [field:SerializeField] public WorldGenerationSettings WorldGenerationSettings { private set; get; }
 
         [field: SerializeField, Header("World Setup")] public GameObject ChunkPrefab { private set; get; }
 
@@ -35,7 +24,7 @@ namespace Philip.WorldGeneration
 
         public void Start()
         {
-            s_worldData = GenerateWorldData();
+            s_worldData = GenerateWorldData(Seed);
             CreateWorldFromData();
             s_worldData.FinishWorldGeneration();
         }
@@ -47,14 +36,29 @@ namespace Philip.WorldGeneration
             DisplayTilesInChunks();
         }
 
-        public WorldData GenerateWorldData()
+        public WorldData GenerateWorldData(int seed)
         {
             // Generates the noise we use for randomisation
-            float[,] generatedNoiseMap = Noise.GenerateNoiseMap(MAP_WIDTH, MAP_HEIGHT, _seed, _offset, _octaves, _persistance, _lacunarity, _noiseScale);
+            float[,] generatedNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldWidth, 
+                WorldGenerationSettings.WorldHeight,
+                seed, 
+                WorldGenerationSettings.Offset,
+                WorldGenerationSettings.Octaves,
+                WorldGenerationSettings.Persistance,
+                WorldGenerationSettings.Lacunarity,
+                WorldGenerationSettings.NoiseScale);
 
             // Creates the required grids for chunking and placing tiles
-            Grid<WorldNode> worldGrid = new Grid<WorldNode>(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE, (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
-            Grid<ChunkNode>  chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
+            Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
+                WorldGenerationSettings.WorldHeight, 
+                WorldGenerationSettings.TileSize, 
+                (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
+            
+            Grid<ChunkNode>  chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.ChunkSize, 
+                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
             return new WorldData(worldGrid, chunkGrid, generatedNoiseMap);
         }
@@ -65,9 +69,9 @@ namespace Philip.WorldGeneration
             Vector3 chunkOffset = new Vector3(0.5f, 0.5f, 0f);
 
             // Creates each chunk
-            for (int y = 0; y < MAP_HEIGHT / CHUNK_SIZE; y++)
+            for (int y = 0; y < WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize; y++)
             {
-                for (int x = 0; x < MAP_WIDTH / CHUNK_SIZE; x++)
+                for (int x = 0; x < WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize; x++)
                 {
                     ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(x, y);
                     Vector3 worldPosition = s_worldData.ChunkGrid.GetWorldPosition(x, y);
@@ -84,9 +88,9 @@ namespace Philip.WorldGeneration
 
         public void GenerateWater()
         {
-            for (int y = 0; y < MAP_HEIGHT; y++)
+            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
-                for (int x = 0; x < MAP_WIDTH; x++)
+                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
                     float currentHeight = s_worldData.HeightMap[x, y];
 
@@ -104,16 +108,17 @@ namespace Philip.WorldGeneration
 
         public void DisplayTilesInChunks()
         {
-            for (int y = 0; y < MAP_HEIGHT; y++)
+            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
-                for (int x = 0; x < MAP_WIDTH; x++)
+                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
                     WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
                     Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
                     ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
 
                     // Makes sure the tile is in the right position of its current chunk tilemap
-                    Vector3Int tilemapCoordinate = new Vector3Int(x - CHUNK_SIZE * chunkNode.X, y - CHUNK_SIZE * chunkNode.Y);
+                    Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X, 
+                                                                  y - WorldGenerationSettings.ChunkSize * chunkNode.Y);
                     if(worldNode.IsWater)
                     {
                         chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
@@ -122,19 +127,6 @@ namespace Philip.WorldGeneration
 
                     chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _tile);
                 }
-            }
-        }
-
-        private void OnValidate()
-        {
-            if (_lacunarity < 1)
-            {
-                _lacunarity = 1;
-            }
-
-            if(_octaves < 0)
-            {
-                _octaves = 0;
             }
         }
     }
