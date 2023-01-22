@@ -26,36 +26,34 @@ namespace Philip.WorldGeneration
         [field: SerializeField, Header("World Setup")] public GameObject ChunkPrefab { private set; get; }
 
 
-        private float[,] _generatedNoiseMap;
-        private Grid<WorldNode> _worldGrid;
-        private Grid<ChunkNode> _chunkGrid;
-
-
         [SerializeField] private Tile _tile;
         [SerializeField] private Tile _waterTile;
 
 
         public void Start()
         {
-            s_worldData = GenerateMap();
-            s_worldData.FinishInit();
+            s_worldData = GenerateWorldData();
+            CreateWorldFromData();
+            s_worldData.FinishWorldGeneration();
         }
 
-        public WorldData GenerateMap()
+        public void CreateWorldFromData()
         {
-            WorldData _worldData;
-            _generatedNoiseMap = Noise.GenerateNoiseMap(MAP_WIDTH, MAP_HEIGHT, _seed, _offset, _octaves, _persistance, _lacunarity, _noiseScale);
-            
-            // Creates the required grids
-            _worldGrid = new Grid<WorldNode>(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE, (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
-            _chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
-
-            _worldData = new WorldData(_worldGrid, _chunkGrid);
-
             GenerateChunkObjects();
             GenerateWater();
             DisplayTilesInChunks();
-            return _worldData;
+        }
+
+        public WorldData GenerateWorldData()
+        {
+            // Generates the noise we use for randomisation
+            float[,] generatedNoiseMap = Noise.GenerateNoiseMap(MAP_WIDTH, MAP_HEIGHT, _seed, _offset, _octaves, _persistance, _lacunarity, _noiseScale);
+
+            // Creates the required grids for chunking and placing tiles
+            Grid<WorldNode> worldGrid = new Grid<WorldNode>(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE, (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
+            Grid<ChunkNode>  chunkGrid = new Grid<ChunkNode>(MAP_WIDTH / CHUNK_SIZE, MAP_HEIGHT / CHUNK_SIZE, CHUNK_SIZE, (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
+
+            return new WorldData(worldGrid, chunkGrid, generatedNoiseMap);
         }
 
         public void GenerateChunkObjects()
@@ -68,8 +66,8 @@ namespace Philip.WorldGeneration
             {
                 for (int x = 0; x < MAP_WIDTH / CHUNK_SIZE; x++)
                 {
-                    ChunkNode chunkNode = _chunkGrid.GetGridObject(x, y);
-                    Vector3 worldPosition = _chunkGrid.GetWorldPosition(x, y);
+                    ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(x, y);
+                    Vector3 worldPosition = s_worldData.ChunkGrid.GetWorldPosition(x, y);
 
                     // Creates the chunk at the right position
                     GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + chunkOffset, Quaternion.identity, transform);
@@ -90,16 +88,16 @@ namespace Philip.WorldGeneration
             {
                 for (int x = 0; x < MAP_WIDTH; x++)
                 {
-                    float currentHeight = _generatedNoiseMap[x, y];
+                    float currentHeight = s_worldData.HeightMap[x, y];
 
                     // Sets water tiles at right height
                     if (currentHeight <= 0.4f)
                     {
-                        _worldGrid.GetGridObject(x, y).SetIsWater(true);
+                        s_worldData.WorldGrid.GetGridObject(x, y).SetIsWater(true);
                         continue;
                     }
 
-                    _worldGrid.GetGridObject(x, y).SetIsWater(false);
+                    s_worldData.WorldGrid.GetGridObject(x, y).SetIsWater(false);
                 }
             }
         }
@@ -110,9 +108,9 @@ namespace Philip.WorldGeneration
             {
                 for (int x = 0; x < MAP_WIDTH; x++)
                 {
-                    WorldNode worldNode = _worldGrid.GetGridObject(x, y);
-                    Vector3 worldPosition = _worldGrid.GetWorldPosition(x, y);
-                    ChunkNode chunkNode = _chunkGrid.GetGridObject(worldPosition);
+                    WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
+                    Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
+                    ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
 
                     // Makes sure the tile is in the right position of its current chunk tilemap
                     Vector3Int tilemapCoordinate = new Vector3Int(x - CHUNK_SIZE * chunkNode.X, y - CHUNK_SIZE * chunkNode.Y);

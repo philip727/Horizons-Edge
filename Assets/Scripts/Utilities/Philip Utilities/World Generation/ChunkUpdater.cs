@@ -11,11 +11,11 @@ namespace Philip.WorldGeneration
         public static Vector2 s_viewerPosition;
 
         // Chunks
-        private List<ChunkNode> loadedChunksLastUpdate = new List<ChunkNode>();
+        private readonly List<ChunkNode> _loadedChunksLastUpdate = new List<ChunkNode>();
 
         public void Update()
         {
-            if (!WorldGenerationHandler.s_worldData.Initialized) return;
+            if (!WorldGenerationHandler.s_worldData.WorldGenerationCompleted) return;
             s_viewerPosition = new Vector2(Viewer.position.x, Viewer.position.y);
             UpdateVisisbleChunks();
         }
@@ -24,12 +24,12 @@ namespace Philip.WorldGeneration
         {
             Vector2Int currentCoords = WorldGenerationHandler.s_worldData.ChunkGrid.GetCoordinate(Viewer.position);
 
-            for (int i = 0; i < loadedChunksLastUpdate.Count; i++)
+            for (int i = 0; i < _loadedChunksLastUpdate.Count; i++)
             {
-                loadedChunksLastUpdate[i].SetVisible(false);
+                _loadedChunksLastUpdate[i].SetVisible(false);
             }
 
-            loadedChunksLastUpdate.Clear();
+            _loadedChunksLastUpdate.Clear();
 
             for (int yOffset = -MAX_VIEW_DISTANCE; yOffset <= MAX_VIEW_DISTANCE; yOffset++)
             {
@@ -43,7 +43,7 @@ namespace Philip.WorldGeneration
                     if(!chunkNode.IsVisible)
                     {
                         chunkNode.SetVisible(true);
-                        loadedChunksLastUpdate.Add(chunkNode);
+                        _loadedChunksLastUpdate.Add(chunkNode);
                     } 
                 }
             }

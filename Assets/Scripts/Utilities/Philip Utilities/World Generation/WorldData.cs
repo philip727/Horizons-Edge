@@ -5,20 +5,22 @@ namespace Philip.WorldGeneration
 {
     public class WorldData
     {
-        public bool Initialized { private set; get; }
+        public bool WorldGenerationCompleted { private set; get; }
         public Grid<WorldNode> WorldGrid { private set; get; }
         public Grid<ChunkNode> ChunkGrid { private set; get; }
+        public float[,] HeightMap { private set; get; }
 
-        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid)
+        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap)
         {
-            Initialized = false;
+            WorldGenerationCompleted = false;
             WorldGrid = worldGrid;
             ChunkGrid = chunkGrid;
+            HeightMap = heightMap;
         }
 
-        public void FinishInit()
+        public void FinishWorldGeneration()
         {
-            Initialized = true;
+            WorldGenerationCompleted = true;
         }
 
         public void SetWorldGrid(Grid<WorldNode> grid)
