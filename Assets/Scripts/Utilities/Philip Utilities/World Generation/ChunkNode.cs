@@ -23,19 +23,12 @@ namespace Philip.WorldGeneration
 
         }
 
-        public void SetChunkGameObject(GameObject gameObject)
+        public void SetupChunk(GameObject chunkObject)
         {
-            ChunkGameObject = gameObject;
-        }
-
-        public void SetWalkableTilemap(Tilemap tilemap)
-        {
-            WalkableTilemap = tilemap;
-        }
-
-        public void SetColliderTilemap(Tilemap tilemap)
-        {
-            ColliderTilemap = tilemap;
+            ChunkGameObject = chunkObject;
+            WalkableTilemap = chunkObject.transform.GetChild(0).GetComponent<Tilemap>();
+            ColliderTilemap = chunkObject.transform.GetChild(1).GetComponent<Tilemap>();
+            SetVisible(false);
         }
 
         public void SetVisible(bool value)

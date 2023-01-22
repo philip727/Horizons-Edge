@@ -3,10 +3,12 @@ using Philip.Utilities.Maths;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using System.Collections.Generic;
+using Philip.Utilities;
 
 namespace Philip.WorldGeneration
 {
-    public class WorldGenerationHandler : MonoBehaviour
+    public class WorldGenerationHandler : MonoBehaviourSingleton<WorldGenerationHandler>
     {
         public static WorldData s_worldData;
         private const int MAP_WIDTH = 1024;
@@ -28,6 +30,7 @@ namespace Philip.WorldGeneration
 
         [SerializeField] private Tile _tile;
         [SerializeField] private Tile _waterTile;
+
 
 
         public void Start()
@@ -74,10 +77,7 @@ namespace Philip.WorldGeneration
                     chunkPrefab.name = $"chunk_{x}_{y}";
 
                     // Adds the tilemaps to the chunks
-                    chunkNode.SetChunkGameObject(chunkPrefab);
-                    chunkNode.SetWalkableTilemap(chunkPrefab.transform.GetChild(0).GetComponent<Tilemap>());
-                    chunkNode.SetColliderTilemap(chunkPrefab.transform.GetChild(1).GetComponent<Tilemap>());
-                    chunkNode.SetVisible(false);
+                    chunkNode.SetupChunk(chunkPrefab);
                 }
             }
         }

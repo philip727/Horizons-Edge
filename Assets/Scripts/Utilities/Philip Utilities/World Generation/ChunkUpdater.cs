@@ -9,11 +9,17 @@ namespace Philip.WorldGeneration
         public const int MAX_VIEW_DISTANCE = 3;
         [field: SerializeField] public Transform Viewer { private set; get; }
         public static Vector2 s_viewerPosition;
+        public static WorldGenerationHandler s_worldGenerator;
 
         // Chunks
         private readonly List<ChunkNode> _loadedChunksLastUpdate = new List<ChunkNode>();
 
-        public void Update()
+        private void Start()
+        {
+            s_worldGenerator = WorldGenerationHandler.Instance;
+        }
+
+        private void Update()
         {
             if (!WorldGenerationHandler.s_worldData.WorldGenerationCompleted) return;
             s_viewerPosition = new Vector2(Viewer.position.x, Viewer.position.y);

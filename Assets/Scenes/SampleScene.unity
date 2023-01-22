@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _noiseScale: 130
   _octaves: 4
-  _persistance: 0.035
+  _persistance: 0.699
   _lacunarity: 6.8
   _seed: 1488
   _offset: {x: 0, y: 0}

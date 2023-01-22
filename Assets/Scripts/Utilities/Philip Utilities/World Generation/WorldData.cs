@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Philip.WorldGeneration
 {
-    public class WorldData
+    public struct WorldData
     {
         public bool WorldGenerationCompleted { private set; get; }
-        public Grid<WorldNode> WorldGrid { private set; get; }
-        public Grid<ChunkNode> ChunkGrid { private set; get; }
-        public float[,] HeightMap { private set; get; }
+        public readonly Grid<WorldNode> WorldGrid { get; }
+        public readonly Grid<ChunkNode> ChunkGrid { get; }
+        public readonly float[,] HeightMap { get; }
 
         public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap)
         {
@@ -21,16 +21,6 @@ namespace Philip.WorldGeneration
         public void FinishWorldGeneration()
         {
             WorldGenerationCompleted = true;
-        }
-
-        public void SetWorldGrid(Grid<WorldNode> grid)
-        {
-            WorldGrid = grid;
-        }
-
-        public void SetChunkGrid(Grid<ChunkNode> grid)
-        {
-            ChunkGrid = grid;
         }
 
         public bool IsValidChunk(Vector2Int coords)
