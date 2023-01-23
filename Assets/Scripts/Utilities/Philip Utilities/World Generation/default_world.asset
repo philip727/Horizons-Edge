@@ -21,3 +21,5 @@ MonoBehaviour:
   <Persistance>k__BackingField: 0.149
   <Lacunarity>k__BackingField: 3.5
   <Offset>k__BackingField: {x: 0, y: 0}
+  <BiomeObjects>k__BackingField:
+  - {fileID: 11400000, guid: f7f0a37f6955e8a4cb3361fd7118a0f1, type: 2}

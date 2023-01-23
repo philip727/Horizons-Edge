@@ -6,7 +6,7 @@ namespace Philip.WorldGeneration
     public class ChunkUpdater : MonoBehaviour
     { 
         // Viewer
-        public const int MAX_VIEW_DISTANCE = 3;
+        public const int MAX_VIEW_DISTANCE = 1;
         [field: SerializeField] public Transform Viewer { private set; get; }
         public static Vector2 s_viewerPosition;
         public static WorldGenerationHandler s_worldGenerator;

@@ -11,10 +11,15 @@ namespace Philip.WorldGeneration
     public class WorldGenerationHandler : MonoBehaviourSingleton<WorldGenerationHandler>
     {
         public static WorldData s_worldData;
-        [field: SerializeField] public int Seed { private set; get; }
+        [field: SerializeField, Header("World")] public int Seed { private set; get; }
         [field:SerializeField] public WorldGenerationSettings WorldGenerationSettings { private set; get; }
+        [field: SerializeField] public NoiseSettings LandSettings { private set; get; }
+        [field: SerializeField] public NoiseSettings PrecipitationSettings { private set; get; }
+        [field: SerializeField] public NoiseSettings TemperatureSettings { private set; get; }
 
-        [field: SerializeField, Header("World Setup")] public GameObject ChunkPrefab { private set; get; }
+
+
+        [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
 
 
         [SerializeField] private Tile _tile;
@@ -39,15 +44,15 @@ namespace Philip.WorldGeneration
         public WorldData GenerateWorldData(int seed)
         {
             // Generates the noise we use for randomisation
-            float[,] generatedNoiseMap = Noise.GenerateNoiseMap(
+            float[,] waterNoiseMap = Noise.GenerateNoiseMap(
                 WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight,
-                seed, 
-                WorldGenerationSettings.Offset,
-                WorldGenerationSettings.Octaves,
-                WorldGenerationSettings.Persistance,
-                WorldGenerationSettings.Lacunarity,
-                WorldGenerationSettings.NoiseScale);
+                seed,
+                LandSettings.Offset,
+                LandSettings.Octaves,
+                LandSettings.Persistance,
+                LandSettings.Lacunarity,
+                LandSettings.NoiseScale);
 
             // Creates the required grids for chunking and placing tiles
             Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
@@ -60,7 +65,7 @@ namespace Philip.WorldGeneration
                 WorldGenerationSettings.ChunkSize, 
                 (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
-            return new WorldData(worldGrid, chunkGrid, generatedNoiseMap);
+            return new WorldData(worldGrid, chunkGrid, waterNoiseMap);
         }
 
         public void GenerateChunkObjects()
