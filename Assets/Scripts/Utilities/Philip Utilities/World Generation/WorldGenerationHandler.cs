@@ -14,9 +14,6 @@ namespace Philip.WorldGeneration
         [field: SerializeField] public NoiseSettings LandSettings { private set; get; }
         [field: SerializeField] public NoiseSettings PrecipitationSettings { private set; get; }
         [field: SerializeField] public NoiseSettings TemperatureSettings { private set; get; }
-
-
-
         [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
 
 
@@ -36,6 +33,7 @@ namespace Philip.WorldGeneration
         {
             GenerateChunkObjects();
             GenerateWater();
+            GenerateBiomes();
             DisplayTilesInChunks();
         }
 
@@ -91,7 +89,6 @@ namespace Philip.WorldGeneration
 
         public void GenerateChunkObjects()
         {
-            
             Vector3 chunkOffset = new Vector3(0.5f, 0.5f, 0f);
 
             // Creates each chunk
@@ -134,26 +131,60 @@ namespace Philip.WorldGeneration
             }
         }
 
+        public void GenerateBiomes()
+        {
+            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
+            {
+                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
+                {
+                    // Gets the precipitation and temp map and creates a default biome we can start with
+                    Biome bestBiome = null;
+                    float precipitationHeight = s_worldData.PrecipitationMap[x, y];
+                    float temperatureHeight = s_worldData.HeightMap[x, y];
+
+                    // Loops through all the biomes and checks if its the best fit for that block
+                    for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
+                    {
+                        Biome currentBiome = WorldGenerationSettings.BiomeObjects[i].Biome;
+                        float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiome.Precipitation, 2f) +
+                            Mathf.Pow(temperatureHeight - currentBiome.Precipitation, 2f));
+
+                        float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow(precipitationHeight - bestBiome.Precipitation, 2f) +
+                            Mathf.Pow(temperatureHeight - bestBiome.Precipitation, 2f));
+
+                        if (currentBiomeEuclidianDistance > bestBiomeEuclidianDistance)
+                        {
+                            bestBiome = currentBiome;
+                        }
+                    }
+
+                    // Set biome
+                    s_worldData.WorldGrid.GetGridObject(x, y).SetBiome(bestBiome == null ? WorldGenerationSettings.BiomeObjects[0].Biome : bestBiome);
+                }
+            }
+        }
+
         public void DisplayTilesInChunks()
         {
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
+                    // Gets the chunk node
                     WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
                     Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
                     ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
 
                     // Makes sure the tile is in the right position of its current chunk tilemap
-                    Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X, 
+                    Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X,
                                                                   y - WorldGenerationSettings.ChunkSize * chunkNode.Y);
-                    if(worldNode.IsWater)
+                    if (worldNode.IsWater)
                     {
                         chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
                         continue;
                     }
 
-                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _tile);
+                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, worldNode.Biome.BiomeTile);
                 }
             }
         }

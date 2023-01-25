@@ -16,10 +16,6 @@ MonoBehaviour:
   WorldHeight: 1024
   TileSize: 1
   ChunkSize: 16
-  <NoiseScale>k__BackingField: 75
-  <Octaves>k__BackingField: 4
-  <Persistance>k__BackingField: 0.149
-  <Lacunarity>k__BackingField: 3.5
-  <Offset>k__BackingField: {x: 0, y: 0}
   <BiomeObjects>k__BackingField:
   - {fileID: 11400000, guid: f7f0a37f6955e8a4cb3361fd7118a0f1, type: 2}
+  - {fileID: 11400000, guid: 610d48efe0356ab40a5c961a3d224e4f, type: 2}

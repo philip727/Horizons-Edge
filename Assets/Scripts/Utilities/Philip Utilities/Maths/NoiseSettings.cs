@@ -9,7 +9,6 @@ public class NoiseSettings : ScriptableObject
     [field: SerializeField] public int Octaves { private set; get; }
     [field: SerializeField, Range(0f, 1f)] public float Persistance { private set; get; }
     [field: SerializeField] public float Lacunarity { private set; get; }
-
     [field: SerializeField] public Vector2 Offset { private set; get; }
 
     private void OnValidate()
