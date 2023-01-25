@@ -2,8 +2,6 @@ using Philip.Grid;
 using Philip.Utilities.Maths;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System;
-using System.Collections.Generic;
 using Philip.Utilities;
 
 namespace Philip.WorldGeneration
