@@ -9,14 +9,13 @@ namespace Philip.WorldGeneration
         public const int MAX_VIEW_DISTANCE = 1;
         [field: SerializeField] public Transform Viewer { private set; get; }
         public static Vector2 s_viewerPosition;
-        public static WorldGenerationHandler s_worldGenerator;
 
         // Chunks
         private readonly List<ChunkNode> _loadedChunksLastUpdate = new List<ChunkNode>();
 
         private void Start()
         {
-            s_worldGenerator = WorldGenerationHandler.Instance;
+
         }
 
         private void Update()
@@ -26,10 +25,13 @@ namespace Philip.WorldGeneration
             UpdateVisisbleChunks();
         }
 
+
+        // Updates the chunk visibility
         private void UpdateVisisbleChunks()
         {
             Vector2Int currentCoords = WorldGenerationHandler.s_worldData.ChunkGrid.GetCoordinate(Viewer.position);
 
+            // Unrenders the chunks from last update
             for (int i = 0; i < _loadedChunksLastUpdate.Count; i++)
             {
                 _loadedChunksLastUpdate[i].SetVisible(false);
@@ -37,6 +39,8 @@ namespace Philip.WorldGeneration
 
             _loadedChunksLastUpdate.Clear();
 
+
+            // Renders the chunks by the render distance in each direction
             for (int yOffset = -MAX_VIEW_DISTANCE; yOffset <= MAX_VIEW_DISTANCE; yOffset++)
             {
                 for (int xOffset = -MAX_VIEW_DISTANCE; xOffset <= MAX_VIEW_DISTANCE; xOffset++)

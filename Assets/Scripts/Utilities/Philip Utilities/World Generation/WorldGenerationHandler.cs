@@ -12,7 +12,7 @@ namespace Philip.WorldGeneration
     {
         public static WorldData s_worldData;
         [field: SerializeField, Header("World")] public int Seed { private set; get; }
-        [field:SerializeField] public WorldGenerationSettings WorldGenerationSettings { private set; get; }
+        [field: SerializeField] public WorldGenerationSettings WorldGenerationSettings { private set; get; }
         [field: SerializeField] public NoiseSettings LandSettings { private set; get; }
         [field: SerializeField] public NoiseSettings PrecipitationSettings { private set; get; }
         [field: SerializeField] public NoiseSettings TemperatureSettings { private set; get; }
@@ -43,7 +43,7 @@ namespace Philip.WorldGeneration
 
         public WorldData GenerateWorldData(int seed)
         {
-            // Generates the noise we use for randomisation
+            // Generates the noise we use for water randomisation
             float[,] waterNoiseMap = Noise.GenerateNoiseMap(
                 WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight,
@@ -54,18 +54,41 @@ namespace Philip.WorldGeneration
                 LandSettings.Lacunarity,
                 LandSettings.NoiseScale);
 
-            // Creates the required grids for chunking and placing tiles
+            // Generates the noise we use for precipitation, this will affect biome generation
+            float[,] precipitationNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldWidth,
+                WorldGenerationSettings.WorldHeight,
+                seed,
+                PrecipitationSettings.Offset,
+                PrecipitationSettings.Octaves,
+                PrecipitationSettings.Persistance,
+                PrecipitationSettings.Lacunarity,
+                PrecipitationSettings.NoiseScale);
+
+            // Generates the noise we use for temperature, this will affect biome generation
+            float[,] temperatureNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldWidth,
+                WorldGenerationSettings.WorldHeight,
+                seed,
+                TemperatureSettings.Offset,
+                TemperatureSettings.Octaves,
+                TemperatureSettings.Persistance,
+                TemperatureSettings.Lacunarity,
+                TemperatureSettings.NoiseScale);
+
+            // Creates the grid that we use for single tile placement
             Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight, 
                 WorldGenerationSettings.TileSize, 
                 (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
             
-            Grid<ChunkNode>  chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
+            // Creates the grid that we use for chunks which holds the tiles displayed
+            Grid<ChunkNode> chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.ChunkSize, 
                 (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
-            return new WorldData(worldGrid, chunkGrid, waterNoiseMap);
+            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap);
         }
 
         public void GenerateChunkObjects()
@@ -78,10 +101,11 @@ namespace Philip.WorldGeneration
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize; x++)
                 {
+                    // Gets the world position of the chunk
                     ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(x, y);
                     Vector3 worldPosition = s_worldData.ChunkGrid.GetWorldPosition(x, y);
 
-                    // Creates the chunk at the right position
+                    // Creates the chunk at the right position which we can use to display tiles
                     GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + chunkOffset, Quaternion.identity, transform);
                     chunkPrefab.name = $"chunk_{x}_{y}";
 
@@ -91,6 +115,7 @@ namespace Philip.WorldGeneration
             }
         }
 
+        // Generates water and oceans
         public void GenerateWater()
         {
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)

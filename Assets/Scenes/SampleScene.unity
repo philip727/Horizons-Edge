@@ -445,8 +445,8 @@ MonoBehaviour:
   <Seed>k__BackingField: 96863
   <WorldGenerationSettings>k__BackingField: {fileID: 11400000, guid: 3e3278ee16f152e429499adcffa99d6c, type: 2}
   <LandSettings>k__BackingField: {fileID: 11400000, guid: d37948e8538578348813c7c04c7d00b3, type: 2}
-  <PrecipitationSettings>k__BackingField: {fileID: 0}
-  <TemperatureSettings>k__BackingField: {fileID: 0}
+  <PrecipitationSettings>k__BackingField: {fileID: 11400000, guid: 1d8c6d9a7191d214baf4102e4eef649e, type: 2}
+  <TemperatureSettings>k__BackingField: {fileID: 11400000, guid: 1c1bb68591d56c54392009bdb8c06eaf, type: 2}
   <ChunkPrefab>k__BackingField: {fileID: 4678267260607809937, guid: 56e5549d830dddb4b838d3b24122a527, type: 3}
   _tile: {fileID: 11400000, guid: bb99f4b40fad76a4687faf5ca11f51ba, type: 2}
   _waterTile: {fileID: 11400000, guid: 9a8d5d8fd6252a3429c4f38ad52d728d, type: 2}

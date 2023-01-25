@@ -8,7 +8,7 @@ public abstract class ObjectPooler<TClass> : MonoBehaviourSingleton<TClass> wher
     [field: SerializeField] public GameObject ObjectPrefab { private set; get; }
     [field: SerializeField] public int StartingAmountOfObjects { private set; get; }
     [field: SerializeField] public Transform ObjectParent { private set; get; }
-    private List<GameObject> _spawnedObjects = new List<GameObject>();
+    private readonly List<GameObject> _spawnedObjects = new List<GameObject>();
 
     public override void Awake()
     {
@@ -34,6 +34,7 @@ public abstract class ObjectPooler<TClass> : MonoBehaviourSingleton<TClass> wher
         return obj;
     }
 
+    // Gets the first object that isn't active
     public GameObject GetObject()
     {
         for (int i = 0; i < _spawnedObjects.Count; i++)
@@ -44,6 +45,7 @@ public abstract class ObjectPooler<TClass> : MonoBehaviourSingleton<TClass> wher
             }
         }
 
+        // If there are no objects that aren't active then it creates a new one
         return SpawnNewObject();
     }
 

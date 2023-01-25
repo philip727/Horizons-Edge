@@ -9,13 +9,17 @@ namespace Philip.WorldGeneration
         public readonly Grid<WorldNode> WorldGrid { get; }
         public readonly Grid<ChunkNode> ChunkGrid { get; }
         public readonly float[,] HeightMap { get; }
+        public readonly float[,] PrecipitationMap { get; }
+        public readonly float[,] TemperatureMap { get; }
 
-        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap)
+        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap)
         {
             WorldGenerationCompleted = false;
             WorldGrid = worldGrid;
             ChunkGrid = chunkGrid;
             HeightMap = heightMap;
+            PrecipitationMap = precipitationMap;
+            TemperatureMap = temperatureMap;
         }
 
         public void FinishWorldGeneration()
