@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13dd1b20d736f5b49948a7ada885e63a, type: 3}
   m_Name: biome_sandy
   m_EditorClassIdentifier: 
-  HeightToSpawnAt: 0
+  <Precipitation>k__BackingField: 0.777
+  <Temperature>k__BackingField: 0.103
+  <BiomeTile>k__BackingField: {fileID: 11400000, guid: 8d26c822674b8dc41ab56eaaa98885ed, type: 2}
   Biome:
     <Name>k__BackingField: Sandy Beach
     <ID>k__BackingField: biomes:sandy_beach
-    <Precipitation>k__BackingField: 0.777
-    <Temperature>k__BackingField: 0.103
-    <BiomeTile>k__BackingField: {fileID: 11400000, guid: 8d26c822674b8dc41ab56eaaa98885ed, type: 2}

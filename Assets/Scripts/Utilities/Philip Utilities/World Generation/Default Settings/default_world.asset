@@ -19,3 +19,4 @@ MonoBehaviour:
   <BiomeObjects>k__BackingField:
   - {fileID: 11400000, guid: f7f0a37f6955e8a4cb3361fd7118a0f1, type: 2}
   - {fileID: 11400000, guid: 610d48efe0356ab40a5c961a3d224e4f, type: 2}
+  - {fileID: 11400000, guid: 1428c007412cbe54cb2bc35eadfaad18, type: 2}

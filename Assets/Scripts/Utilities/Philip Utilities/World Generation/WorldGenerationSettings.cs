@@ -5,11 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New World Settings", menuName = "Philip/World Generation/World Settings")]
 public class WorldGenerationSettings : ScriptableObject
 {
-    [field: SerializeField] public int WorldWidth = 1024;
-    [field: SerializeField] public int WorldHeight = 1024;
-    [field: SerializeField] public int TileSize = 1;
-    [field: SerializeField] public int ChunkSize = 16;
+    [field: SerializeField] public int WorldWidth { private set; get; } = 1024;
+    [field: SerializeField] public int WorldHeight { private set; get; } = 1024;
+    [field: SerializeField] public int TileSize { private set; get; } = 1;
+    [field: SerializeField] public int ChunkSize { private set; get; } = 16;
     [field: SerializeField] public BiomeObject[] BiomeObjects { private set; get; } = new BiomeObject[0];
+
+    public BiomeObject GetBiomeObject(Biome biome)
+    {
+        for (int i = 0; i < BiomeObjects.Length; i++)
+        {
+            if (BiomeObjects[i].Biome.ID == biome.ID)
+            {
+                return BiomeObjects[i];
+            }
+        }
+
+        return null;
+    }
 
 
     private void OnValidate()

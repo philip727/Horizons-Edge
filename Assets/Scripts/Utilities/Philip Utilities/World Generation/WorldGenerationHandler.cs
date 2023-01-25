@@ -138,28 +138,28 @@ namespace Philip.WorldGeneration
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
                     // Gets the precipitation and temp map and creates a default biome we can start with
-                    Biome bestBiome = null;
+                    BiomeObject bestBiome = null;
                     float precipitationHeight = s_worldData.PrecipitationMap[x, y];
-                    float temperatureHeight = s_worldData.HeightMap[x, y];
+                    float temperatureHeight = s_worldData.TemperatureMap[x, y];
 
                     // Loops through all the biomes and checks if its the best fit for that block
                     for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
                     {
-                        Biome currentBiome = WorldGenerationSettings.BiomeObjects[i].Biome;
-                        float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiome.Precipitation, 2f) +
-                            Mathf.Pow(temperatureHeight - currentBiome.Precipitation, 2f));
+                        BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
+                        float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiomeObject.Precipitation, 2f) +
+                            Mathf.Pow(temperatureHeight - currentBiomeObject.Temperature, 2f));
 
                         float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow(precipitationHeight - bestBiome.Precipitation, 2f) +
-                            Mathf.Pow(temperatureHeight - bestBiome.Precipitation, 2f));
+                            Mathf.Pow(temperatureHeight - bestBiome.Temperature, 2f));
 
                         if (currentBiomeEuclidianDistance > bestBiomeEuclidianDistance)
                         {
-                            bestBiome = currentBiome;
+                            bestBiome = currentBiomeObject;
                         }
                     }
 
                     // Set biome
-                    s_worldData.WorldGrid.GetGridObject(x, y).SetBiome(bestBiome == null ? WorldGenerationSettings.BiomeObjects[0].Biome : bestBiome);
+                    s_worldData.WorldGrid.GetGridObject(x, y).SetBiome(bestBiome == null ? WorldGenerationSettings.BiomeObjects[0].Biome : bestBiome.Biome);
                 }
             }
         }
@@ -184,7 +184,12 @@ namespace Philip.WorldGeneration
                         continue;
                     }
 
-                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, worldNode.Biome.BiomeTile);
+                    if (worldNode.Biome.ID == "biomes:void_shores")
+                        Debug.Log("Hi");
+
+                    //Debug.Log(worldNode.Biome.ID);
+
+                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, WorldGenerationSettings.GetBiomeObject(worldNode.Biome).BiomeTile);
                 }
             }
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: noise_temperature
   m_EditorClassIdentifier: 
   <NoiseScale>k__BackingField: 60
-  <Octaves>k__BackingField: 6
-  <Persistance>k__BackingField: 0.255
-  <Lacunarity>k__BackingField: 3.21
+  <Octaves>k__BackingField: 8
+  <Persistance>k__BackingField: 0.089
+  <Lacunarity>k__BackingField: 2.3
   <Offset>k__BackingField: {x: 100, y: -90}
