@@ -146,6 +146,8 @@ namespace Philip.WorldGeneration
                     for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
                     {
                         BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
+
+
                         float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiomeObject.Precipitation, 2f) +
                             Mathf.Pow(temperatureHeight - currentBiomeObject.Temperature, 2f));
 

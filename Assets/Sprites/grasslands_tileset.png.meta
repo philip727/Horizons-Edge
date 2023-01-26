@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b4e4ec297817f6b4f87e9be2d0701c07
+guid: faa7827fb7940704f842ec4227137a2f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: somerandomtilesidk_0
+      name: grasslands_tileset_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73cf698fb62ce8f4485f54ee86e665e8
+      internalID: -1110028612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grasslands_tileset_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a61ff80dd5a0d4c4fa7769372fd8cb8f
+      internalID: -350999650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grasslands_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d921386fc81a26542800ea5721b032cf
+      internalID: 710297157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grasslands_tileset_3
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdab5adfc13a0264f9358899ae67e82f
-      internalID: -384382542
+      spriteID: 822f51cec24fca348ad97f0e8eb3dd06
+      internalID: 954957220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: somerandomtilesidk_1
+      name: grasslands_tileset_4
       rect:
         serializedVersion: 2
         x: 16
@@ -152,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c5d0ff629fb813408c0f72ddba0b366
-      internalID: -1211565130
+      spriteID: 7d02d0162a4507341923f9fc8503f61f
+      internalID: -684147316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: somerandomtilesidk_2
+      name: grasslands_tileset_5
       rect:
         serializedVersion: 2
         x: 0
@@ -173,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7d2ea0e7ecd994d95d9641b6853415
-      internalID: -1134078614
+      spriteID: c226f077970628e4596d328b1121b799
+      internalID: -1477430635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: somerandomtilesidk_3
+      name: grasslands_tileset_6
       rect:
         serializedVersion: 2
         x: 16
@@ -194,8 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 939b678c1fa016d48a6b88f3cc8ae237
-      internalID: -1931691280
+      spriteID: 234c558ed2fee15428fb54c92e2202fd
+      internalID: -2087431097
       vertices: []
       indices: 
       edges: []
@@ -211,10 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      somerandomtilesidk_0: -384382542
-      somerandomtilesidk_1: -1211565130
-      somerandomtilesidk_3: -1931691280
-      somerandomtilesidk_2: -1134078614
+      grasslands_tileset_4: -684147316
+      grasslands_tileset_3: 954957220
+      grasslands_tileset_0: -1110028612
+      grasslands_tileset_6: -2087431097
+      grasslands_tileset_2: 710297157
+      grasslands_tileset_5: -1477430635
+      grasslands_tileset_1: -350999650
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

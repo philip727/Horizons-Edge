@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da54f7c92a9dcd4e9809a47eeb4fcc9, type: 3}
   m_Name: default_world
   m_EditorClassIdentifier: 
-  WorldWidth: 1024
-  WorldHeight: 1024
-  TileSize: 1
-  ChunkSize: 16
+  <WorldWidth>k__BackingField: 1024
+  <WorldHeight>k__BackingField: 1024
+  <TileSize>k__BackingField: 1
+  <ChunkSize>k__BackingField: 16
   <BiomeObjects>k__BackingField:
   - {fileID: 11400000, guid: f7f0a37f6955e8a4cb3361fd7118a0f1, type: 2}
-  - {fileID: 11400000, guid: 610d48efe0356ab40a5c961a3d224e4f, type: 2}
-  - {fileID: 11400000, guid: 1428c007412cbe54cb2bc35eadfaad18, type: 2}
