@@ -11,6 +11,7 @@ namespace Philip.Tilemaps
     {
         [field: SerializeField] public RuleTile[] RuleTiles = new RuleTile[0];
 
+        [System.Serializable]
         public class RuleTile
         {
             [field: SerializeField] public Tile Tile { private set; get; }

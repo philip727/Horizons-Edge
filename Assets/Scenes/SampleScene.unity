@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1973751281}
   - component: {fileID: 1973751283}
   - component: {fileID: 1973751284}
+  - component: {fileID: 1973751285}
   m_Layer: 0
   m_Name: map
   m_TagString: Untagged
@@ -463,3 +464,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Viewer>k__BackingField: {fileID: 285686835}
+--- !u!114 &1973751285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973751280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015ec4c3c2b7ba74494da50ec8ee06be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldGenerationHandler: {fileID: 1973751283}

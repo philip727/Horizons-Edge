@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3cc9115d4788e438bf9f90be03957d, type: 3}
+  m_Name: ruletile_grasslands
+  m_EditorClassIdentifier: 
+  RuleTiles:
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 7d92432f6b854484281c9d2f8a2821b4, type: 2}
+    <Rule>k__BackingField: 0
+  - <Tile>k__BackingField: {fileID: 11400000, guid: f7acd1e3fcb5a0244b4d7c125ab81aa2, type: 2}
+    <Rule>k__BackingField: 2
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 78fa230a5f35de4498019f7395dfaf47, type: 2}
+    <Rule>k__BackingField: 1
+  - <Tile>k__BackingField: {fileID: 11400000, guid: c07c31d5355d2d24ab40e93a517b8752, type: 2}
+    <Rule>k__BackingField: 3
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 6e447058e29468b4e8ee311580f682b2, type: 2}
+    <Rule>k__BackingField: 4
+  - <Tile>k__BackingField: {fileID: 11400000, guid: ebff6ba6a588da04180fdcfed6f01da8, type: 2}
+    <Rule>k__BackingField: 5

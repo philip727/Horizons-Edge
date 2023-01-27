@@ -11,7 +11,7 @@ namespace Philip.WorldGeneration
 
         public void Awake()
         {
-            WorldGenerationHandler.s_worldData.onWorldGenerationFinished += OnWorldGenerationFinished;
+            _worldGenerationHandler.onWorldGenerationFinished += OnWorldGenerationFinished;
         }
 
         private void OnWorldGenerationFinished()
@@ -36,14 +36,17 @@ namespace Philip.WorldGeneration
             WorldNode bottomLeftNode = worldNode.GetNeighbour(Node<WorldNode>.NeighbourDirections.DownLeft);
             WorldNode bottomRightNode = worldNode.GetNeighbour(Node<WorldNode>.NeighbourDirections.DownRight);
 
+            //Debug.Log($"{leftNode}, {aboveNode}, {rightNode}, {belowNode}, {topLeftNode}, {topRightNode}, {bottomLeftNode}, {bottomRightNode}");
+
             // Centre Tile
             if(leftNode != null && aboveNode != null && rightNode != null 
                 && belowNode != null && topLeftNode != null && topRightNode != null
                 && bottomLeftNode != null && bottomRightNode != null)
             {
                 if(!leftNode.IsWater && !aboveNode.IsWater && !rightNode.IsWater && !belowNode.IsWater
-                    && !topLeftNode.IsWater && !topRightNode.IsWater && !bottomLeftNode.IsWater !&& bottomRightNode.IsWater)
+                    && !topLeftNode.IsWater && !topRightNode.IsWater && !bottomLeftNode.IsWater !&& !bottomRightNode.IsWater)
                 {
+                    //Debug.Log("Centre Tile");
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.Centre);
                 }
             }
@@ -78,14 +81,36 @@ namespace Philip.WorldGeneration
             // Bottom Edge Tile
             if(leftNode != null && rightNode != null && aboveNode != null)
             {
-                if(!leftNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && (belowNode == null || belowNode.IsWater))
+                if(!leftNode.IsWater && !aboveNode.IsWater && !rightNode.IsWater && (belowNode == null || belowNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CentreDown);
                 }
             }
 
+            // Top Left Corner Tile
+            if(rightNode != null && belowNode != null && bottomRightNode != null)
+            {
+                if (!rightNode.IsWater && !belowNode.IsWater && !bottomRightNode.IsWater 
+                    && (leftNode == null || leftNode.IsWater) && (aboveNode == null || aboveNode.IsWater)
+                    && (topLeftNode == null || topLeftNode.IsWater))
+                {
+                    return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.TopLeft);
+                }
+            }
+
+            // Top Right Corner Tile
+            if(leftNode != null && belowNode != null && bottomLeftNode != null)
+            {
+                if (!leftNode.IsWater && !belowNode.IsWater && !bottomLeftNode.IsWater
+                    && (rightNode == null || rightNode.IsWater) && (aboveNode == null || aboveNode.IsWater)
+                    && (topRightNode == null || topRightNode.IsWater))
+                {
+                    return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.TopRight);
+                }
+            }
 
 
+            //Debug.LogError($"<color=#36ffc3>[WORLD GENERATION]</color> could not determine tile");
 
             return null;
         }
@@ -100,6 +125,12 @@ namespace Philip.WorldGeneration
                 {
                     // Need to determine tile
                     WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
+
+                    if(worldNode.IsWater)
+                    {
+                        continue;
+                    }
+
                     Tile determinedTile = DetermineTile(worldNode);
                     if(determinedTile != null)
                     {
@@ -114,6 +145,7 @@ namespace Philip.WorldGeneration
                     }
                 }
             }
+
         }
     }
 }

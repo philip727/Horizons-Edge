@@ -35,42 +35,42 @@ namespace Philip.Grid
             switch (neighbourDirections)
             {
                 case NeighbourDirections.Left:
-                    if(!_grid.IsValidCoordinate(X - 1, Y))
+                    if(_grid.IsValidCoordinate(X - 1, Y))
                         return _grid.GetGridObject(X - 1, Y);
 
                     break;
                 case NeighbourDirections.Right:
-                    if (!_grid.IsValidCoordinate(X + 1, Y))
+                    if (_grid.IsValidCoordinate(X + 1, Y))
                         return _grid.GetGridObject(X + 1, Y);
 
                     break;
                 case NeighbourDirections.Up:
-                    if (!_grid.IsValidCoordinate(X, Y + 1))
+                    if (_grid.IsValidCoordinate(X, Y + 1))
                         return _grid.GetGridObject(X, Y + 1);
 
                     break;
                 case NeighbourDirections.Down:
-                    if (!_grid.IsValidCoordinate(X, Y - 1))
+                    if (_grid.IsValidCoordinate(X, Y - 1))
                         return _grid.GetGridObject(X, Y - 1);
 
                     break;
                 case NeighbourDirections.UpLeft:
-                    if (!_grid.IsValidCoordinate(X - 1, Y + 1))
+                    if (_grid.IsValidCoordinate(X - 1, Y + 1))
                         return _grid.GetGridObject(X - 1, Y + 1);
                     
                     break;
                 case NeighbourDirections.UpRight:
-                    if (!_grid.IsValidCoordinate(X + 1, Y + 1))
+                    if (_grid.IsValidCoordinate(X + 1, Y + 1))
                         return _grid.GetGridObject(X + 1, Y + 1);
 
                     break;
                 case NeighbourDirections.DownLeft:
-                    if (!_grid.IsValidCoordinate(X - 1, Y - 1))
+                    if (_grid.IsValidCoordinate(X - 1, Y - 1))
                         return _grid.GetGridObject(X - 1, Y - 1);
 
                     break;
                 case NeighbourDirections.DownRight:
-                    if (!_grid.IsValidCoordinate(X + 1, Y - 1))
+                    if (_grid.IsValidCoordinate(X + 1, Y - 1))
                         return _grid.GetGridObject(X + 1, Y - 1);
 
                     break;

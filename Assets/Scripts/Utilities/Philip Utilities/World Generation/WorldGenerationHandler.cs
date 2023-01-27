@@ -8,7 +8,9 @@ namespace Philip.WorldGeneration
 {
     public class WorldGenerationHandler : MonoBehaviourSingleton<WorldGenerationHandler>
     {
+        public delegate void WorldGenerationFished();
         public static WorldData s_worldData;
+        public WorldGenerationFished onWorldGenerationFinished;
         [field: SerializeField, Header("World")] public int Seed { private set; get; }
         [field: SerializeField] public WorldGenerationSettings WorldGenerationSettings { private set; get; }
         [field: SerializeField] public NoiseSettings LandSettings { private set; get; }
@@ -26,7 +28,13 @@ namespace Philip.WorldGeneration
         {
             s_worldData = GenerateWorldData(Seed);
             CreateWorldFromData();
+            FinishWorldGeneration();
+        }
+
+        private void FinishWorldGeneration()
+        {
             s_worldData.FinishWorldGeneration();
+            onWorldGenerationFinished?.Invoke();
         }
 
         public void CreateWorldFromData()

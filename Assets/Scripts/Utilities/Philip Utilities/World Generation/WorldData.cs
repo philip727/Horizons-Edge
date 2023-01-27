@@ -6,10 +6,8 @@ namespace Philip.WorldGeneration
 {
     public class WorldData
     {
-        public delegate void WorldGenerationFinished();
 
         public bool WorldGenerationCompleted { private set; get; }
-        public WorldGenerationFinished onWorldGenerationFinished;
         public Grid<WorldNode> WorldGrid { get; }
         public Grid<ChunkNode> ChunkGrid { get; }
         public float[,] HeightMap { get; }
@@ -29,7 +27,6 @@ namespace Philip.WorldGeneration
         public void FinishWorldGeneration()
         {
             WorldGenerationCompleted = true;
-            onWorldGenerationFinished?.Invoke();
         }
 
         public bool IsValidChunk(Vector2Int coords)
