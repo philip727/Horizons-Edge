@@ -52,36 +52,40 @@ namespace Philip.WorldGeneration
             }
 
             // Top Edge Tile
-            if(leftNode != null && rightNode != null && belowNode != null)
+            if(leftNode != null && rightNode != null && belowNode != null && bottomLeftNode != null && bottomRightNode != null)
             {
-                if(!leftNode.IsWater && !rightNode.IsWater && !belowNode.IsWater && (aboveNode == null || aboveNode.IsWater))
+                if(!leftNode.IsWater && !rightNode.IsWater && !belowNode.IsWater 
+                    && !bottomLeftNode.IsWater && !bottomRightNode.IsWater && (aboveNode == null || aboveNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CentreUp);
                 }
             }
 
             // Left Edge Tile
-            if(rightNode != null && aboveNode != null && belowNode != null)
+            if(rightNode != null && aboveNode != null && belowNode != null && topRightNode != null && bottomRightNode != null)
             {
-                if(!rightNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && (leftNode == null || leftNode.IsWater))
+                if(!rightNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && !topRightNode.IsWater && !bottomRightNode.IsWater
+                    && (leftNode == null || leftNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CentreLeft);
                 }
             }
 
             // Right Edge Tile
-            if(leftNode != null && aboveNode != null && belowNode != null)
+            if(leftNode != null && aboveNode != null && belowNode != null && topLeftNode != null && bottomLeftNode != null)
             {
-                if (!leftNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && (rightNode == null || rightNode.IsWater)) 
+                if (!leftNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && !topLeftNode.IsWater && !bottomLeftNode.IsWater 
+                    && (rightNode == null || rightNode.IsWater)) 
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CentreRight);
                 }
             }
 
             // Bottom Edge Tile
-            if(leftNode != null && rightNode != null && aboveNode != null)
+            if(leftNode != null && rightNode != null && aboveNode != null && topLeftNode != null && topRightNode != null)
             {
-                if(!leftNode.IsWater && !aboveNode.IsWater && !rightNode.IsWater && (belowNode == null || belowNode.IsWater))
+                if(!leftNode.IsWater && !aboveNode.IsWater && !rightNode.IsWater 
+                    && !topLeftNode.IsWater && !topRightNode.IsWater && (belowNode == null || belowNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CentreDown);
                 }
