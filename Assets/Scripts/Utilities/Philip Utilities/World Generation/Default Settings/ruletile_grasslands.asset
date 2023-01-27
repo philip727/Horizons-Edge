@@ -27,3 +27,15 @@ MonoBehaviour:
     <Rule>k__BackingField: 5
   - <Tile>k__BackingField: {fileID: 11400000, guid: 614a7be7d64b5ad46a884b54814c06a1, type: 2}
     <Rule>k__BackingField: 6
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 5bffdeb2123fda8478eb4841beb7653d, type: 2}
+    <Rule>k__BackingField: 7
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 67583497f3047614e90fba84190cf083, type: 2}
+    <Rule>k__BackingField: 8
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 56768b948a9f6aa498ed57676504b01f, type: 2}
+    <Rule>k__BackingField: 9
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 2c383b19503a61c43bc8553bf90bc81b, type: 2}
+    <Rule>k__BackingField: 10
+  - <Tile>k__BackingField: {fileID: 11400000, guid: fbf7804ef4f72f242b7a5e2d0b5e5442, type: 2}
+    <Rule>k__BackingField: 12
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 6e08cdbc9afd547478e1ba8588e8f849, type: 2}
+    <Rule>k__BackingField: 11
