@@ -109,6 +109,14 @@ namespace Philip.WorldGeneration
                 }
             }
 
+            // Bottom Left Corner Tile
+
+            // Bottom Right Corner Tile
+
+            // Going Around Corner Tiles
+
+            // Alone Tiles Each Direction
+
 
             //Debug.LogError($"<color=#36ffc3>[WORLD GENERATION]</color> could not determine tile");
 

@@ -25,3 +25,5 @@ MonoBehaviour:
     <Rule>k__BackingField: 4
   - <Tile>k__BackingField: {fileID: 11400000, guid: ebff6ba6a588da04180fdcfed6f01da8, type: 2}
     <Rule>k__BackingField: 5
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 614a7be7d64b5ad46a884b54814c06a1, type: 2}
+    <Rule>k__BackingField: 6
