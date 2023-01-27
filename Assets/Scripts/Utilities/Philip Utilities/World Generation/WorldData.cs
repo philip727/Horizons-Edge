@@ -1,16 +1,20 @@
 using Philip.Grid;
 using UnityEngine;
+using static Philip.WorldGeneration.WorldData;
 
 namespace Philip.WorldGeneration
 {
-    public struct WorldData
+    public class WorldData
     {
+        public delegate void WorldGenerationFinished();
+
         public bool WorldGenerationCompleted { private set; get; }
-        public readonly Grid<WorldNode> WorldGrid { get; }
-        public readonly Grid<ChunkNode> ChunkGrid { get; }
-        public readonly float[,] HeightMap { get; }
-        public readonly float[,] PrecipitationMap { get; }
-        public readonly float[,] TemperatureMap { get; }
+        public WorldGenerationFinished onWorldGenerationFinished;
+        public Grid<WorldNode> WorldGrid { get; }
+        public Grid<ChunkNode> ChunkGrid { get; }
+        public float[,] HeightMap { get; }
+        public float[,] PrecipitationMap { get; }
+        public float[,] TemperatureMap { get; }
 
         public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap)
         {
@@ -25,6 +29,7 @@ namespace Philip.WorldGeneration
         public void FinishWorldGeneration()
         {
             WorldGenerationCompleted = true;
+            onWorldGenerationFinished?.Invoke();
         }
 
         public bool IsValidChunk(Vector2Int coords)

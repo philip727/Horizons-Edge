@@ -34,7 +34,7 @@ namespace Philip.WorldGeneration
             GenerateChunkObjects();
             GenerateWater();
             GenerateBiomes();
-            DisplayTilesInChunks();
+            //DisplayTilesInChunks();
         }
 
         public WorldData GenerateWorldData(int seed)
@@ -166,35 +166,35 @@ namespace Philip.WorldGeneration
             }
         }
 
-        public void DisplayTilesInChunks()
-        {
-            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
-            {
-                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
-                {
-                    // Gets the chunk node
-                    WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
-                    Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
-                    ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
+        //public void DisplayTilesInChunks()
+        //{
+        //    for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
+        //    {
+        //        for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
+        //        {
+        //            // Gets the chunk node
+        //            WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
+        //            Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
+        //            ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
 
-                    // Makes sure the tile is in the right position of its current chunk tilemap
-                    Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X,
-                                                                  y - WorldGenerationSettings.ChunkSize * chunkNode.Y);
-                    if (worldNode.IsWater)
-                    {
-                        chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
-                        continue;
-                    }
+        //            // Makes sure the tile is in the right position of its current chunk tilemap
+        //            Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X,
+        //                                                          y - WorldGenerationSettings.ChunkSize * chunkNode.Y);
+        //            if (worldNode.IsWater)
+        //            {
+        //                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
+        //                continue;
+        //            }
 
-                    if (worldNode.Biome.ID == "biomes:void_shores")
-                        Debug.Log("Hi");
+        //            if (worldNode.Biome.ID == "biomes:void_shores")
+        //                Debug.Log("Hi");
 
-                    //Debug.Log(worldNode.Biome.ID);
+        //            //Debug.Log(worldNode.Biome.ID);
 
-                    chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, WorldGenerationSettings.GetBiomeObject(worldNode.Biome).BiomeTile);
-                }
-            }
-        }
+        //            chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules);
+        //        }
+        //    }
+        //}
     }
 }
 
