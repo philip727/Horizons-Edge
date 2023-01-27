@@ -41,6 +41,7 @@ namespace Philip.Tilemaps
             SingleTileLeft,
             SingleTileRight,
             SingleTileDown,
+            TileAlone,
         }
 
         public Tile GetTileFromRule(RuleTilePositions ruleToLookFor)

@@ -43,3 +43,7 @@ MonoBehaviour:
     <Rule>k__BackingField: 13
   - <Tile>k__BackingField: {fileID: 11400000, guid: 121580e501fae9f40854d6ced01ff715, type: 2}
     <Rule>k__BackingField: 17
+  - <Tile>k__BackingField: {fileID: 11400000, guid: 4bf3d765153eef54d918e747789ebf29, type: 2}
+    <Rule>k__BackingField: 14
+  - <Tile>k__BackingField: {fileID: 11400000, guid: c739866cf64fd73429fc9774a8d8a9b0, type: 2}
+    <Rule>k__BackingField: 21

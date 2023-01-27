@@ -134,55 +134,74 @@ namespace Philip.WorldGeneration
             }
 
             // Corner Leading Up Right
-            if(rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomLeftNode != null)
+            if(rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomLeftNode != null && topRightNode != null)
             {
                 if(!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !bottomLeftNode.IsWater
-                    && (bottomRightNode == null || bottomRightNode.IsWater))
+                    && !topRightNode.IsWater && (bottomRightNode == null || bottomRightNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingRightBottom);
                 }
             }
 
             // Corner Leading Up Left
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomRightNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomRightNode != null && topLeftNode != null)
             {
                 if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !bottomRightNode.IsWater
-                    && (bottomLeftNode == null || bottomLeftNode.IsWater))
+                    && !topLeftNode.IsWater && (bottomLeftNode == null || bottomLeftNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingLeftBottom);
                 }
             }
 
             // Corner Leading Down Left
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topRightNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topRightNode != null && bottomLeftNode != null)
             {
                 if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !topRightNode.IsWater
-                    && (topLeftNode == null || topLeftNode.IsWater))
+                    && !bottomLeftNode.IsWater && (topLeftNode == null || topLeftNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingLeftTop);
                 }
             }
 
             // Corner Leading Down Right
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topLeftNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topLeftNode != null && bottomRightNode != null)
             {
                 if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !topLeftNode.IsWater
-                    && (topRightNode == null || topRightNode.IsWater))
+                    && !bottomRightNode.IsWater && (topRightNode == null || topRightNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingRightTop);
                 }
             }
 
             // Single Block Up Corner
-            if (rightNode != null && leftNode != null && belowNode != null && bottomLeftNode != null && bottomRightNode != null)
+            if (rightNode != null && leftNode != null && aboveNode != null && belowNode != null && bottomLeftNode != null && bottomRightNode != null)
             {
-                if(!rightNode.IsWater && !leftNode.IsWater && !belowNode.IsWater && !bottomLeftNode.IsWater && !bottomRightNode.IsWater
+                if(!aboveNode.IsWater && !rightNode.IsWater && !leftNode.IsWater && !belowNode.IsWater && !bottomLeftNode.IsWater && !bottomRightNode.IsWater
                     && (topLeftNode == null || topLeftNode.IsWater) && (topRightNode == null || topRightNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.GoingUpToSingleTile);
                 }
             }
 
+            // Single Block Down Corner
+            if(rightNode != null && leftNode != null && aboveNode != null && belowNode != null && topRightNode != null && topLeftNode != null)
+            {
+                if (!rightNode.IsWater && !leftNode.IsWater && !aboveNode.IsWater && !belowNode.IsWater && !topRightNode.IsWater && !topLeftNode.IsWater
+                    && (bottomLeftNode == null || bottomLeftNode.IsWater) && (bottomRightNode == null || bottomRightNode.IsWater))
+                {
+                    return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.GoingDownToSingleTile);
+                }
+            }
+
+            // Single Block Left Corner
+            //if (aboveNode != null && belowNode != null && leftNode != null)
+            //{
+            //    if (!aboveNode.IsWater && !belowNode.IsWater && !leftNode.IsWater && (topLeftNode == null || topLeftNode.IsWater)
+            //        && (bottomLeftNode == null || bottomLeftNode.IsWater))
+            //    {
+
+            //    }
+            //}
 
             // Single Width Walk Ways
 
@@ -196,6 +215,12 @@ namespace Philip.WorldGeneration
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.SingleTileUp);
                 }
+            }
+
+            if ((leftNode == null || leftNode.IsWater) && (rightNode == null || rightNode.IsWater) 
+                && (aboveNode == null || aboveNode.IsWater) && (belowNode == null || belowNode.IsWater))
+            {
+                return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.TileAlone);
             }
 
             //Debug.LogError($"<color=#36ffc3>[WORLD GENERATION]</color> could not determine tile");

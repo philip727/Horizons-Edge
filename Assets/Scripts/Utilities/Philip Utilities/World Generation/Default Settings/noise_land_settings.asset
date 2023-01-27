@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NoiseScale>k__BackingField: 50
   <Octaves>k__BackingField: 4
-  <Persistance>k__BackingField: 0.155
+  <Persistance>k__BackingField: 0.187
   <Lacunarity>k__BackingField: 2.87
   <Offset>k__BackingField: {x: 0, y: 0}
