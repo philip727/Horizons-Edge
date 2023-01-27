@@ -19,10 +19,6 @@ namespace Philip.WorldGeneration
         [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
 
 
-        [SerializeField] private Tile _tile;
-        [SerializeField] private Tile _waterTile;
-
-
 
         public void Start()
         {

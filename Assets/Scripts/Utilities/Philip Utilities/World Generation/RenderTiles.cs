@@ -9,6 +9,8 @@ namespace Philip.WorldGeneration
     {
         [SerializeField] private WorldGenerationHandler _worldGenerationHandler;
 
+        [SerializeField] private Tile _waterTile;
+
         public void Awake()
         {
             _worldGenerationHandler.onWorldGenerationFinished += OnWorldGenerationFinished;
@@ -134,9 +136,9 @@ namespace Philip.WorldGeneration
             }
 
             // Corner Leading Up Right
-            if(rightNode != null && belowNode != null && aboveNode != null && leftNode != null)
+            if(rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomLeftNode != null)
             {
-                if(!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater 
+                if(!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !bottomLeftNode.IsWater
                     && (bottomRightNode == null || bottomRightNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingRightBottom);
@@ -144,9 +146,9 @@ namespace Philip.WorldGeneration
             }
 
             // Corner Leading Up Left
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && bottomRightNode != null)
             {
-                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater
+                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !bottomRightNode.IsWater
                     && (bottomLeftNode == null || bottomLeftNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingLeftBottom);
@@ -154,9 +156,9 @@ namespace Philip.WorldGeneration
             }
 
             // Corner Leading Down Left
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topRightNode != null)
             {
-                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater
+                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !topRightNode.IsWater
                     && (topLeftNode == null || topLeftNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingLeftTop);
@@ -164,16 +166,19 @@ namespace Philip.WorldGeneration
             }
 
             // Corner Leading Down Right
-            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null)
+            if (rightNode != null && belowNode != null && aboveNode != null && leftNode != null && topLeftNode != null)
             {
-                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater
+                if (!rightNode.IsWater && !belowNode.IsWater && !aboveNode.IsWater && !leftNode.IsWater && !topLeftNode.IsWater
                     && (topRightNode == null || topRightNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.CornerNothingRightTop);
                 }
             }
 
-            // Going Around Corner Tiles
+
+
+            // Single Width Walk Ways
+
 
             // Alone Tiles Each Direction
 
@@ -193,21 +198,20 @@ namespace Philip.WorldGeneration
                 {
                     // Need to determine tile
                     WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
-
-                    if(worldNode.IsWater)
+                    Vector3 worldPosition = WorldGenerationHandler.s_worldData.WorldGrid.GetWorldPosition(x, y);
+                    ChunkNode chunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(worldPosition);
+                    Vector3Int tilemapCoordinate = new Vector3Int(x - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.X,
+                                                                  y - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.Y);
+                    if (worldNode.IsWater)
                     {
+                        chunkNode.ColliderTilemap.SetTile(tilemapCoordinate, _waterTile);
                         continue;
                     }
 
                     Tile determinedTile = DetermineTile(worldNode);
                     if(determinedTile != null)
                     {
-                        Vector3 worldPosition = WorldGenerationHandler.s_worldData.WorldGrid.GetWorldPosition(x, y);
-                        ChunkNode chunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(worldPosition);
-
-                        // Makes sure the tile is in the right position of its current chunk tilemap
-                        Vector3Int tilemapCoordinate = new Vector3Int(x - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.X,
-                                                                      y - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.Y);
+                        
 
                         chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile);
                     }
