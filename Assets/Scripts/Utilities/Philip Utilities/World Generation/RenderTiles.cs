@@ -97,8 +97,7 @@ namespace Philip.WorldGeneration
             if(rightNode != null && belowNode != null && bottomRightNode != null)
             {
                 if (!rightNode.IsWater && !belowNode.IsWater && !bottomRightNode.IsWater 
-                    && (leftNode == null || leftNode.IsWater) && (aboveNode == null || aboveNode.IsWater)
-                    && (topLeftNode == null || topLeftNode.IsWater))
+                    && (leftNode == null || leftNode.IsWater) && (aboveNode == null || aboveNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.TopLeft);
                 }
@@ -108,8 +107,7 @@ namespace Philip.WorldGeneration
             if(leftNode != null && belowNode != null && bottomLeftNode != null)
             {
                 if (!leftNode.IsWater && !belowNode.IsWater && !bottomLeftNode.IsWater
-                    && (rightNode == null || rightNode.IsWater) && (aboveNode == null || aboveNode.IsWater)
-                    && (topRightNode == null || topRightNode.IsWater))
+                    && (rightNode == null || rightNode.IsWater) && (aboveNode == null || aboveNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.TopRight);
                 }
@@ -119,7 +117,7 @@ namespace Philip.WorldGeneration
             if(rightNode != null && aboveNode != null && topRightNode != null)
             {
                 if (!rightNode.IsWater && !aboveNode.IsWater && !topRightNode.IsWater && (leftNode == null || leftNode.IsWater)
-                    && (belowNode == null || belowNode.IsWater) && (bottomLeftNode == null || bottomLeftNode.IsWater))
+                    && (belowNode == null || belowNode.IsWater))
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.BottomLeft);
                 }
@@ -129,7 +127,7 @@ namespace Philip.WorldGeneration
             if(leftNode != null && aboveNode != null && topLeftNode != null)
             {
                 if (!leftNode.IsWater && !aboveNode.IsWater && !topLeftNode.IsWater && (rightNode == null || rightNode.IsWater)
-                    && (bottomRightNode == null || bottomRightNode.IsWater) && (belowNode == null || belowNode.IsWater)) 
+                    && (belowNode == null || belowNode.IsWater)) 
                 {
                     return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.BottomRight);
                 }
@@ -175,13 +173,30 @@ namespace Philip.WorldGeneration
                 }
             }
 
+            // Single Block Up Corner
+            if (rightNode != null && leftNode != null && belowNode != null && bottomLeftNode != null && bottomRightNode != null)
+            {
+                if(!rightNode.IsWater && !leftNode.IsWater && !belowNode.IsWater && !bottomLeftNode.IsWater && !bottomRightNode.IsWater
+                    && (topLeftNode == null || topLeftNode.IsWater) && (topRightNode == null || topRightNode.IsWater))
+                {
+                    return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.GoingUpToSingleTile);
+                }
+            }
 
 
             // Single Width Walk Ways
 
 
             // Alone Tiles Each Direction
-
+            // Alone Tile Up
+            if(bottomLeftNode != null && belowNode != null && bottomRightNode != null)
+            {
+                if (!bottomLeftNode.IsWater && !belowNode.IsWater && !bottomRightNode.IsWater
+                    && (leftNode == null || leftNode.IsWater) && (rightNode == null || rightNode.IsWater) && (aboveNode == null || aboveNode.IsWater))
+                {
+                    return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(RuleTilePositions.SingleTileUp);
+                }
+            }
 
             //Debug.LogError($"<color=#36ffc3>[WORLD GENERATION]</color> could not determine tile");
 

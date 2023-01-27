@@ -33,6 +33,14 @@ namespace Philip.Tilemaps
             CornerNothingLeftBottom,
             CornerNothingRightTop,
             CornerNothingLeftTop,
+            GoingUpToSingleTile,
+            GoingDownToSingleTile,
+            GoingRightToSingleTile,
+            GoingLeftToSingleTile,
+            SingleTileUp,
+            SingleTileLeft,
+            SingleTileRight,
+            SingleTileDown,
         }
 
         public Tile GetTileFromRule(RuleTilePositions ruleToLookFor)
