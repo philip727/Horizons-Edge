@@ -66,6 +66,7 @@ namespace Philip.Tilemaps
             public SpriteType SpriteType { get { return _spriteType; } }
             [field: SerializeField] public List<RuleNodes> RequiredLandNodes { private set; get; } = new List<RuleNodes>();
             [field: SerializeField] public List<RuleNodes> RequiredNothingNodes { private set; get; } = new List<RuleNodes>();
+            [field: SerializeField] public List<RuleNodes> AddColliders { private set; get; } = new List<RuleNodes>();
 
             public Vector3Int ConvertRuleToOffset(RuleNodes ruleNode)
             {
