@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -865,7 +865,6 @@ TextureImporter:
       1_grasslands_animated_5: -679946082
       1_grasslands_animated_14: 2109852043
       1_grasslands_animated_32: 1284789485
-      1_grasslands_animated_30: -1636022576
       1_grasslands_animated_34: 587336966
       1_grasslands_animated_6: -61636594
       1_grasslands_animated_10: -2112316256
@@ -892,8 +891,9 @@ TextureImporter:
       1_grasslands_animated_12: -1273404
       1_grasslands_animated_24: 417499656
       1_grasslands_animated_31: 786870173
-      1_grasslands_animated_25: -1068850610
+      1_grasslands_animated_30: -1636022576
       1_grasslands_animated_28: -1489556741
+      1_grasslands_animated_25: -1068850610
       1_grasslands_animated_3: 234883608
       1_grasslands_animated_23: 85264058
       1_grasslands_animated_16: 851373892
