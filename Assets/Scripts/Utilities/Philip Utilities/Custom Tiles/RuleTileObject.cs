@@ -45,7 +45,7 @@ namespace Philip.Tilemaps
         }
 
         // Gets the tile in that worldnode, if it fits its requirements
-        public TileBase GetTileFromRule(WorldNode worldNode)
+        public RuleTile GetTileFromRule(WorldNode worldNode)
         {
             RuleTile result = Array.Find(RuleTiles, tile => tile.CheckIfMeetsRequirements(worldNode));
             if (result == null)
@@ -54,12 +54,7 @@ namespace Philip.Tilemaps
                 return null;
             }
 
-            return result.SpriteType switch
-            {
-                SpriteType.Default => result.tile,
-                SpriteType.Animated => result.animatedTile,
-                _ => result.tile,
-            };
+            return result;
         }
 
         [System.Serializable]
@@ -68,13 +63,15 @@ namespace Philip.Tilemaps
             [SerializeField] private SpriteType _spriteType = SpriteType.Default;
             [ConditionalField("_spriteType", SpriteType.Default)] public Tile tile;
             [ConditionalField("_spriteType", SpriteType.Animated)] public AnimatedTile animatedTile;
-
             public SpriteType SpriteType { get { return _spriteType; } }
-            
-            
-
             [field: SerializeField] public List<RuleNodes> RequiredLandNodes { private set; get; } = new List<RuleNodes>();
             [field: SerializeField] public List<RuleNodes> RequiredNothingNodes { private set; get; } = new List<RuleNodes>();
+
+            public Vector3Int ConvertRuleToOffset(RuleNodes ruleNode)
+            {
+                s_ruleNodesByCoordinate.TryGetValue(ruleNode, out Vector2Int offset);
+                return (Vector3Int)offset;
+            }
 
             // Checks through its needs, if it meets then it will be available
             public bool CheckIfMeetsRequirements(WorldNode worldNode)

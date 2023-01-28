@@ -8,6 +8,7 @@ namespace Philip.WorldGeneration
     {
         public GameObject ChunkGameObject { private set; get; }
         public Tilemap WalkableTilemap { private set; get; }
+        public Tilemap WaterTilemap { private set; get; }
         public Tilemap ColliderTilemap { private set; get; }
 
         public bool IsVisible
@@ -27,7 +28,8 @@ namespace Philip.WorldGeneration
         {
             ChunkGameObject = chunkObject;
             WalkableTilemap = chunkObject.transform.GetChild(0).GetComponent<Tilemap>();
-            ColliderTilemap = chunkObject.transform.GetChild(1).GetComponent<Tilemap>();
+            WaterTilemap = chunkObject.transform.GetChild(1).GetComponent<Tilemap>();
+            ColliderTilemap = chunkObject.transform.GetChild(2).GetComponent<Tilemap>();
             SetVisible(false);
         }
 

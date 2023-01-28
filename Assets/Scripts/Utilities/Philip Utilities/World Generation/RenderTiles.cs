@@ -2,6 +2,7 @@ using UnityEngine;
 using Philip.Grid;
 using static Philip.Tilemaps.RuleTileObject;
 using UnityEngine.Tilemaps;
+using RuleTile = Philip.Tilemaps.RuleTileObject.RuleTile;
 
 namespace Philip.WorldGeneration
 {
@@ -21,13 +22,13 @@ namespace Philip.WorldGeneration
             DisplayTiles();
         }
 
-        private TileBase DetermineTile(int x, int y)
+        private RuleTile DetermineTile(int x, int y)
         {
             WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
             return DetermineTile(worldNode);
         }
 
-        private TileBase DetermineTile(WorldNode worldNode)
+        private RuleTile DetermineTile(WorldNode worldNode)
         {
             return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(worldNode);
         }
@@ -48,14 +49,29 @@ namespace Philip.WorldGeneration
                                                                   y - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.Y);
                     if (worldNode.IsWater)
                     {
-                        chunkNode.ColliderTilemap.SetTile(tilemapCoordinate, _waterTile);
+                        chunkNode.WaterTilemap.SetTile(tilemapCoordinate, _waterTile);
                         continue;
                     }
 
-                    TileBase determinedTile = DetermineTile(worldNode);
+                    RuleTile determinedTile = DetermineTile(worldNode);
                     if(determinedTile != null)
                     {
-                        chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile);
+                        switch (determinedTile.SpriteType)
+                        {
+                            case SpriteType.Default:
+                                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile.tile);
+                                break;
+                            case SpriteType.Animated:
+                                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile.animatedTile);
+                                break;
+                        }
+
+                        foreach (RuleNodes colliderRule in determinedTile.RequiredNothingNodes)
+                        {
+                            Vector3Int tilemapOffset = tilemapCoordinate + determinedTile.ConvertRuleToOffset(colliderRule);
+
+                            chunkNode.ColliderTilemap.SetTile(tilemapOffset, _waterTile);
+                        }
                     }
                 }
             }
