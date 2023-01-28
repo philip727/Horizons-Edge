@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: 1_grassland_single_left
+  m_Name: 1_grasslands_single_right
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -679946082, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
-  - {fileID: -1273404, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
-  - {fileID: -1555298951, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
-  - {fileID: 1119718274, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
-  - {fileID: -1467630782, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  - {fileID: 793108806, guid: 7cb4658ee95f2f648a2c3122baaa7c98, type: 3}
+  - {fileID: 21307589, guid: 7cb4658ee95f2f648a2c3122baaa7c98, type: 3}
+  - {fileID: 1397858596, guid: 7cb4658ee95f2f648a2c3122baaa7c98, type: 3}
+  - {fileID: 1282674571, guid: 7cb4658ee95f2f648a2c3122baaa7c98, type: 3}
+  - {fileID: 449444742, guid: 7cb4658ee95f2f648a2c3122baaa7c98, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0
