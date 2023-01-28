@@ -74,8 +74,8 @@ MonoBehaviour:
     <RequiredLandNodes>k__BackingField: 0000000001000000020000000300000005000000070000000600000008000000
     <RequiredNothingNodes>k__BackingField: 0600000008000000
   - <Tile>k__BackingField: {fileID: 11400000, guid: d96bd9de87bf633499ae3fe49042a159, type: 2}
-    <RequiredLandNodes>k__BackingField: 010000000000000003000000060000000700000005000000
+    <RequiredLandNodes>k__BackingField: 01000000000000000300000006000000070000000500000008000000
     <RequiredNothingNodes>k__BackingField: 0200000008000000
   - <Tile>k__BackingField: {fileID: 11400000, guid: dfb746cf1a7eb674f943519ca31db5f2, type: 2}
-    <RequiredLandNodes>k__BackingField: 010000000200000005000000080000000700000003000000
+    <RequiredLandNodes>k__BackingField: 01000000020000000500000008000000070000000300000006000000
     <RequiredNothingNodes>k__BackingField: 0000000006000000

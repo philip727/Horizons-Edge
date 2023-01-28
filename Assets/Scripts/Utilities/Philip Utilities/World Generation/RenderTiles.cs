@@ -21,13 +21,13 @@ namespace Philip.WorldGeneration
             DisplayTiles();
         }
 
-        private Tile DetermineTile(int x, int y)
+        private TileBase DetermineTile(int x, int y)
         {
             WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
             return DetermineTile(worldNode);
         }
 
-        private Tile DetermineTile(WorldNode worldNode)
+        private TileBase DetermineTile(WorldNode worldNode)
         {
             return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(worldNode);
         }
@@ -52,7 +52,7 @@ namespace Philip.WorldGeneration
                         continue;
                     }
 
-                    Tile determinedTile = DetermineTile(worldNode);
+                    TileBase determinedTile = DetermineTile(worldNode);
                     if(determinedTile != null)
                     {
                         chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile);
