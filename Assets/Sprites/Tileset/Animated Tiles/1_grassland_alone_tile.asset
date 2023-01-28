@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: 1_grassland_alone_tile
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 234883608, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  - {fileID: -2112316256, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  - {fileID: 1249872304, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  - {fileID: 417499656, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  - {fileID: 786870173, guid: 89f66c0540259ff4ebfb21918205f95a, type: 3}
+  m_MinSpeed: 2
+  m_MaxSpeed: 2
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0

@@ -15,14 +15,14 @@ public class RuleTileObjectEditor : Editor
 
         foreach (RuleTileObject.RuleTile ruleTile in _ruleTileObject.RuleTiles)
         {
-            if(ruleTile.Tile == null)
+            if(ruleTile.tile == null)
             {
                 continue;
             }
 
-            Texture2D texture = AssetPreview.GetAssetPreview(ruleTile.Tile.sprite);
+            Texture2D texture = AssetPreview.GetAssetPreview(ruleTile.tile.sprite);
 
-            GUILayout.Label(ruleTile.Tile.name, GUILayout.Height(64), GUILayout.Width(64));
+            GUILayout.Label(ruleTile.tile.name, GUILayout.Height(64), GUILayout.Width(64));
 
             GUI.DrawTexture(GUILayoutUtility.GetLastRect(), texture);
         }

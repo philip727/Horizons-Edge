@@ -14,15 +14,15 @@ namespace Philip.Tilemaps
 
         public static Dictionary<RuleNodes, Vector2Int> s_ruleNodesByCoordinate = new Dictionary<RuleNodes, Vector2Int>()
         {
-            { RuleNodes.UpLeft, new Vector2Int(-1, 1) },
-            { RuleNodes.Up, new Vector2Int(0, 1) },
-            { RuleNodes.UpRight, new Vector2Int(1,1) },
-            { RuleNodes.Left, new Vector2Int(-1, 0) },
-            { RuleNodes.Middle, new Vector2Int(0,0) },
-            { RuleNodes.Right, new Vector2Int(1, 0) },
+            { RuleNodes.UpLeft,     new Vector2Int(-1, 1) },
+            { RuleNodes.Up,         new Vector2Int(0, 1) },
+            { RuleNodes.UpRight,    new Vector2Int(1,1) },
+            { RuleNodes.Left,       new Vector2Int(-1, 0) },
+            { RuleNodes.Middle,     new Vector2Int(0,0) },
+            { RuleNodes.Right,      new Vector2Int(1, 0) },
             { RuleNodes.BottomLeft, new Vector2Int(-1, -1) },
-            { RuleNodes.Bottom, new Vector2Int(0, -1) },
-            { RuleNodes.BottomRight, new Vector2Int(1, -1) },
+            { RuleNodes.Bottom,     new Vector2Int(0, -1) },
+            { RuleNodes.BottomRight,new Vector2Int(1, -1) },
         };
 
         public enum RuleNodes
@@ -56,18 +56,21 @@ namespace Philip.Tilemaps
 
             return result.SpriteType switch
             {
-                SpriteType.Default => result.Tile,
-                SpriteType.Animated => result.AnimatedTile,
-                _ => result.Tile,
+                SpriteType.Default => result.tile,
+                SpriteType.Animated => result.animatedTile,
+                _ => result.tile,
             };
         }
 
         [System.Serializable]
         public class RuleTile
         {
-            [field: SerializeField] public SpriteType SpriteType { private set; get; } = SpriteType.Default;
-            [field: SerializeField, ConditionalField("SpriteType", SpriteType.Default)] public Tile Tile { private set; get; }
-            [field: SerializeField, ConditionalField("SpriteType", SpriteType.Animated)] public AnimatedTile AnimatedTile { private set; get; }
+            [SerializeField] private SpriteType _spriteType = SpriteType.Default;
+            [ConditionalField("_spriteType", SpriteType.Default)] public Tile tile;
+            [ConditionalField("_spriteType", SpriteType.Animated)] public AnimatedTile animatedTile;
+
+            public SpriteType SpriteType { get { return _spriteType; } }
+            
             
 
             [field: SerializeField] public List<RuleNodes> RequiredLandNodes { private set; get; } = new List<RuleNodes>();
