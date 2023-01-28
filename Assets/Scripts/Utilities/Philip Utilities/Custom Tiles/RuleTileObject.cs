@@ -12,7 +12,7 @@ namespace Philip.Tilemaps
     {
         [field: SerializeField] public RuleTile[] RuleTiles = new RuleTile[0];
 
-        public static Dictionary<RuleNodes, Vector2Int> s_ruleNodesByCoordinate = new Dictionary<RuleNodes, Vector2Int>()
+        public static Dictionary<RuleNodes, Vector2Int> s_ruleNodesByCoordinate { get; } = new Dictionary<RuleNodes, Vector2Int>()
         {
             { RuleNodes.UpLeft,     new Vector2Int(-1, 1) },
             { RuleNodes.Up,         new Vector2Int(0, 1) },
