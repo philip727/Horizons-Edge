@@ -63,3 +63,63 @@ MonoBehaviour:
     animatedTile: {fileID: 0}
     <RequiredLandNodes>k__BackingField: 010000000300000005000000060000000700000008000000
     <RequiredNothingNodes>k__BackingField: 0000000002000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 854d28ac7cc7e5744aad20e06322b2e1, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 070000000500000003000000020000000100000000000000
+    <RequiredNothingNodes>k__BackingField: 0600000008000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 333679ecb155c1946abf9b362a52d806, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 07000000
+    <RequiredNothingNodes>k__BackingField: 010000000300000005000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 9e3214487bb0a0c4ca0d57c300d94cee, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 010000000000000003000000060000000700000005000000
+    <RequiredNothingNodes>k__BackingField: 0800000002000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: f806525b9d554ba4ebd6080807b6896c, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 010000000200000005000000080000000700000003000000
+    <RequiredNothingNodes>k__BackingField: 0000000006000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: a6ebf7e7f8941f248901981cb85e6e0d, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 01000000020000000500000008000000070000000600000003000000
+    <RequiredNothingNodes>k__BackingField: 00000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: e0d188950ef6a8346b0d62205c72bec0, type: 2}
+    <RequiredLandNodes>k__BackingField: 04000000
+    <RequiredNothingNodes>k__BackingField: 01000000050000000700000003000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: e0bde5deeafa22a45bd6785738607753, type: 2}
+    <RequiredLandNodes>k__BackingField: 010000000000000003000000
+    <RequiredNothingNodes>k__BackingField: 0700000005000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: f2ebe5eb13d6ee145ba1a40cec7ffa1f, type: 2}
+    <RequiredLandNodes>k__BackingField: 01000000
+    <RequiredNothingNodes>k__BackingField: 030000000700000005000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: 792792cc4c2b7bc41b25e87ad83e881d, type: 2}
+    <RequiredLandNodes>k__BackingField: 05000000
+    <RequiredNothingNodes>k__BackingField: 030000000300000007000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: f2e31a7922e13eb429d641d84a7e3e8f, type: 2}
+    <RequiredLandNodes>k__BackingField: 010000000200000005000000
+    <RequiredNothingNodes>k__BackingField: 0300000007000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: 71ecd674a48ecef4c8c8e07f552171fe, type: 2}
+    <RequiredLandNodes>k__BackingField: 0100000000000000020000000300000005000000
+    <RequiredNothingNodes>k__BackingField: 060000000700000008000000
+  - _spriteType: 1
+    tile: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: fe7c6f7251a293c44aead7652fef7ef2, type: 2}
+    <RequiredLandNodes>k__BackingField: 03000000
+    <RequiredNothingNodes>k__BackingField: 010000000500000007000000
