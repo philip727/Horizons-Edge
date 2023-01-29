@@ -57,6 +57,8 @@ public class CharacterMovementController : MonoBehaviour
 
         // Only updates if necessary
         if (movementVector == default) return;
+
+        // Movement based side
         //int temporarySide = Mathf.RoundToInt(movementVector.x);
 
         // Makes sure the side is never 0, as this would mess up the scaling.
@@ -66,6 +68,7 @@ public class CharacterMovementController : MonoBehaviour
         CharacterRigidbody.MovePosition(moveByVector);
     }
 
+    // Adjusts facing side depending on the mouse
     private void AdjustSide()
     {
         Vector3 mousePosition = PMouse.GetScreenMouseWorldPosition(Camera.main);
@@ -76,6 +79,7 @@ public class CharacterMovementController : MonoBehaviour
         // Only updates when necessary
         if (temporarySide == _currentSide) return;
 
+        // Makes sure the side is never 0, considering the scaling would be very messed up
         _currentSide = temporarySide != 0 ? temporarySide : _currentSide;
     }
 
@@ -85,7 +89,7 @@ public class CharacterMovementController : MonoBehaviour
         Vector3 lastScale = _characterSpriteRenderer.transform.localScale;
         //Vector3 lastPosition = _characterSpriteRenderer.transform.localPosition;
 
-        // Only updates if necessary
+        // Only updates when necessary
         if (lastScale.x == _currentSide) return;
 
         _characterSpriteRenderer.transform.localScale = new Vector3(_currentSide, lastScale.y, lastScale.z);

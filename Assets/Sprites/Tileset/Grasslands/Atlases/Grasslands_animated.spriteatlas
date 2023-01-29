@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grasslands_animated
+  m_Name: grasslands_animated
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -99,6 +99,31 @@ SpriteAtlas:
     - {fileID: 700064290, guid: eb204260c8b168945a5eecbe3068ef8f, type: 3}
     - {fileID: -1395682964, guid: eb204260c8b168945a5eecbe3068ef8f, type: 3}
     - {fileID: 1244468494, guid: eb204260c8b168945a5eecbe3068ef8f, type: 3}
+    - {fileID: 216363315, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 1319399654, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 442133520, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 1642228671, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 2048134935, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 987019060, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 262389044, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 1472814313, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 831063711, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 127380007, guid: ba6aed8a1e5f9e14c92929f310bb2f49, type: 3}
+    - {fileID: 2000563217, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -354948852, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -607811953, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: 1833908417, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -1449252715, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: 880655568, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -1517261790, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -2061127432, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -2144425835, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: 1786929587, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -1842844779, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: 208202087, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -1173201462, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: 57625854, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
+    - {fileID: -1484064718, guid: 2bbe2c91ea558234b8865f309c62d03c, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -216,5 +241,5 @@ SpriteAtlas:
   - 1_grasslands_animated_fixed_1
   - 1_grasslands_animated_fixed_0
   m_RenderDataMap: {}
-  m_Tag: Grasslands_animated
+  m_Tag: grasslands_animated
   m_IsVariant: 0

@@ -76,7 +76,7 @@ MonoBehaviour:
   - _spriteType: 0
     tile: {fileID: 11400000, guid: 854d28ac7cc7e5744aad20e06322b2e1, type: 2}
     animatedTile: {fileID: 0}
-    <RequiredLandNodes>k__BackingField: 070000000500000003000000020000000100000000000000
+    <RequiredLandNodes>k__BackingField: 0700000005000000030000000200000001000000000000000600000008000000
     <RequiredNothingNodes>k__BackingField: 0600000008000000
     <AddColliders>k__BackingField: 
   - _spriteType: 0
@@ -156,4 +156,58 @@ MonoBehaviour:
     animatedTile: {fileID: 11400000, guid: 6e436673e6f161547a4b898d622d4f80, type: 2}
     <RequiredLandNodes>k__BackingField: 05000000020000000100000003000000
     <RequiredNothingNodes>k__BackingField: 000000000700000006000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 2974d2778eff8214db544e307b882a21, type: 2}
+    animatedTile: {fileID: 11400000, guid: 6e436673e6f161547a4b898d622d4f80, type: 2}
+    <RequiredLandNodes>k__BackingField: 010000000000000003000000
+    <RequiredNothingNodes>k__BackingField: 02000000050000000600000008000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 65789af670b95c34b93b146011f45a1d, type: 2}
+    animatedTile: {fileID: 11400000, guid: 6e436673e6f161547a4b898d622d4f80, type: 2}
+    <RequiredLandNodes>k__BackingField: 0100000007000000
+    <RequiredNothingNodes>k__BackingField: 0300000005000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 3a4ae23ba9de33248af737d0f27c81c5, type: 2}
+    animatedTile: {fileID: 11400000, guid: 6e436673e6f161547a4b898d622d4f80, type: 2}
+    <RequiredLandNodes>k__BackingField: 010000000700000005000000
+    <RequiredNothingNodes>k__BackingField: 02000000080000000300000006000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 3a4ae23ba9de33248af737d0f27c81c5, type: 2}
+    animatedTile: {fileID: 11400000, guid: 2f5be44fa8d223140b7cf235e271d07d, type: 2}
+    <RequiredLandNodes>k__BackingField: 0300000005000000
+    <RequiredNothingNodes>k__BackingField: 010000000700000000000000020000000600000008000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 3a4ae23ba9de33248af737d0f27c81c5, type: 2}
+    animatedTile: {fileID: 11400000, guid: f9aecee51a86a574686c9c37b37e1e3b, type: 2}
+    <RequiredLandNodes>k__BackingField: 030000000500000002000000
+    <RequiredNothingNodes>k__BackingField: 0100000007000000000000000600000008000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: a9aa56c624b54cc49aeb85a4aa68372f, type: 2}
+    animatedTile: {fileID: 11400000, guid: f9aecee51a86a574686c9c37b37e1e3b, type: 2}
+    <RequiredLandNodes>k__BackingField: 030000000500000001000000020000000000000007000000
+    <RequiredNothingNodes>k__BackingField: 0600000008000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 375701463bfe58f4d985a8eb352d36f4, type: 2}
+    animatedTile: {fileID: 11400000, guid: f9aecee51a86a574686c9c37b37e1e3b, type: 2}
+    <RequiredLandNodes>k__BackingField: 0300000005000000010000000200000007000000
+    <RequiredNothingNodes>k__BackingField: 0000000008000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: a1854a879c93a4a4a826b264709c389e, type: 2}
+    animatedTile: {fileID: 11400000, guid: f9aecee51a86a574686c9c37b37e1e3b, type: 2}
+    <RequiredLandNodes>k__BackingField: 03000000050000000200000007000000
+    <RequiredNothingNodes>k__BackingField: 0000000008000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: a1854a879c93a4a4a826b264709c389e, type: 2}
+    animatedTile: {fileID: 11400000, guid: 790682f9d24af2444a27fd9b80a04e5b, type: 2}
+    <RequiredLandNodes>k__BackingField: 0100000002000000050000000800000003000000
+    <RequiredNothingNodes>k__BackingField: 0000000007000000
     <AddColliders>k__BackingField: 04000000

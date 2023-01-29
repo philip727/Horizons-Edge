@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grasslands_static
+  m_Name: grasslands_static
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 0
@@ -62,6 +62,17 @@ SpriteAtlas:
     - {fileID: 843574565, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
     - {fileID: 1124191085, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
     - {fileID: 1364289387, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -824545464, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: -1637588096, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: -900894463, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: 1458736137, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: 1198840295, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: 909145536, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+    - {fileID: -1574694116, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+    - {fileID: 930207380, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+    - {fileID: -528171463, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+    - {fileID: -1535024433, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+    - {fileID: -738723981, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -85,6 +96,17 @@ SpriteAtlas:
   - {fileID: -2147342037, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: -895734194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: -759290908, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -1574694116, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+  - {fileID: 930207380, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+  - {fileID: -528171463, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+  - {fileID: -1535024433, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+  - {fileID: -738723981, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+  - {fileID: 909145536, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+  - {fileID: 1198840295, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+  - {fileID: -1637588096, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+  - {fileID: -824545464, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+  - {fileID: 1458736137, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
+  - {fileID: -900894463, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
   m_PackedSpriteNamesToIndex:
   - 1_grasslands_11
   - 1_grasslands_10
@@ -104,6 +126,17 @@ SpriteAtlas:
   - 1_grasslands_5
   - 1_grasslands_8
   - 1_grasslands_9
+  - 1_grasslands_walkways_0
+  - 1_grasslands_walkways_1
+  - 1_grasslands_walkways_2
+  - 1_grasslands_walkways_3
+  - 1_grasslands_walkways_4
+  - 1_grasslands_extras_2_5
+  - 1_grasslands_extras_2_4
+  - 1_grasslands_extras_2_1
+  - 1_grasslands_extras_2_0
+  - 1_grasslands_extras_2_3
+  - 1_grasslands_extras_2_2
   m_RenderDataMap: {}
-  m_Tag: Grasslands_static
+  m_Tag: grasslands_static
   m_IsVariant: 0

@@ -50,7 +50,7 @@ namespace Philip.Tilemaps
             RuleTile result = Array.Find(RuleTiles, tile => tile.CheckIfMeetsRequirements(worldNode));
             if (result == null)
             {
-                Debug.LogError($"<color=#42ddf5>[TILEMAPS]</color> could not find tile in {RuleTiles}");
+                Debug.LogError($"<color=#42ddf5>[TILEMAPS]</color> Could not determine tile in ({worldNode.X}, {worldNode.Y})");
                 return null;
             }
 
