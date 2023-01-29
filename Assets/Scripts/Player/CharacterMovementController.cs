@@ -1,3 +1,4 @@
+using Philip.Utilities.Extras;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class CharacterMovementController : MonoBehaviour
     // Character Input
     [SerializeField, Header("Input")] private CharacterInputController _characterInputController;
     [SerializeField] private float _speed;
-    [field:SerializeField] public int NormalizedSpeed { private set; get; }
+    public int NormalizedSpeed { private set; get; }
 
     // Scale Manipulation
     [SerializeField, Header("Sprite Modification")] private SpriteRenderer _characterSpriteRenderer;
@@ -26,6 +27,7 @@ public class CharacterMovementController : MonoBehaviour
     private void Update()
     {
         AdjustSpriteScale();
+        AdjustSide();
     }
 
     private void FixedUpdate()
@@ -55,13 +57,26 @@ public class CharacterMovementController : MonoBehaviour
 
         // Only updates if necessary
         if (movementVector == default) return;
-        int temporarySide = Mathf.RoundToInt(movementVector.x);
+        //int temporarySide = Mathf.RoundToInt(movementVector.x);
 
         // Makes sure the side is never 0, as this would mess up the scaling.
-        _currentSide = temporarySide != 0 ? temporarySide : _currentSide;
+        //_currentSide = temporarySide != 0 ? temporarySide : _currentSide;
 
         Vector3 moveByVector = CharacterRigidbody.transform.position + (_speed * Time.fixedDeltaTime * new Vector3(movementVector.x, movementVector.y, 0f));
         CharacterRigidbody.MovePosition(moveByVector);
+    }
+
+    private void AdjustSide()
+    {
+        Vector3 mousePosition = PMouse.GetScreenMouseWorldPosition(Camera.main);
+        Vector3 characterPosition = CharacterRigidbody.transform.position;
+        Vector3 distance = mousePosition - characterPosition;
+        int temporarySide = Mathf.Clamp(distance.x < 0f ? Mathf.FloorToInt(distance.x) : Mathf.CeilToInt(distance.x), -1, 1);
+
+        // Only updates when necessary
+        if (temporarySide == _currentSide) return;
+
+        _currentSide = temporarySide != 0 ? temporarySide : _currentSide;
     }
 
     // Makes sure the character is facing the right way

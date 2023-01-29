@@ -361,10 +361,16 @@ namespace Philip.Utilities
     {
         public static class PMouse
         {
-            public static Vector3 GetMouseWorldPosition(this UnityEngine.Camera camera)
+            public static Vector3 GetScreenMouseWorldPosition(this UnityEngine.Camera camera)
             {
                 return camera.ScreenToWorldPoint(Input.mousePosition);
             }
+
+            public static Vector3 GetViewportMouseWorldPosition(this UnityEngine.Camera camera)
+            {
+                return camera.ViewportToWorldPoint(Input.mousePosition);
+            }
+
         }
 
     }

@@ -11,6 +11,7 @@ public class CharacterInputController : MonoBehaviour
         CharacterInputActions = new CharacterInputActions();
     }
 
+    // Makes sure the input actions aren't null
     public IEnumerator WaitForInputController(Action func)
     {
         yield return new WaitUntil(() => CharacterInputActions != null);

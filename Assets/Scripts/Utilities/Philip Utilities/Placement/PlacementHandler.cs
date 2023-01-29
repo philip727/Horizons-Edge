@@ -56,7 +56,7 @@ namespace Philip.Building
             {
                 // Gets the grid and the current co-ordinate our mouse is at
                 _grid = Placement<IBuildable>.Instance.GetGrid();
-                currentCoords = _grid.GetCoordinate(Camera.main.GetMouseWorldPosition());
+                currentCoords = _grid.GetCoordinate(Camera.main.GetScreenMouseWorldPosition());
 
                 UpdatePreviewPosition(_grid, currentCoords);
 
