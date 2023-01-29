@@ -73,11 +73,21 @@ SpriteAtlas:
     - {fileID: -528171463, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
     - {fileID: -1535024433, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
     - {fileID: -738723981, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
+    - {fileID: 992149034, guid: 2dafc04a1b9dc68459de5df0f5c1b817, type: 3}
+    - {fileID: -1233607541, guid: 2dafc04a1b9dc68459de5df0f5c1b817, type: 3}
+    - {fileID: 806983929, guid: 5a9bf052d61902740a826aa31db526d9, type: 3}
+    - {fileID: -1750414988, guid: 5a9bf052d61902740a826aa31db526d9, type: 3}
+    - {fileID: 326574399, guid: ae7c15e108d0aa34885fad9d256bb0ac, type: 3}
+    - {fileID: -411952445, guid: ae7c15e108d0aa34885fad9d256bb0ac, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -411952445, guid: ae7c15e108d0aa34885fad9d256bb0ac, type: 3}
+  - {fileID: 326574399, guid: ae7c15e108d0aa34885fad9d256bb0ac, type: 3}
+  - {fileID: 806983929, guid: 5a9bf052d61902740a826aa31db526d9, type: 3}
+  - {fileID: -1750414988, guid: 5a9bf052d61902740a826aa31db526d9, type: 3}
   - {fileID: -812575742, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: 1119799368, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: 582978910, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
@@ -96,6 +106,8 @@ SpriteAtlas:
   - {fileID: -2147342037, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: -895734194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
   - {fileID: -759290908, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -1233607541, guid: 2dafc04a1b9dc68459de5df0f5c1b817, type: 3}
+  - {fileID: 992149034, guid: 2dafc04a1b9dc68459de5df0f5c1b817, type: 3}
   - {fileID: -1574694116, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
   - {fileID: 930207380, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
   - {fileID: -528171463, guid: 4c5b33fde3472634f9c5fe5ba76aa309, type: 3}
@@ -108,6 +120,10 @@ SpriteAtlas:
   - {fileID: 1458736137, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
   - {fileID: -900894463, guid: 9df9b14e784348346969b651e2a67bd9, type: 3}
   m_PackedSpriteNamesToIndex:
+  - 6_grasslands_extras_1
+  - 6_grasslands_extras_0
+  - 5_grasslands_extras_0
+  - 5_grasslands_extras_1
   - 1_grasslands_11
   - 1_grasslands_10
   - 1_grasslands_13
@@ -126,6 +142,8 @@ SpriteAtlas:
   - 1_grasslands_5
   - 1_grasslands_8
   - 1_grasslands_9
+  - 4_grasslands_extras_1
+  - 4_grasslands_extras_0
   - 1_grasslands_walkways_0
   - 1_grasslands_walkways_1
   - 1_grasslands_walkways_2
