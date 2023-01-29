@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Grasslands_static
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: -1192266559, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1353824370, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 2120784391, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 673105409, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -1233458456, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -2147342037, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1001053194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -2105174033, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -895734194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -759290908, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1119799368, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: -812575742, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1826243858, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 582978910, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1035070262, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 843574565, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1124191085, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    - {fileID: 1364289387, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -812575742, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1119799368, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 582978910, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1826243858, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 843574565, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1035070262, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1364289387, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1124191085, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 2120784391, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 673105409, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -1192266559, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1353824370, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: 1001053194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -2105174033, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -1233458456, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -2147342037, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -895734194, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  - {fileID: -759290908, guid: c037ea94a4a87fb4599338e1aa21f599, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 1_grasslands_11
+  - 1_grasslands_10
+  - 1_grasslands_13
+  - 1_grasslands_12
+  - 1_grasslands_15
+  - 1_grasslands_14
+  - 1_grasslands_17
+  - 1_grasslands_16
+  - 1_grasslands_2
+  - 1_grasslands_3
+  - 1_grasslands_0
+  - 1_grasslands_1
+  - 1_grasslands_6
+  - 1_grasslands_7
+  - 1_grasslands_4
+  - 1_grasslands_5
+  - 1_grasslands_8
+  - 1_grasslands_9
+  m_RenderDataMap: {}
+  m_Tag: Grasslands_static
+  m_IsVariant: 0

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovementController : MonoBehaviour
 {
-    [field:SerializeField] public GameObject CharacterMainObject { private set; get; }
+    [field:SerializeField] public Rigidbody2D CharacterRigidbody { private set; get; }
 
     // Character Input
     [SerializeField, Header("Input")] private CharacterInputController _characterInputController;
@@ -60,7 +60,8 @@ public class CharacterMovementController : MonoBehaviour
         // Makes sure the side is never 0, as this would mess up the scaling.
         _currentSide = temporarySide != 0 ? temporarySide : _currentSide;
 
-        CharacterMainObject.transform.position += new Vector3(movementVector.x, movementVector.y, 0f) * _speed * Time.fixedDeltaTime;
+        Vector3 moveByVector = CharacterRigidbody.transform.position + (_speed * Time.fixedDeltaTime * new Vector3(movementVector.x, movementVector.y, 0f));
+        CharacterRigidbody.MovePosition(moveByVector);
     }
 
     // Makes sure the character is facing the right way
