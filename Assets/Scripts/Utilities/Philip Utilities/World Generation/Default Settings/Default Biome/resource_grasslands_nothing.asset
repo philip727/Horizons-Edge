@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
-  m_Name: noise_tropicality
+  m_Script: {fileID: 11500000, guid: e47736ba81f083a4bba6531c807c06db, type: 3}
+  m_Name: resource_grasslands_nothing
   m_EditorClassIdentifier: 
-  <NoiseScale>k__BackingField: 1
-  <Octaves>k__BackingField: 8
-  <Persistance>k__BackingField: 1
-  <Lacunarity>k__BackingField: 8.19
-  <Offset>k__BackingField: {x: -85.75, y: 194.2}
+  <Resource>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 0}
+  <Baron>k__BackingField: 0.482
+  <Tropicality>k__BackingField: 1

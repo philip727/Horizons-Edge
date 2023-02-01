@@ -168,11 +168,11 @@ namespace Philip.WorldGeneration
             {
                 BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
 
-                float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiomeObject.Precipitation, 2f) +
-                    Mathf.Pow(temperatureHeight - currentBiomeObject.Temperature, 2f));
+                float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow((precipitationHeight - currentBiomeObject.Precipitation) +
+                    (temperatureHeight - currentBiomeObject.Temperature), 2f));
 
-                float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow(precipitationHeight - bestBiome.Precipitation, 2f) +
-                    Mathf.Pow(temperatureHeight - bestBiome.Temperature, 2f));
+                float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow((precipitationHeight - bestBiome.Precipitation) +
+                    (temperatureHeight - bestBiome.Temperature), 2f));
 
                 if (currentBiomeEuclidianDistance > bestBiomeEuclidianDistance)
                 {
@@ -208,11 +208,11 @@ namespace Philip.WorldGeneration
             for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
             {
                 ResourceObject resourceObject = biomeObject.ResourceObjects[i];
-                float currentEuclidianDistance = Mathf.Abs(Mathf.Pow(baronHeight - resourceObject.Baron, 2f)
-                    - Mathf.Pow(tropicalHeight - resourceObject.Tropicality, 2f));
+                float currentEuclidianDistance = Mathf.Abs(Mathf.Pow((baronHeight - resourceObject.Baron) + 
+                    (tropicalHeight - resourceObject.Tropicality), 2f));
 
-                float bestEuclidianDistance = bestResourceObject ==  null ? 0f : Mathf.Abs(Mathf.Pow(baronHeight - bestResourceObject.Baron, 2f)
-                    - Mathf.Pow(tropicalHeight - bestResourceObject.Tropicality, 2f));
+                float bestEuclidianDistance = bestResourceObject ==  null ? 0f : Mathf.Abs(Mathf.Pow((baronHeight - bestResourceObject.Baron) + 
+                    (tropicalHeight - bestResourceObject.Tropicality), 2f));
 
                 if(currentEuclidianDistance > bestEuclidianDistance)
                 {
@@ -239,16 +239,16 @@ namespace Philip.WorldGeneration
                     Biome biome = worldNode.Biome;
                     BiomeObject biomeObject = WorldGenerationSettings.GetBiomeObject(biome);
 
+                    if(biomeObject.ResourceObjects.Length == 0)
+                    {
+                        continue;
+                    }
+
                     int chunkX = x / WorldGenerationSettings.ChunkSize;
                     int chunkY = y / WorldGenerationSettings.ChunkSize;
 
                     ChunkNode chunk = s_worldData.ChunkGrid.GetGridObject(chunkX, chunkY);
                     Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
-
-                    if(biomeObject.ResourceObjects.Length == 0)
-                    {
-                        continue;
-                    }
 
                     ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
                     if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)

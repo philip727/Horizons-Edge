@@ -18,3 +18,4 @@ MonoBehaviour:
   <ChunkSize>k__BackingField: 16
   <BiomeObjects>k__BackingField:
   - {fileID: 11400000, guid: f7f0a37f6955e8a4cb3361fd7118a0f1, type: 2}
+  - {fileID: 11400000, guid: 9ec46cdff0b5a9c409c1441b9241d773, type: 2}

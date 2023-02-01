@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: noise_baron
   m_EditorClassIdentifier: 
   <NoiseScale>k__BackingField: 1
-  <Octaves>k__BackingField: 11
-  <Persistance>k__BackingField: 1
-  <Lacunarity>k__BackingField: 8
+  <Octaves>k__BackingField: 8
+  <Persistance>k__BackingField: 0.968
+  <Lacunarity>k__BackingField: 1
   <Offset>k__BackingField: {x: -75.4, y: -387.4}
