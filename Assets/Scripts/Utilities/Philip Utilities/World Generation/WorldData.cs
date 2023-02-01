@@ -13,8 +13,10 @@ namespace Philip.WorldGeneration
         public float[,] HeightMap { get; }
         public float[,] PrecipitationMap { get; }
         public float[,] TemperatureMap { get; }
+        public float[,] BaronMap { get; }
+        public float[,] TropicalityMap { get; }
 
-        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap)
+        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap, float[,] rockyMap, float[,] tropicalityMap)
         {
             WorldGenerationCompleted = false;
             WorldGrid = worldGrid;
@@ -22,6 +24,8 @@ namespace Philip.WorldGeneration
             HeightMap = heightMap;
             PrecipitationMap = precipitationMap;
             TemperatureMap = temperatureMap;
+            BaronMap = rockyMap;
+            TropicalityMap = tropicalityMap;
         }
 
         public void FinishWorldGeneration()

@@ -3,6 +3,9 @@ using Philip.Utilities.Maths;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Philip.Utilities;
+using Philip.Tilemaps;
+using System.Collections.Generic;
+using UnityEditor;
 
 namespace Philip.WorldGeneration
 {
@@ -16,9 +19,9 @@ namespace Philip.WorldGeneration
         [field: SerializeField] public NoiseSettings LandSettings { private set; get; }
         [field: SerializeField] public NoiseSettings PrecipitationSettings { private set; get; }
         [field: SerializeField] public NoiseSettings TemperatureSettings { private set; get; }
+        [field: SerializeField] public NoiseSettings BaronSettings { private set; get; }
+        [field: SerializeField] public NoiseSettings TropicalitySettings { private set; get; }
         [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
-
-
 
         public void Start()
         {
@@ -33,15 +36,15 @@ namespace Philip.WorldGeneration
             onWorldGenerationFinished?.Invoke();
         }
 
-        public void CreateWorldFromData()
+        private void CreateWorldFromData()
         {
             GenerateChunkObjects();
             GenerateWater();
             GenerateBiomes();
-            //DisplayTilesInChunks();
+            GenerateWorldObjects();
         }
 
-        public WorldData GenerateWorldData(int seed)
+        private WorldData GenerateWorldData(int seed)
         {
             // Generates the noise we use for water randomisation
             float[,] waterNoiseMap = Noise.GenerateNoiseMap(
@@ -76,6 +79,26 @@ namespace Philip.WorldGeneration
                 TemperatureSettings.Lacunarity,
                 TemperatureSettings.NoiseScale);
 
+            float[,] baronNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldWidth,
+                WorldGenerationSettings.WorldHeight,
+                seed,
+                BaronSettings.Offset,
+                BaronSettings.Octaves,
+                BaronSettings.Persistance,
+                BaronSettings.Lacunarity,
+                BaronSettings.NoiseScale);
+
+            float[,] tropicalityNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldWidth,
+                WorldGenerationSettings.WorldHeight,
+                seed,
+                TropicalitySettings.Offset,
+                TropicalitySettings.Octaves,
+                TropicalitySettings.Persistance,
+                TropicalitySettings.Lacunarity,
+                TropicalitySettings.NoiseScale);
+
             // Creates the grid that we use for single tile placement
             Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight, 
@@ -88,10 +111,10 @@ namespace Philip.WorldGeneration
                 WorldGenerationSettings.ChunkSize, 
                 (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
-            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap);
+            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap);
         }
 
-        public void GenerateChunkObjects()
+        private void GenerateChunkObjects()
         {
             Vector3 chunkOffset = new Vector3(0.5f, 0.5f, 0f);
 
@@ -115,7 +138,7 @@ namespace Philip.WorldGeneration
         }
 
         // Generates water and oceans
-        public void GenerateWater()
+        private void GenerateWater()
         {
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
@@ -135,34 +158,39 @@ namespace Philip.WorldGeneration
             }
         }
 
-        public void GenerateBiomes()
+        private BiomeObject GetBestBiome(int x, int y)
+        {
+            BiomeObject bestBiome = null;
+            float precipitationHeight = s_worldData.PrecipitationMap[x, y];
+            float temperatureHeight = s_worldData.TemperatureMap[x, y];
+
+            for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
+            {
+                BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
+
+                float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiomeObject.Precipitation, 2f) +
+                    Mathf.Pow(temperatureHeight - currentBiomeObject.Temperature, 2f));
+
+                float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow(precipitationHeight - bestBiome.Precipitation, 2f) +
+                    Mathf.Pow(temperatureHeight - bestBiome.Temperature, 2f));
+
+                if (currentBiomeEuclidianDistance > bestBiomeEuclidianDistance)
+                {
+                    bestBiome = currentBiomeObject;
+                }
+            }
+
+            return bestBiome;
+        }
+
+        private void GenerateBiomes()
         {
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
                     // Gets the precipitation and temp map and creates a default biome we can start with
-                    BiomeObject bestBiome = null;
-                    float precipitationHeight = s_worldData.PrecipitationMap[x, y];
-                    float temperatureHeight = s_worldData.TemperatureMap[x, y];
-
-                    // Loops through all the biomes and checks if its the best fit for that block
-                    for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
-                    {
-                        BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
-
-
-                        float currentBiomeEuclidianDistance = Mathf.Abs(Mathf.Pow(precipitationHeight - currentBiomeObject.Precipitation, 2f) +
-                            Mathf.Pow(temperatureHeight - currentBiomeObject.Temperature, 2f));
-
-                        float bestBiomeEuclidianDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow(precipitationHeight - bestBiome.Precipitation, 2f) +
-                            Mathf.Pow(temperatureHeight - bestBiome.Temperature, 2f));
-
-                        if (currentBiomeEuclidianDistance > bestBiomeEuclidianDistance)
-                        {
-                            bestBiome = currentBiomeObject;
-                        }
-                    }
+                    BiomeObject bestBiome = GetBestBiome(x, y);
 
                     // Set biome
                     s_worldData.WorldGrid.GetGridObject(x, y).SetBiome(bestBiome == null ? WorldGenerationSettings.BiomeObjects[0].Biome : bestBiome.Biome);
@@ -170,35 +198,66 @@ namespace Philip.WorldGeneration
             }
         }
 
-        //public void DisplayTilesInChunks()
-        //{
-        //    for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
-        //    {
-        //        for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
-        //        {
-        //            // Gets the chunk node
-        //            WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
-        //            Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
-        //            ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(worldPosition);
+        private ResourceObject GetBestResource(BiomeObject biomeObject, int x, int y)
+        {
+            float baronHeight = s_worldData.BaronMap[x, y];
+            float tropicalHeight = s_worldData.TropicalityMap[x, y];
 
-        //            // Makes sure the tile is in the right position of its current chunk tilemap
-        //            Vector3Int tilemapCoordinate = new Vector3Int(x - WorldGenerationSettings.ChunkSize * chunkNode.X,
-        //                                                          y - WorldGenerationSettings.ChunkSize * chunkNode.Y);
-        //            if (worldNode.IsWater)
-        //            {
-        //                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _waterTile);
-        //                continue;
-        //            }
+            ResourceObject bestResourceObject = biomeObject.ResourceObjects[0];
 
-        //            if (worldNode.Biome.ID == "biomes:void_shores")
-        //                Debug.Log("Hi");
+            for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
+            {
+                ResourceObject resourceObject = biomeObject.ResourceObjects[i];
+                float currentEuclidianDistance = Mathf.Abs(Mathf.Pow(baronHeight - resourceObject.Baron, 2f)
+                    - Mathf.Pow(tropicalHeight - resourceObject.Tropicality, 2f));
 
-        //            //Debug.Log(worldNode.Biome.ID);
+                float bestEuclidianDistance = bestResourceObject ==  null ? 0f : Mathf.Abs(Mathf.Pow(baronHeight - bestResourceObject.Baron, 2f)
+                    - Mathf.Pow(tropicalHeight - bestResourceObject.Tropicality, 2f));
 
-        //            chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules);
-        //        }
-        //    }
-        //}
+                if(currentEuclidianDistance > bestEuclidianDistance)
+                {
+                    bestResourceObject = resourceObject;
+                }
+            }
+
+            return bestResourceObject;
+        }
+
+        private void GenerateWorldObjects()
+        {
+            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
+            {
+                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
+                {
+                    WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
+
+                    if (worldNode.HasWaterNeighbours())
+                    {
+                        continue;
+                    }
+
+                    Biome biome = worldNode.Biome;
+                    BiomeObject biomeObject = WorldGenerationSettings.GetBiomeObject(biome);
+
+                    int chunkX = x / WorldGenerationSettings.ChunkSize;
+                    int chunkY = y / WorldGenerationSettings.ChunkSize;
+
+                    ChunkNode chunk = s_worldData.ChunkGrid.GetGridObject(chunkX, chunkY);
+                    Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
+
+                    if(biomeObject.ResourceObjects.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
+                    if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
+                    {
+                        Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
+                    }
+                }
+            }
+        }
     }
 }
 

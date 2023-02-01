@@ -12,7 +12,7 @@ namespace Philip.Tilemaps
     {
         [field: SerializeField] public RuleTile[] RuleTiles = new RuleTile[0];
 
-        public static Dictionary<RuleNodes, Vector2Int> s_ruleNodesByCoordinate { get; } = new Dictionary<RuleNodes, Vector2Int>()
+        public static Dictionary<RuleNodes, Vector2Int> RuleNodesByCoordinate { get; } = new Dictionary<RuleNodes, Vector2Int>()
         {
             { RuleNodes.UpLeft,     new Vector2Int(-1, 1) },
             { RuleNodes.Up,         new Vector2Int(0, 1) },
@@ -70,7 +70,7 @@ namespace Philip.Tilemaps
 
             public Vector3Int ConvertRuleToOffset(RuleNodes ruleNode)
             {
-                s_ruleNodesByCoordinate.TryGetValue(ruleNode, out Vector2Int offset);
+                RuleNodesByCoordinate.TryGetValue(ruleNode, out Vector2Int offset);
                 return (Vector3Int)offset;
             }
 
@@ -79,7 +79,7 @@ namespace Philip.Tilemaps
             {
                 foreach (RuleNodes requiredNode in RequiredLandNodes)
                 {
-                    s_ruleNodesByCoordinate.TryGetValue(requiredNode, out Vector2Int offset);
+                    RuleNodesByCoordinate.TryGetValue(requiredNode, out Vector2Int offset);
                     WorldNode worldNodeToCheck = worldNode.GetNeighbour(offset);
 
                     if(worldNodeToCheck != null && !worldNodeToCheck.IsWater)
@@ -92,7 +92,7 @@ namespace Philip.Tilemaps
 
                 foreach (RuleNodes requiredNothing in RequiredNothingNodes)
                 {
-                    s_ruleNodesByCoordinate.TryGetValue(requiredNothing, out Vector2Int offset);
+                    RuleNodesByCoordinate.TryGetValue(requiredNothing, out Vector2Int offset);
                     WorldNode worldNodeToCheck = worldNode.GetNeighbour(offset);
                     if(worldNodeToCheck == null || worldNodeToCheck.IsWater)
                     {
