@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
   m_Name: noise_baron
   m_EditorClassIdentifier: 
-  <NoiseScale>k__BackingField: 1
-  <Octaves>k__BackingField: 8
-  <Persistance>k__BackingField: 0.968
-  <Lacunarity>k__BackingField: 1
+  <NoiseScale>k__BackingField: 6
+  <Octaves>k__BackingField: 4
+  <Persistance>k__BackingField: 0.169
+  <Lacunarity>k__BackingField: 2
   <Offset>k__BackingField: {x: -75.4, y: -387.4}

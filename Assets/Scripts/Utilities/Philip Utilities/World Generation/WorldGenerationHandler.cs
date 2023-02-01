@@ -253,6 +253,7 @@ namespace Philip.WorldGeneration
                     ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
                     if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
                     {
+                        Debug.Log("Object created");
                         Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
                     }
                 }
