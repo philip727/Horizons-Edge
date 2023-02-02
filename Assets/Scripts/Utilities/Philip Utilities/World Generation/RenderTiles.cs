@@ -28,6 +28,12 @@ namespace Philip.WorldGeneration
             return DetermineTile(worldNode);
         }
 
+        private RuleTile DetermineTile(Vector2Int coordinates)
+        {
+            WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(coordinates.x, coordinates.y);
+            return DetermineTile(worldNode);
+        }
+
         private RuleTile DetermineTile(WorldNode worldNode)
         {
             return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(worldNode);

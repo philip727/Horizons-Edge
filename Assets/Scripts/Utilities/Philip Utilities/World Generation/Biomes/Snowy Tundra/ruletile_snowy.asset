@@ -14,8 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RuleTiles:
   - _spriteType: 0
-    tile: {fileID: 11400000, guid: 8bde0ef4222e2314b92105a171201a9b, type: 2}
+    tile: {fileID: 11400000, guid: 5cf526f7284808c409d4209b6ed34275, type: 2}
     animatedTile: {fileID: 0}
     <RequiredLandNodes>k__BackingField: 000000000100000002000000030000000400000005000000060000000700000008000000
     <RequiredNothingNodes>k__BackingField: 
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 85813859c5a1c174289a0143b5f37d6b, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 050000000800000007000000
+    <RequiredNothingNodes>k__BackingField: 0100000003000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: 458a910e6be9a3a4caf773c62815dfb6, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 0500000008000000070000000600000003000000
+    <RequiredNothingNodes>k__BackingField: 01000000
+    <AddColliders>k__BackingField: 
+  - _spriteType: 0
+    tile: {fileID: 11400000, guid: a91a4213c79aa974da1cae0168a643aa, type: 2}
+    animatedTile: {fileID: 0}
+    <RequiredLandNodes>k__BackingField: 030000000600000007000000
+    <RequiredNothingNodes>k__BackingField: 0100000005000000
     <AddColliders>k__BackingField: 
