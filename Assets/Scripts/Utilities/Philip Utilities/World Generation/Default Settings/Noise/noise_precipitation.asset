@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
   m_Name: noise_precipitation
   m_EditorClassIdentifier: 
-  <NoiseScale>k__BackingField: 40
+  <NoiseScale>k__BackingField: 80
   <Octaves>k__BackingField: 6
   <Persistance>k__BackingField: 0.093
   <Lacunarity>k__BackingField: 5.7
