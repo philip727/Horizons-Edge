@@ -2,6 +2,7 @@ using Philip.Grid;
 using Philip.Utilities.Maths;
 using UnityEngine;
 using Philip.Utilities;
+using Philip.Building;
 
 namespace Philip.WorldGeneration
 {
@@ -107,7 +108,13 @@ namespace Philip.WorldGeneration
                 WorldGenerationSettings.ChunkSize, 
                 (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
-            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap);
+            Placement<IBuildable> placement = new Placement<IBuildable>(
+                WorldGenerationSettings.WorldWidth,
+                WorldGenerationSettings.WorldHeight,
+                WorldGenerationSettings.TileSize,
+                originPosition: default);
+
+            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap, placement);
         }
 
         private void GenerateChunkObjects()

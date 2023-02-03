@@ -94,27 +94,6 @@ namespace Philip.Building
             }
         }
 
-        //public void StartBuilding(IBuildable buildableObject)
-        //{
-        //    if (IsBuilding) return;
-
-
-        //    IsBuilding = true;
-
-        //    // Makes sure there is no preview
-        //    if (_currentObjectPreview != null)
-        //    {
-        //        Destroy(_currentObjectPreview);
-        //    }
-
-
-        //    // Sets up the current buildable object
-        //    CurrentObject = buildableObject;
-        //    var obj = Instantiate(CurrentObject.BuiltObject);
-        //    obj.name = $"{CurrentObject}_preview";
-        //    _currentObjectPreview = obj;
-        //}
-
         public void StartBuilding(GameObject gObj)
         {
             if (IsBuilding) return;

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Philip.Grid
 {
     [System.Serializable]
-    public class Grid<T> {
+    public class Grid<TGridObject> {
 
         public delegate void OnGridValueChanged(int x, int y);
         [field:SerializeField, Header("Setup")] public int Width { private set; get; }
@@ -23,9 +23,9 @@ namespace Philip.Grid
         public OnGridValueChanged afterGridValueChanged;
 
         // Arrays
-        [SerializeField] private T[,] _gridArray;
+        [SerializeField] private TGridObject[,] _gridArray;
 
-        public Grid(int width, int height, float cellSize, Func<Grid<T>, int, int, T> createObject, bool debug=false, Vector3 originPosition=default) 
+        public Grid(int width, int height, float cellSize, Func<Grid<TGridObject>, int, int, TGridObject> createObject, bool debug=false, Vector3 originPosition=default) 
         {
             Width = width;
             Height = height;
@@ -37,9 +37,9 @@ namespace Philip.Grid
         }
 
         // Initializes the grid and creates it
-        public void Init(Func<Grid<T>, int, int, T> createObject)
+        public void Init(Func<Grid<TGridObject>, int, int, TGridObject> createObject)
         {
-            _gridArray = new T[Width, Height];
+            _gridArray = new TGridObject[Width, Height];
             for (int x = 0; x < _gridArray.GetLength(0); x++)
             {
                 for (int y = 0; y < _gridArray.GetLength(1); y++)
@@ -123,7 +123,7 @@ namespace Philip.Grid
         }
 
         // Gets the value of a coordinate
-        public T GetGridObject(int x, int y)
+        public TGridObject GetGridObject(int x, int y)
         {
             if (x >= 0 && y >= 0 && x < Width && y < Height)
             {
@@ -135,7 +135,7 @@ namespace Philip.Grid
             }
         }
 
-        public T GetGridObject(Vector2Int coords)
+        public TGridObject GetGridObject(Vector2Int coords)
         {
             if (coords.x >= 0 && coords.y >= 0 && coords.x < Width && coords.y < Height)
             {
@@ -148,14 +148,14 @@ namespace Philip.Grid
         }
 
         // Gets the value of a coordinate from a world position
-        public T GetGridObject(Vector3 worldPosition)
+        public TGridObject GetGridObject(Vector3 worldPosition)
         {
             Vector2Int coordinates = GetCoordinate(worldPosition);
             return GetGridObject(coordinates.x, coordinates.y);
         }
 
         // Sets the value of a coordinate
-        public void SetGridObject(int x, int y, T value)
+        public void SetGridObject(int x, int y, TGridObject value)
         {
             if (x >= 0 && y >= 0 && x < Width && y < Height)
             {
@@ -169,7 +169,7 @@ namespace Philip.Grid
         }
 
         // Sets the value of a coordinate from world position
-        public void SetGridObject(Vector3 worldPosition, T value)
+        public void SetGridObject(Vector3 worldPosition, TGridObject value)
         {
             Vector2Int coordinates = GetCoordinate(worldPosition);
             SetGridObject(coordinates.x, coordinates.y, value);
