@@ -8,6 +8,7 @@ namespace Philip.Inventory
     {
         [field: SerializeField] public InventoryItemObject<T>[] Items { private set; get; } = new InventoryItemObject<T>[0];
 
+        [ContextMenu("Update ID's")]
         public virtual void UpdateIDs()
         {
             for (int i = 0; i < Items.Length; i++)

@@ -264,6 +264,3 @@ namespace Philip.WorldGeneration
 
     }
 }
-
-
-

@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Philip.Inventory
 {
-    public class InventoryItemObject<T> : ScriptableObject where T : InventoryItem, new()
+    public class InventoryItemObject<TItem, TItemType> : ScriptableObject where TItem : InventoryItem, new() where TItemType : Enum
     {
         [field:SerializeField] public Sprite DisplaySprite { private set; get; }
         [field: SerializeField] public bool Stackable { private set; get; }
         [field: SerializeField, TextArea(5, 7)] public string Description { private set; get; }
+        [field: SerializeField] public TItemType ItemType { private set; get; };
 
-        public T data = new T();
-        public virtual T CreateItem()
+        public TItem data = new TItem();
+        public virtual TItem CreateItem()
         {
-            return new T();
+            return new TItem();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Philip.Inventory
 
         [field:SerializeField] public int ID { protected set; get; }
 
+
         public void SetID(int value)
         {
             ID = value;

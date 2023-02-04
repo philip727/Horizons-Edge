@@ -4,12 +4,14 @@ using UnityEngine;
 namespace Philip.Inventory
 {
     [System.Serializable]
-    public class InventorySlot<TItem> where TItem : InventoryItem, new()
+    public class InventorySlot<TItem, TItemType> where TItem : InventoryItem, new() where TItemType : Enum
     {
-        public delegate void InvetorySlotUpdate(InventorySlot<TItem> _inventorySlot);
+        public delegate void InvetorySlotUpdate(InventorySlot<TItem, TItemType> _inventorySlot);
 
+        [field: SerializeField] public TItemType[] AllowedItemTypes = new TItemType[0];
         [field:SerializeField] public TItem Item { private set; get; }
         [field: SerializeField] public long Amount { private set; get; }
+
 
 
         [System.NonSerialized] public InvetorySlotUpdate OnBeforeUpdate;

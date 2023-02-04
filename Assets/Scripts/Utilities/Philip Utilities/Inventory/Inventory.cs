@@ -1,12 +1,12 @@
 using UnityEngine;
+using System;
 namespace Philip.Inventory
 {
     [System.Serializable]
-    public class Inventory<TItem> where TItem : InventoryItem, new()
+    public class Inventory<TItem, TItemType> where TItem : InventoryItem, new() where TItemType : Enum
     {
         public string InventoryName { private set; get; }
-
-        [field: SerializeField] public InventorySlot<TItem>[] Slots { protected set; get; } = new InventorySlot<TItem>[10];
+        [field: SerializeField] public InventorySlot<TItem, TItemType>[] Slots { protected set; get; } = new InventorySlot<TItem, TItemType>[10];
 
 
         // Gets the amount of empty slots
@@ -25,7 +25,7 @@ namespace Philip.Inventory
         }
 
         // Finds an item with the same ID
-        public InventorySlot<TItem> FindItem(TItem item)
+        public InventorySlot<TItem, TItemType> FindItem(TItem item)
         {
             for (int i = 0; i < Slots.Length; i++)
             {
@@ -39,7 +39,7 @@ namespace Philip.Inventory
         }
 
         // Finds the first empty slot in the inventory
-        public InventorySlot<TItem> SetFirstEmptySlot(TItem item, int amount)
+        public InventorySlot<TItem, TItemType> SetFirstEmptySlot(TItem item, int amount)
         {
             for (int i = 0; i < Slots.Length; i++)
             {
@@ -56,7 +56,7 @@ namespace Philip.Inventory
         // Adds an item
         public bool AddItem(TItem item, int amount)
         {
-            InventorySlot<TItem> inventorySlot = FindItem(item);
+            InventorySlot<TItem, TItemType> inventorySlot = FindItem(item);
             if (InventoryHandler<TItem>.Instance.Database.Items[item.ID].Stackable && inventorySlot != null)
             {
                 inventorySlot.AddAmount(amount);
