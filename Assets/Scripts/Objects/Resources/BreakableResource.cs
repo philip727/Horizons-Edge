@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BreakableResource : ChunkRunObject, IInteractable, IDamageable
+public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageable
 {
     [field: SerializeField] public string NameToShow { private set; get; }
 

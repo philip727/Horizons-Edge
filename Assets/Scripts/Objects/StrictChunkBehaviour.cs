@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ChunkRunObject : StructureObject
+public abstract class StrictChunkBehaviour : StructureObject
 {
     protected bool _objectInViewersChunk = true;
 

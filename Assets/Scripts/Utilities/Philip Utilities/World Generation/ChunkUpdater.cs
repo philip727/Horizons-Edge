@@ -32,7 +32,6 @@ namespace Philip.WorldGeneration
         {
             Vector2Int currentCoords = WorldGenerationHandler.s_worldData.ChunkGrid.GetCoordinate(Viewer.position);
 
-            // Unrenders the chunks from last update
             _chunksAlreadyLoadedOnFrame.Clear();
 
             // Renders the chunks by the render distance in each direction
@@ -47,7 +46,7 @@ namespace Philip.WorldGeneration
 
                     if(chunkNode.IsVisible)
                     {
-                        // Chunks that are already loaded, that should be loaded
+                        // Chunks that are already loaded, that should be kept loaded
                         _chunksAlreadyLoadedOnFrame.Add(chunkNode);
                     }
                     else
