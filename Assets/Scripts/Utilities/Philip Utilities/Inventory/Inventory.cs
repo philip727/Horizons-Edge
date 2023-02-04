@@ -57,7 +57,7 @@ namespace Philip.Inventory
         public bool AddItem(TItem item, int amount)
         {
             InventorySlot<TItem, TItemType> inventorySlot = FindItem(item);
-            if (InventoryHandler<TItem>.Instance.Database.Items[item.ID].Stackable && inventorySlot != null)
+            if (InventoryHandler<TItem, TItemType>.Instance.Database.Items[item.ID].Stackable && inventorySlot != null)
             {
                 inventorySlot.AddAmount(amount);
                 return true;
@@ -66,7 +66,7 @@ namespace Philip.Inventory
             if (EmptySlotCount <= 0)
                 return false;
 
-            if (!InventoryHandler<TItem>.Instance.Database.Items[item.ID].Stackable || inventorySlot == null)
+            if (!InventoryHandler<TItem, TItemType>.Instance.Database.Items[item.ID].Stackable || inventorySlot == null)
             {
                 SetFirstEmptySlot(item, amount);
                 return true;
