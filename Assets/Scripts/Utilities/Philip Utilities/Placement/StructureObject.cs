@@ -36,7 +36,6 @@ namespace Philip.Building
         public virtual void OnBuilt()
         {
             SetIsBuilt(true);
-            Debug.Log($"<color=#754deb>[BUILDING]</color> OnBuilt() Called on object {gameObject} ({gameObject.GetInstanceID()})");
         }
 
         public void SetIsBuilt(bool value)

@@ -66,7 +66,7 @@ public class PlacementGridManagerEditor : Editor
 
         if (_myTarget.Placement.GetGrid().IsValidCoordinate(coords.x, coords.y) && _myTarget.Placement.GetGrid().IsValidCoordinate(coords.x, coords.y))
         {
-            if (_myTarget.Placement.GetGrid().GetGridObject(coords.x, coords.y).IsBuildable)
+            if (_myTarget.Placement.GetGrid().GetGridObject(coords.x, coords.y).CanBuildOn)
             {
                 _myTarget.AddNonBuildableTiles(coords);
             }

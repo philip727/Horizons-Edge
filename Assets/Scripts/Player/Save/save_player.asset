@@ -12,3 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7d3c21d83169f4294b272c3b4b12b8, type: 3}
   m_Name: save_player
   m_EditorClassIdentifier: 
+  <Inventory>k__BackingField:
+    <Slots>k__BackingField:
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0
+    - AllowedItemTypes: 
+      <Item>k__BackingField:
+        <Name>k__BackingField: 
+        <ID>k__BackingField: -1
+      <Amount>k__BackingField: 0

@@ -32,13 +32,13 @@ namespace Philip.Building
         {
             foreach (Vector2Int coords in buildingObject.CoordinatesItTakesUp)
             {
-                if (!_grid.IsValidCoordinate(givenCoords + coords) || CanPlaceInNode(givenCoords + coords))
+                if (!_grid.IsValidCoordinate(givenCoords + coords) || !CanPlaceInNode(givenCoords + coords))
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
 
         public void PlaceObjectInNode(TBuildingObject buildingObject, Vector2Int coords)
@@ -47,6 +47,7 @@ namespace Philip.Building
             SetNodesAroundNode(node, buildingObject, false);
             node.SetObjectInNode(buildingObject);
             buildingObject.OnBuilt();
+            Debug.Log($"<color=#754deb>[BUILDING]</color> Built {buildingObject.BuiltObject.name} at ({coords.x}, {coords.y})");
         }
 
         public TBuildingObject GetObjectInNode(Vector2Int coords)
@@ -80,14 +81,14 @@ namespace Philip.Building
         public bool CanPlaceInNode(int x, int y)
         {
             PlacementNode<TBuildingObject> node = _grid.GetGridObject(x, y);
-            return node.IsBuildable;
+            return node.CanBuildOn;
         }
 
         // Checks if we can place in that node
         public bool CanPlaceInNode(Vector2Int coords)
         {
             PlacementNode<TBuildingObject> node = _grid.GetGridObject(coords.x, coords.y);
-            return node.IsBuildable;
+            return node.CanBuildOn;
         }
 
         // Gets the grid the placement node uses

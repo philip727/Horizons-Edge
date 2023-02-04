@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Philip.Building 
 { 
-    public class PlacementHandler : MonoBehaviourSingleton<PlacementHandler>
+    public class PlacementHandler : MonoBehaviour
     {
         public IBuildable CurrentObject { private set; get; } = null;
         public bool IsBuilding { private set; get; }
@@ -16,12 +16,6 @@ namespace Philip.Building
         private Grid<PlacementNode<IBuildable>> _grid;
         private Vector2Int currentCoords;
 
-
-        public override void Awake()
-        {
-            base.Awake();
-
-        }
 
         public void OnEnable()
         {

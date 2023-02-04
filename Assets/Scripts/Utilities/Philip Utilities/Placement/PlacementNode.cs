@@ -7,7 +7,7 @@ namespace Philip.Building
     {
         public TBuildingObject ObjectInNode { private set; get; } = default;
 
-        public bool IsBuildable { private set; get; } = true;
+        public bool CanBuildOn { private set; get; } = true;
         public bool BuiltOn { private set; get; } = false;
 
         public PlacementNode(Grid<PlacementNode<TBuildingObject>> grid, int x, int y) : base(grid, x, y)
@@ -23,7 +23,7 @@ namespace Philip.Building
         // Set the is buildable variable
         public void SetIsBuildable(bool value)
         {
-            IsBuildable = value;
+            CanBuildOn = value;
         }
 
         // Sets the built on variable
