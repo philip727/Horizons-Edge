@@ -12,6 +12,7 @@ namespace Philip.WorldGeneration
 
         // Chunks
         private readonly List<ChunkNode> _loadedChunksLastUpdate = new List<ChunkNode>();
+        private readonly List<ChunkNode> _chunksAlreadyLoadedOnFrame = new List<ChunkNode>();
 
         private void Start()
         {
@@ -32,13 +33,7 @@ namespace Philip.WorldGeneration
             Vector2Int currentCoords = WorldGenerationHandler.s_worldData.ChunkGrid.GetCoordinate(Viewer.position);
 
             // Unrenders the chunks from last update
-            for (int i = 0; i < _loadedChunksLastUpdate.Count; i++)
-            {
-                _loadedChunksLastUpdate[i].SetVisible(false);
-            }
-
-            _loadedChunksLastUpdate.Clear();
-
+            _chunksAlreadyLoadedOnFrame.Clear();
 
             // Renders the chunks by the render distance in each direction
             for (int yOffset = -MAX_VIEW_DISTANCE; yOffset <= MAX_VIEW_DISTANCE; yOffset++)
@@ -46,15 +41,33 @@ namespace Philip.WorldGeneration
                 for (int xOffset = -MAX_VIEW_DISTANCE; xOffset <= MAX_VIEW_DISTANCE; xOffset++)
                 {
                     Vector2Int viewedChunkCoord = currentCoords + new Vector2Int(xOffset, yOffset);
-
                     if (!WorldGenerationHandler.s_worldData.IsValidChunk(viewedChunkCoord)) continue;
                     ChunkNode chunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(viewedChunkCoord);
 
-                    if(!chunkNode.IsVisible)
+
+                    if(chunkNode.IsVisible)
                     {
+                        // Chunks that are already loaded, that should be loaded
+                        _chunksAlreadyLoadedOnFrame.Add(chunkNode);
+                    }
+                    else
+                    {
+                        // If Chunk isn't loaded and should be
                         chunkNode.SetVisible(true);
                         _loadedChunksLastUpdate.Add(chunkNode);
-                    } 
+                        _chunksAlreadyLoadedOnFrame.Add(chunkNode);
+                    }
+                }
+            }
+
+            // Removes previously loaded chunks, have to iterate backwards to prevent error
+            for (int i = _loadedChunksLastUpdate.Count - 1; i >= 0; i--)
+            {
+                ChunkNode chunk = _loadedChunksLastUpdate[i];
+                if (!_chunksAlreadyLoadedOnFrame.Contains(chunk))
+                {
+                    chunk.SetVisible(false);
+                    _loadedChunksLastUpdate.Remove(chunk);
                 }
             }
         }

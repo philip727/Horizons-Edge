@@ -21,6 +21,11 @@ namespace Philip.Building
             SetupStructureNodes();
         }
 
+        protected virtual void Update()
+        {
+            Debug.Log("Is this monobehaviour even running");
+        }
+
         public void SetupStructureNodes()
         {
             Vector2Int coordinates = Placement<IBuildable>.Instance.GetGrid().GetCoordinate(BuiltObject.transform.position);

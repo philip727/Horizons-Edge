@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 757242077712894524}
   m_Layer: 0
   m_Name: character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 7246442752504651787}
   - component: {fileID: 7246442752504651789}
   - component: {fileID: 7246442752504651786}
+  - component: {fileID: 3462714645187941854}
   m_Layer: 0
   m_Name: character_sprite
   m_TagString: Untagged
@@ -471,6 +472,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3462714645187941854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246442752504651784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062bf159987fd4245a5b35981135e460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adjustableSortingLayers:
+  - <SpriteRenderer>k__BackingField: {fileID: 213510232849075849}
+    <LayerOffset>k__BackingField: -1
+  _layerOffset: 0
+  _alwaysUpdate: 1
 --- !u!1 &7246442752655492973
 GameObject:
   m_ObjectHideFlags: 0

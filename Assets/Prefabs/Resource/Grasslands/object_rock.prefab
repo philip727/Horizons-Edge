@@ -49,10 +49,11 @@ MonoBehaviour:
   - {x: 0, y: 0}
   <IsBuilt>k__BackingField: 0
   <NameToShow>k__BackingField: Rock
-  <InteractRange>k__BackingField: 4
+  <InteractRange>k__BackingField: 2
   <CanInteract>k__BackingField: 0
   <MaxHealth>k__BackingField: 5
   <Health>k__BackingField: 5
+  _circleCollider: {fileID: 0}
 --- !u!1 &1233229728214271889
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4145196952736708123}
   - component: {fileID: 7565539364214797878}
+  - component: {fileID: 9142636272202261455}
   m_Layer: 0
   m_Name: rock_sprite
   m_TagString: Untagged
@@ -137,6 +139,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9142636272202261455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233229728214271889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062bf159987fd4245a5b35981135e460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adjustableSortingLayers: []
+  _layerOffset: 0
+  _alwaysUpdate: 0
 --- !u!1 &3873650452568743469
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,9 +203,9 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.0037218928, y: 0.33363235}
-  - {x: 0.25534597, y: 0.4770649}
-  - {x: 0.83035904, y: 0.5171302}
-  - {x: 0.99210787, y: 0.36282519}
+  - {x: 0.25893104, y: 0.36114746}
+  - {x: 0.86859983, y: 0.35819182}
+  - {x: 1.0016681, y: 0.34728986}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
