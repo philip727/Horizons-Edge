@@ -7,6 +7,7 @@ public interface IInteractable
     [SerializeField] string NameToShow { get; }
     [SerializeField] float InteractRange { get; }
     [SerializeField] bool CanInteract { get; }
+    [SerializeField] GameObject InteractObject { get; }
 
     void OnInteract();
 

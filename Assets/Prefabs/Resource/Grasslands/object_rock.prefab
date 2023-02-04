@@ -49,11 +49,11 @@ MonoBehaviour:
   - {x: 0, y: 0}
   <IsBuilt>k__BackingField: 0
   <NameToShow>k__BackingField: Rock
-  <InteractRange>k__BackingField: 2
+  <InteractRange>k__BackingField: 4
   <CanInteract>k__BackingField: 0
   <MaxHealth>k__BackingField: 5
   <Health>k__BackingField: 5
-  _circleCollider: {fileID: 0}
+  <InteractObject>k__BackingField: {fileID: 7342781243330505614}
 --- !u!1 &1233229728214271889
 GameObject:
   m_ObjectHideFlags: 0

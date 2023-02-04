@@ -23,7 +23,7 @@ namespace Philip.Building
 
         protected virtual void Update()
         {
-            Debug.Log("Is this monobehaviour even running");
+
         }
 
         public void SetupStructureNodes()

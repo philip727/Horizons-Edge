@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageable
 {
+    public delegate void OnItemInteractable(GameObject gameObject, bool canInteract);
     [field: SerializeField] public string NameToShow { private set; get; }
 
     [field: SerializeField] public float InteractRange { private set; get; }
@@ -17,7 +18,11 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
 
     [field: SerializeField] public int Health { private set; get; }
 
+    [field: SerializeField] public GameObject InteractObject { private set; get; }
+
     private GameObject _player;
+
+    private CharacterInteractionManager _characterInteraction;
 
     protected override void Start()
     {
@@ -37,7 +42,11 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
         if (_player == null)
         {
             _player = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log("Player is null");
+        }
+
+        if(_characterInteraction == null && _player != null)
+        {
+            _characterInteraction = _player.GetComponentInChildren<CharacterInteractionManager>();
         }
     }
 
@@ -45,15 +54,19 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
     {
         if (!gameObject.activeSelf) return;
 
-        if (PVector.GetDistanceBetween(gameObject, _player, InteractRange, true))
+        if (PVector.GetDistanceBetween(gameObject, _player, InteractRange, true) && !CanInteract)
         {
             CanInteract = true;
-            Debug.Log("In range");
-            return;
+            _characterInteraction.interactables.Add(this);
         }
-
-        CanInteract = false;
+        else if (CanInteract)
+        {
+            CanInteract = false;
+            _characterInteraction.interactables.Remove(this);
+        }
     }
+
+
 
     public void Death()
     {
