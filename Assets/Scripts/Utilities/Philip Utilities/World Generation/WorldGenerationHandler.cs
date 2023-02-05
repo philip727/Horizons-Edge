@@ -229,8 +229,8 @@ namespace Philip.WorldGeneration
                 Vector2 mapVector = new Vector2(baronHeight, tropicalHeight);
                 Vector2 resourceVector = new Vector2(resourceObject.Baron, resourceObject.Tropicality);
 
-                float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
-
+                //float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
+                float currentResourceDistance = Mathf.Abs(tropicalHeight - resourceObject.Tropicality) + Mathf.Abs(baronHeight - resourceObject.Baron);
 
                 if (bestResourceDistance > currentResourceDistance)
                 {
@@ -274,7 +274,9 @@ namespace Philip.WorldGeneration
                     ChunkNode chunk = s_worldData.ChunkGrid.GetGridObject(chunkX, chunkY);
                     Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
 
+                    //System.Random prng = new System.Random(Seed);
                     ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
+                    //ResourceObject resourceObject = biomeObject.ResourceObjects[prng.Next(0, biomeObject.ResourceObjects.Length - 1)];
                     PlaceObjectAtNode(resourceObject, worldPosition, chunk, new Vector2Int(x, y));
                 }
             }

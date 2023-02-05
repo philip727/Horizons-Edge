@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47736ba81f083a4bba6531c807c06db, type: 3}
   m_Name: resource_stone
   m_EditorClassIdentifier: 
-  <Resource>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 7342781243330505614, guid: ab4a0840b6dff9b4c8043ac9bf98b505, type: 3}
   <StructureObjectSettings>k__BackingField: {fileID: 11400000, guid: 25d0e9744e3ba064a9dc5d958645ebc7, type: 2}
-  <Baron>k__BackingField: 0.666
-  <Tropicality>k__BackingField: 0.112
+  <Baron>k__BackingField: 0.886
+  <Tropicality>k__BackingField: 0.101

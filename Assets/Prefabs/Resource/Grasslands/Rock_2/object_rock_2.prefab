@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adjustableSortingLayers:
   - <SpriteRenderer>k__BackingField: {fileID: 7363237297190656381}
-    <LayerOffset>k__BackingField: -5
-  _layerOffset: 0
+    <PositionOffset>k__BackingField: -2
+  _positionOffset: 0
   _alwaysUpdate: 0
 --- !u!1 &4299980692995405477
 GameObject:

@@ -10,20 +10,20 @@ public class AdjustSortingLayer : MonoBehaviour
     {
         [field: SerializeField] public SpriteRenderer SpriteRenderer { private set; get; }
         public Color StartingSpriteColor { private set; get; }
-        [field: SerializeField] public float LayerOffset { private set; get; }
+        [field: SerializeField] public float PositionOffset { private set; get; }
 
         public AdjustableSortingLayer(SpriteRenderer spriteRenderer, float offset)
         {
             SpriteRenderer = spriteRenderer;
             StartingSpriteColor = spriteRenderer.color;
-            LayerOffset = offset;
+            PositionOffset = offset;
         }
     }
 
     [SerializeField] private List<AdjustableSortingLayer> _adjustableSortingLayers = new List<AdjustableSortingLayer>();
 
     private const int MAX_SORTING_LAYER = 32767;
-    [SerializeField] private float _layerOffset;
+    [SerializeField] private float _positionOffset;
     [SerializeField] private bool _alwaysUpdate = false;
 
 
@@ -32,7 +32,7 @@ public class AdjustSortingLayer : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer)
         {
-            _adjustableSortingLayers.Add(new AdjustableSortingLayer(spriteRenderer, _layerOffset));
+            _adjustableSortingLayers.Add(new AdjustableSortingLayer(spriteRenderer, _positionOffset));
         }
     }
 
@@ -55,7 +55,7 @@ public class AdjustSortingLayer : MonoBehaviour
     {
         foreach (AdjustableSortingLayer sortableLayer in _adjustableSortingLayers)
         {
-            sortableLayer.SpriteRenderer.sortingOrder = (int)(MAX_SORTING_LAYER - ((transform.position.y - sortableLayer.LayerOffset) * 10f));
+            sortableLayer.SpriteRenderer.sortingOrder = (int)(MAX_SORTING_LAYER - ((transform.position.y + sortableLayer.PositionOffset) * 10f));
         }
     }
 }

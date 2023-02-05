@@ -280,14 +280,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adjustableSortingLayers:
   - <SpriteRenderer>k__BackingField: {fileID: 7372152343159792705}
-    <LayerOffset>k__BackingField: -2
+    <PositionOffset>k__BackingField: 2
   - <SpriteRenderer>k__BackingField: {fileID: 7989252391207774556}
-    <LayerOffset>k__BackingField: -2
+    <PositionOffset>k__BackingField: 2
   - <SpriteRenderer>k__BackingField: {fileID: 8945668425746291480}
-    <LayerOffset>k__BackingField: 2
+    <PositionOffset>k__BackingField: -2
   - <SpriteRenderer>k__BackingField: {fileID: 1268468229938726716}
-    <LayerOffset>k__BackingField: 2
-  _layerOffset: 0
+    <PositionOffset>k__BackingField: -2
+  _positionOffset: 0
   _alwaysUpdate: 1
 --- !u!1 &6530273042997834095
 GameObject:
@@ -733,8 +733,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adjustableSortingLayers:
   - <SpriteRenderer>k__BackingField: {fileID: 213510232849075849}
-    <LayerOffset>k__BackingField: -1
-  _layerOffset: 0
+    <PositionOffset>k__BackingField: -2
+  _positionOffset: 0
   _alwaysUpdate: 1
 --- !u!1 &7246442752655492973
 GameObject:
