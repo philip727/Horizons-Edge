@@ -16,9 +16,10 @@ namespace Philip.WorldGeneration
         public float[,] TemperatureMap { get; }
         public float[,] BaronMap { get; }
         public float[,] TropicalityMap { get; }
+        public float[,] ObjectMap { get; }
         public Placement<IBuildable> Placement { get; }
 
-        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap, float[,] rockyMap, float[,] tropicalityMap, Placement<IBuildable> placement)
+        public WorldData(Grid<WorldNode> worldGrid, Grid<ChunkNode> chunkGrid, float[,] heightMap, float[,] precipitationMap, float[,] temperatureMap, float[,] rockyMap, float[,] tropicalityMap, float[,] objectMap, Placement<IBuildable> placement)
         {
             WorldGenerationCompleted = false;
             WorldGrid = worldGrid;
@@ -28,6 +29,7 @@ namespace Philip.WorldGeneration
             TemperatureMap = temperatureMap;
             BaronMap = rockyMap;
             TropicalityMap = tropicalityMap;
+            ObjectMap = objectMap;
             Placement = placement;
         }
 

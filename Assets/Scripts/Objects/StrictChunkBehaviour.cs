@@ -13,6 +13,7 @@ public abstract class StrictChunkBehaviour : StructureObject
         base.Update();
         ChunkNode currentChunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(transform.position);
         ChunkNode viewedChunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(ChunkUpdater.s_viewerPosition);
+        if (viewedChunkNode == null) return;
 
         ObjectIsRunning = currentChunkNode.Coordinates == viewedChunkNode.Coordinates;
 

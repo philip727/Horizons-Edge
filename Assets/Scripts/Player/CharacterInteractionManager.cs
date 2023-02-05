@@ -48,11 +48,35 @@ public class CharacterInteractionManager : MonoBehaviour
 
     private void OnInteractPressed(InputAction.CallbackContext obj)
     {
-        Debug.Log(obj.control.displayName);
-        if (_currentMouseNode.Coordinates == _lastCoordinates && _lastBestInteractable.InteractObject != null)
+        if (CheckCoords(_currentMouseNode.Coordinates, _lastCoordinates, _lastBestInteractable))
         {
             _lastBestInteractable.OnInteract(obj.control.displayName);
         }
+    }
+
+    private bool CheckCoords(Vector2Int givenCoordinates, Vector2Int coordinatesToCheck, IInteractable interactable)
+    {
+        if (interactable == null || interactable.InteractObject == null) return false;
+        StructureObject structureObject = interactable.InteractObject.GetComponentInChildren<StructureObject>();
+        if (structureObject)
+        {
+            foreach (Vector2Int coords in structureObject.StructureObjectSettings.CoordinatesItTakesUp)
+            {
+                if(givenCoordinates == coordinatesToCheck + coords)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            if (givenCoordinates == coordinatesToCheck)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void UpdateMouseNode()
@@ -66,7 +90,7 @@ public class CharacterInteractionManager : MonoBehaviour
     private void InteractionHighlighter()
     {
         if (_currentMouseNode == null) return;
-        if (_currentMouseNode.Coordinates == _lastCoordinates && _lastBestInteractable.InteractObject != null) 
+        if (CheckCoords(_currentMouseNode.Coordinates, _lastCoordinates, _lastBestInteractable)) 
         {
             DetermineStructure(_lastBestInteractable);
             return;
@@ -156,7 +180,7 @@ public class CharacterInteractionManager : MonoBehaviour
         {
             foreach (Vector2Int coordinates in structureObject.StructureObjectSettings.CoordinatesItTakesUp)
             {
-                if (mouseNode.Coordinates == objectNode.Coordinates + coordinates)
+                if (mouseNode.Coordinates == (objectNode.Coordinates + coordinates))
                 {
                     return true;
                 }

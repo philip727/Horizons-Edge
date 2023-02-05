@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab4a7a622a0fba46a5705978ec657de, type: 3}
-  m_Name: object_rock_settings
+  m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
+  m_Name: noise_object
   m_EditorClassIdentifier: 
-  <CoordinatesItTakesUp>k__BackingField:
-  - {x: 0, y: 0}
+  <NoiseScale>k__BackingField: 3
+  <Octaves>k__BackingField: 4
+  <Persistance>k__BackingField: 0.295
+  <Lacunarity>k__BackingField: 4
+  <Offset>k__BackingField: {x: -100, y: 200}

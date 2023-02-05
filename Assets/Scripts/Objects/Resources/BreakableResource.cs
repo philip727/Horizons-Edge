@@ -75,7 +75,10 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
 
     public void OnInteract(string interactionName)
     {
-        TakeDamage(1);
+        if(interactionName == "Left Button")
+        {
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(int damage)

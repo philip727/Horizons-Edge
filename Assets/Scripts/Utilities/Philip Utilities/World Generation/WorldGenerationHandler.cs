@@ -18,6 +18,7 @@ namespace Philip.WorldGeneration
         [field: SerializeField] public NoiseSettings TemperatureSettings { private set; get; }
         [field: SerializeField] public NoiseSettings BaronSettings { private set; get; }
         [field: SerializeField] public NoiseSettings TropicalitySettings { private set; get; }
+        [field: SerializeField] public NoiseSettings ObjectSettings { private set; get; }
         [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
 
         public void Start()
@@ -96,6 +97,16 @@ namespace Philip.WorldGeneration
                 TropicalitySettings.Lacunarity,
                 TropicalitySettings.NoiseScale);
 
+            float[,] objectNoiseMap = Noise.GenerateNoiseMap(
+                WorldGenerationSettings.WorldHeight,
+                WorldGenerationSettings.WorldWidth,
+                seed,
+                ObjectSettings.Offset,
+                ObjectSettings.Octaves,
+                ObjectSettings.Persistance,
+                ObjectSettings.Lacunarity,
+                ObjectSettings.NoiseScale);
+
             // Creates the grid that we use for single tile placement
             Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight, 
@@ -114,7 +125,7 @@ namespace Philip.WorldGeneration
                 WorldGenerationSettings.TileSize,
                 originPosition: default);
 
-            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap, placement);
+            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap, objectNoiseMap, placement);
         }
 
         private void GenerateChunkObjects()
@@ -228,6 +239,7 @@ namespace Philip.WorldGeneration
 
         private void GenerateWorldObjects()
         {
+            System.Random prng = new System.Random(Seed);
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
@@ -235,6 +247,11 @@ namespace Philip.WorldGeneration
                     WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
 
                     if (worldNode.HasWaterNeighbours())
+                    {
+                        continue;
+                    }
+
+                    if (s_worldData.ObjectMap[x, y] >= 0.2f)
                     {
                         continue;
                     }

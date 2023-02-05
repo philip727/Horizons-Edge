@@ -16,8 +16,8 @@ MonoBehaviour:
   <Temperature>k__BackingField: 0.026
   <TileRules>k__BackingField: {fileID: 11400000, guid: 7e8455fc5782d9d478859ef2c912e2eb, type: 2}
   <ResourceObjects>k__BackingField:
-  - {fileID: 11400000, guid: 815a66775d2e97f47a7ec448e3c1f7ab, type: 2}
   - {fileID: 11400000, guid: e3f7af49153033e4e9c0bae649afa753, type: 2}
+  - {fileID: 11400000, guid: e947e299dc54cef4c82379d8d8500b73, type: 2}
   Biome:
     <Name>k__BackingField: Grasslands
     <ID>k__BackingField: biome:grasslands
