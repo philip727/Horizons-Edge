@@ -254,9 +254,21 @@ namespace Philip.WorldGeneration
                     Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
 
                     ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
-                    if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
+                    PlaceObjectAtNode(resourceObject, worldPosition, chunk, new Vector2Int(x, y));
+                }
+            }
+        }
+
+        private void PlaceObjectAtNode(ResourceObject resourceObject, Vector3 worldPosition, ChunkNode chunk, Vector2Int givenCoords)
+        {
+            if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
+            {
+                foreach (Vector2Int coords in resourceObject.StructureObjectSettings.CoordinatesItTakesUp)
+                {
+                    if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords + coords))
                     {
                         Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
+                        break;
                     }
                 }
             }

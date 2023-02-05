@@ -30,7 +30,20 @@ namespace Philip.Building
 
         public bool CanPlaceBuildingAtNode(TBuildingObject buildingObject, Vector2Int givenCoords)
         {
-            foreach (Vector2Int coords in buildingObject.CoordinatesItTakesUp)
+            foreach (Vector2Int coords in buildingObject.StructureObjectSettings.CoordinatesItTakesUp)
+            {
+                if (!_grid.IsValidCoordinate(givenCoords + coords) || !CanPlaceInNode(givenCoords + coords))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool CanPlaceBuildingAtNode(StructureObjectSettings structureObjectSettings, Vector2Int givenCoords)
+        {
+            foreach (Vector2Int coords in structureObjectSettings.CoordinatesItTakesUp)
             {
                 if (!_grid.IsValidCoordinate(givenCoords + coords) || !CanPlaceInNode(givenCoords + coords))
                 {
@@ -57,7 +70,7 @@ namespace Philip.Building
 
         private void SetNodesAroundNode(PlacementNode<TBuildingObject> node, TBuildingObject buildingObject, bool value)
         {
-            foreach (Vector2Int coords in buildingObject.CoordinatesItTakesUp)
+            foreach (Vector2Int coords in buildingObject.StructureObjectSettings.CoordinatesItTakesUp)
             {
                 if (_grid.IsValidCoordinate(node.Coordinates + coords))
                 {
@@ -68,7 +81,7 @@ namespace Philip.Building
 
         private void SetNodesArondCoordinates(TBuildingObject buildingObject, Vector2Int givenCoords, bool value)
         {
-            foreach (Vector2Int coords in buildingObject.CoordinatesItTakesUp)
+            foreach (Vector2Int coords in buildingObject.StructureObjectSettings.CoordinatesItTakesUp)
             {
                 if (_grid.IsValidCoordinate(givenCoords + coords))
                 {

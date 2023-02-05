@@ -12,7 +12,7 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
 
     [field: SerializeField] public float InteractRange { private set; get; }
 
-    [field: SerializeField] public bool CanInteract { private set; get; }
+    public bool CanInteract { private set; get; }
 
     [field: SerializeField] public int MaxHealth { private set; get; }
 
@@ -32,7 +32,7 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
     protected override void Update()
     {
         base.Update();
-        if (!_objectInViewersChunk) return;
+        if (!ObjectIsRunning) return;
         GrabPlayer();
         CheckInteraction();
     }
@@ -70,16 +70,21 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
 
     public void Death()
     {
-        //throw new System.NotImplementedException();
+        Destroy(InteractObject);
     }
 
-    public void OnInteract()
+    public void OnInteract(string interactionName)
     {
-        //throw new System.NotImplementedException();
+        TakeDamage(1);
     }
 
     public void TakeDamage(int damage)
     {
-        //throw new System.NotImplementedException();
+        Health -= 1;
+
+        if (Health <= 0)
+        {
+            Death();
+        }
     }
 }

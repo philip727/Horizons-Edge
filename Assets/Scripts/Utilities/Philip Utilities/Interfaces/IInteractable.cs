@@ -9,6 +9,6 @@ public interface IInteractable
     [SerializeField] bool CanInteract { get; }
     [SerializeField] GameObject InteractObject { get; }
 
-    void OnInteract();
+    void OnInteract(string interactionDisplayName);
 
 }

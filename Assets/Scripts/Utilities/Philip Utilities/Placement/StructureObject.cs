@@ -6,9 +6,9 @@ namespace Philip.Building
     {
         [field: SerializeField] public GameObject BuiltObject { private set; get; }
 
-        [field: SerializeField] public Vector2Int[] CoordinatesItTakesUp { private set; get; }
+        [field: SerializeField] public StructureObjectSettings StructureObjectSettings { private set; get; }
 
-        [field: SerializeField] public bool IsBuilt { private set; get; } = false;
+        public bool IsBuilt { private set; get; } = false;
 
         protected virtual void Awake()
         {

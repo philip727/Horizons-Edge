@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class StrictChunkBehaviour : StructureObject
 {
-    protected bool _objectInViewersChunk = true;
+    public bool ObjectIsRunning { private set; get; } = true;
 
     protected override void Update()
     {
@@ -14,8 +14,7 @@ public abstract class StrictChunkBehaviour : StructureObject
         ChunkNode currentChunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(transform.position);
         ChunkNode viewedChunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(ChunkUpdater.s_viewerPosition);
 
-        _objectInViewersChunk = currentChunkNode.Coordinates == viewedChunkNode.Coordinates;
+        ObjectIsRunning = currentChunkNode.Coordinates == viewedChunkNode.Coordinates;
 
-        //Debug.Log(_objectInViewersChunk);
     }
 }

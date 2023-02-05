@@ -45,12 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BuiltObject>k__BackingField: {fileID: 7342781243330505614}
-  <CoordinatesItTakesUp>k__BackingField:
-  - {x: 0, y: 0}
-  <IsBuilt>k__BackingField: 0
+  <StructureObjectSettings>k__BackingField: {fileID: 11400000, guid: 25d0e9744e3ba064a9dc5d958645ebc7, type: 2}
   <NameToShow>k__BackingField: Rock
-  <InteractRange>k__BackingField: 4
-  <CanInteract>k__BackingField: 0
+  <InteractRange>k__BackingField: 3
   <MaxHealth>k__BackingField: 5
   <Health>k__BackingField: 5
   <InteractObject>k__BackingField: {fileID: 7342781243330505614}

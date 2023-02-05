@@ -6,7 +6,8 @@ using UnityEngine;
 public interface IBuildable
 {
     GameObject BuiltObject { get; }
-    Vector2Int[] CoordinatesItTakesUp { get; }
+
+    public StructureObjectSettings StructureObjectSettings { get; }
     bool IsBuilt { get; }
 
     void OnBuilt();

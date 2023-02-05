@@ -29,7 +29,11 @@ public class AdjustSortingLayer : MonoBehaviour
 
     private void Awake()
     {
-        _adjustableSortingLayers.Add(new AdjustableSortingLayer(GetComponent<SpriteRenderer>(), _layerOffset));
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer)
+        {
+            _adjustableSortingLayers.Add(new AdjustableSortingLayer(spriteRenderer, _layerOffset));
+        }
     }
 
     // Start is called before the first frame update
