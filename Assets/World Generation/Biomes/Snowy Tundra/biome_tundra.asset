@@ -15,7 +15,10 @@ MonoBehaviour:
   <Precipitation>k__BackingField: 0.776
   <Temperature>k__BackingField: 0.098
   <TileRules>k__BackingField: {fileID: 11400000, guid: 7a6bb626f950d9946be03c5d2c6766d3, type: 2}
-  <ResourceObjects>k__BackingField: []
+  <ResourceObjects>k__BackingField:
+  - {fileID: 11400000, guid: bc1be4d89ec5ed349a7aaa612bf6a5cb, type: 2}
+  - {fileID: 11400000, guid: 4db9d046b03b1d741bcf3f2e3b28fb55, type: 2}
+  - {fileID: 11400000, guid: 2c80ec9fdf496df48818f5d143a0df9b, type: 2}
   Biome:
     <Name>k__BackingField: Snowy Tundra
     <ID>k__BackingField: biomes:snow_tundra

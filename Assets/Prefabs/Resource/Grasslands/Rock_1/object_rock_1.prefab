@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adjustableSortingLayers:
   - <SpriteRenderer>k__BackingField: {fileID: 7512594028284064245}
-    <PositionOffset>k__BackingField: -2
+    <PositionOffset>k__BackingField: 0.2
   _positionOffset: 0
   _alwaysUpdate: 0
 --- !u!1 &3873650452568743469

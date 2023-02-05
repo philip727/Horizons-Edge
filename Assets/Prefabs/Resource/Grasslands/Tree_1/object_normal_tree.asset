@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aab4a7a622a0fba46a5705978ec657de, type: 3}
-  m_Name: object_tree_1_settings
+  m_Name: object_normal_tree
   m_EditorClassIdentifier: 
   <CoordinatesItTakesUp>k__BackingField:
   - {x: 0, y: 0}

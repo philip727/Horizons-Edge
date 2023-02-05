@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47736ba81f083a4bba6531c807c06db, type: 3}
+  m_Name: resource_ice_rock
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 5336552476244562105, guid: 142c18475d0e423448ded5d659c27217, type: 3}
+  <StructureObjectSettings>k__BackingField: {fileID: 11400000, guid: e045fd8977dc77a4f9f06f51a211514a, type: 2}
+  <Baron>k__BackingField: 0.776
+  <Tropicality>k__BackingField: 0.162
