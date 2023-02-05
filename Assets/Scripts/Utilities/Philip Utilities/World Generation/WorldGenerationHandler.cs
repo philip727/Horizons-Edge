@@ -223,7 +223,6 @@ namespace Philip.WorldGeneration
             ResourceObject bestResourceObject = null;
             float bestResourceDistance = 100000f;
 
-            System.Random prng = new System.Random(Seed);
             for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
             {
                 ResourceObject resourceObject = biomeObject.ResourceObjects[i];

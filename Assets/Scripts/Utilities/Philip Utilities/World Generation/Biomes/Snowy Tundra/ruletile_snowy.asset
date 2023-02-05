@@ -197,11 +197,11 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 93fc5d85730c43b489eafcdf1278b550, type: 2}
     animatedTile: {fileID: 0}
     <RequiredLandNodes>k__BackingField: 010000000000000003000000
-    <RequiredNothingNodes>k__BackingField: 0500000006000000
+    <RequiredNothingNodes>k__BackingField: 050000000600000002000000
     <AddColliders>k__BackingField: 
   - _spriteType: 0
     tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
     animatedTile: {fileID: 0}
     <RequiredLandNodes>k__BackingField: 010000000200000005000000
-    <RequiredNothingNodes>k__BackingField: 0300000008000000
+    <RequiredNothingNodes>k__BackingField: 030000000800000000000000
     <AddColliders>k__BackingField: 
