@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: item_wood
   m_EditorClassIdentifier: 
   <DisplaySprite>k__BackingField: {fileID: 0}
-  <Stackable>k__BackingField: 0
+  <Stackable>k__BackingField: 1
   <Description>k__BackingField: 
+  <ItemType>k__BackingField: 0
   data:
-    <Name>k__BackingField: 
+    <Name>k__BackingField: Wood
     <ID>k__BackingField: 0

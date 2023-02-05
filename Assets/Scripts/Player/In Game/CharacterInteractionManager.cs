@@ -50,7 +50,7 @@ public class CharacterInteractionManager : MonoBehaviour
     {
         if (CheckCoords(_currentMouseNode.Coordinates, _lastCoordinates, _lastBestInteractable))
         {
-            _lastBestInteractable.OnInteract(obj.control.displayName);
+            _lastBestInteractable.OnInteract(obj.control.displayName, this);
         }
     }
 

@@ -6,13 +6,9 @@ using UnityEngine;
 public interface IBuildable
 {
     GameObject BuiltObject { get; }
-
-    public StructureObjectSettings StructureObjectSettings { get; }
+    StructureObjectSettings StructureObjectSettings { get; }
     bool IsBuilt { get; }
-
     void OnBuilt();
-
     bool HasBuildRequirements();
-
     void SetIsBuilt(bool value);
 }

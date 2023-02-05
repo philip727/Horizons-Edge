@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888197630790145146}
-  - component: {fileID: 7414325206676768527}
+  - component: {fileID: 4868502560941125223}
   m_Layer: 0
   m_Name: rock_collider
   m_TagString: Untagged
@@ -183,8 +183,8 @@ Transform:
   m_Father: {fileID: 2625356302625079497}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &7414325206676768527
-EdgeCollider2D:
+--- !u!60 &4868502560941125223
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,16 +197,25 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.0037218928, y: 0.33363235}
-  - {x: 0.25893104, y: 0.36114746}
-  - {x: 0.86859983, y: 0.35819182}
-  - {x: 1.0016681, y: 0.34728986}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: 0.6852848, y: 0.10788931}
+      - {x: 0.21779704, y: 0.11499944}
+      - {x: 0, y: 0.28497195}
+      - {x: 0.0041761994, y: 0.2140523}
+      - {x: 0.20544904, y: 0.02611339}
+      - {x: 0.6870024, y: 0.034528255}
+      - {x: 1.0050933, y: 0.17704135}
+      - {x: 1.0022638, y: 0.28724518}
 --- !u!1 &7342781243330505614
 GameObject:
   m_ObjectHideFlags: 0

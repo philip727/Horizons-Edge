@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558238606752464115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.905, y: 0.813, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1466300485741346034}
-  - component: {fileID: 7532719280238030727}
+  - component: {fileID: 5410628626317107968}
   m_Layer: 0
   m_Name: rock_collider
   m_TagString: Untagged
@@ -183,8 +183,8 @@ Transform:
   m_Father: {fileID: 3027055144185260097}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &7532719280238030727
-EdgeCollider2D:
+--- !u!60 &5410628626317107968
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,16 +197,29 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.0037218928, y: 0.33363235}
-  - {x: 0.25893104, y: 0.36114746}
-  - {x: 0.86859983, y: 0.35819182}
-  - {x: 1.0016681, y: 0.34728986}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: 1.5979961, y: 0.37633842}
+      - {x: 1.1780722, y: 0.24771619}
+      - {x: 0.62618256, y: 0.321032}
+      - {x: 0.21286862, y: 0.4377219}
+      - {x: 0.010095358, y: 0.540661}
+      - {x: 0.014822125, y: 0.37770164}
+      - {x: 0.21772936, y: 0.20857364}
+      - {x: 0.6270755, y: 0.11822635}
+      - {x: 1.2123806, y: 0.115143895}
+      - {x: 1.6266415, y: 0.25988853}
+      - {x: 2.0020652, y: 0.46038932}
+      - {x: 2.0008094, y: 0.69735396}
 --- !u!1 &7580954180458836685
 GameObject:
   m_ObjectHideFlags: 0

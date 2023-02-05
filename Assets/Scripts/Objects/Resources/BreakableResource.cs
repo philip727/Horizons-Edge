@@ -73,7 +73,7 @@ public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageabl
         Destroy(InteractObject);
     }
 
-    public void OnInteract(string interactionName)
+    public void OnInteract(string interactionName, object initiator)
     {
         if(interactionName == "Left Button")
         {

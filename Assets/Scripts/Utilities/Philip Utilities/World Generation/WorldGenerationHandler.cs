@@ -280,13 +280,11 @@ namespace Philip.WorldGeneration
         {
             if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
             {
-                foreach (Vector2Int coords in resourceObject.StructureObjectSettings.CoordinatesItTakesUp)
+                if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords))
                 {
-                    if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords + coords))
-                    {
-                        Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
-                        break;
-                    }
+                    GameObject obj = Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
+                    IBuildable buildable = obj.GetComponentInChildren<IBuildable>();
+                    Placement<IBuildable>.Instance.PlaceObjectInNode(buildable, givenCoords);
                 }
             }
         }

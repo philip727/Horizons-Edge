@@ -8,6 +8,17 @@ namespace Philip.Inventory
         public string InventoryName { private set; get; }
         [field: SerializeField] public InventorySlot<TItem, TItemType>[] Slots { protected set; get; } = new InventorySlot<TItem, TItemType>[10];
 
+        public Inventory(string inventoryName)
+        {
+            InventoryName = inventoryName;
+            Slots = new InventorySlot<TItem, TItemType>[24];
+        }
+
+        public Inventory(string inventoryName, int amountOfSlots)
+        {
+            InventoryName = inventoryName;
+            Slots = new InventorySlot<TItem, TItemType>[amountOfSlots];
+        }
 
         // Gets the amount of empty slots
         public int EmptySlotCount
@@ -54,10 +65,10 @@ namespace Philip.Inventory
         }
 
         // Adds an item
-        public bool AddItem(TItem item, int amount)
+        public bool AddItem(TItem item, int amount, InventoryHandler<TItem, TItemType> inventoryHandler)
         {
             InventorySlot<TItem, TItemType> inventorySlot = FindItem(item);
-            if (InventoryHandler<TItem, TItemType>.Instance.Database.Items[item.ID].Stackable && inventorySlot != null)
+            if (inventoryHandler.Database.Items[item.ID].Stackable && inventorySlot != null)
             {
                 inventorySlot.AddAmount(amount);
                 return true;
@@ -66,13 +77,26 @@ namespace Philip.Inventory
             if (EmptySlotCount <= 0)
                 return false;
 
-            if (!InventoryHandler<TItem, TItemType>.Instance.Database.Items[item.ID].Stackable || inventorySlot == null)
+            if (!inventoryHandler.Database.Items[item.ID].Stackable || inventorySlot == null)
             {
                 SetFirstEmptySlot(item, amount);
                 return true;
             }
 
             return false;
+        }
+
+        public bool AddItem(InventoryItemObject<TItem, TItemType> itemObject, int amount, InventoryHandler<TItem, TItemType> inventoryHandler)
+        {
+            return AddItem(itemObject.data, amount, inventoryHandler);
+        }
+
+        public void Clear()
+        {
+            foreach (InventorySlot<TItem, TItemType> slot in Slots)
+            {
+                slot.UpdateSlot(new TItem(), 0);
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ public interface IInteractable
     [SerializeField] float InteractRange { get; }
     [SerializeField] bool CanInteract { get; }
     [SerializeField] GameObject InteractObject { get; }
-
-    void OnInteract(string interactionDisplayName);
+    void OnInteract(string interactionDisplayName, object initiator);
 
 }
