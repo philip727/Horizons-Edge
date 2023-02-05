@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e47736ba81f083a4bba6531c807c06db, type: 3}
-  m_Name: resource_grasslands_nothing
+  m_Script: {fileID: 11500000, guid: aab4a7a622a0fba46a5705978ec657de, type: 3}
+  m_Name: object_tree_1_settings
   m_EditorClassIdentifier: 
-  <Resource>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 0}
-  <Baron>k__BackingField: 1
-  <Tropicality>k__BackingField: 1
+  <CoordinatesItTakesUp>k__BackingField:
+  - {x: 0, y: 0}

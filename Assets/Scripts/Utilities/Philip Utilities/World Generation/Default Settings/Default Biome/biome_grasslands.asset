@@ -18,6 +18,7 @@ MonoBehaviour:
   <ResourceObjects>k__BackingField:
   - {fileID: 11400000, guid: e3f7af49153033e4e9c0bae649afa753, type: 2}
   - {fileID: 11400000, guid: e947e299dc54cef4c82379d8d8500b73, type: 2}
+  - {fileID: 11400000, guid: e9e9f490d3e53f14988f9b5903ab95e3, type: 2}
   Biome:
     <Name>k__BackingField: Grasslands
     <ID>k__BackingField: biome:grasslands

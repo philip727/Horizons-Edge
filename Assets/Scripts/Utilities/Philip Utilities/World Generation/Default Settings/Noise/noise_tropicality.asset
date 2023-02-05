@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
   m_Name: noise_tropicality
   m_EditorClassIdentifier: 
-  <NoiseScale>k__BackingField: 4
+  <NoiseScale>k__BackingField: 5
   <Octaves>k__BackingField: 11
   <Persistance>k__BackingField: 0.041
   <Lacunarity>k__BackingField: 4
-  <Offset>k__BackingField: {x: -85.75, y: 194.2}
+  <Offset>k__BackingField: {x: -500, y: 2000}

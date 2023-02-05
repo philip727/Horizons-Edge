@@ -3,6 +3,8 @@ using Philip.Utilities.Maths;
 using UnityEngine;
 using Philip.Utilities;
 using Philip.Building;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 namespace Philip.WorldGeneration
 {
@@ -174,7 +176,8 @@ namespace Philip.WorldGeneration
 
         private BiomeObject GetBestBiome(int x, int y)
         {
-            BiomeObject bestBiome = null;
+            BiomeObject bestBiomeObject = null;
+            float bestBiomeDistance = 9999999f;
             float precipitationHeight = s_worldData.PrecipitationMap[x, y];
             float temperatureHeight = s_worldData.TemperatureMap[x, y];
 
@@ -182,19 +185,19 @@ namespace Philip.WorldGeneration
             {
                 BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
 
-                float currentBiomeDistance = Mathf.Abs(Mathf.Pow((precipitationHeight - currentBiomeObject.Precipitation) +
-                    (temperatureHeight - currentBiomeObject.Temperature), 2f));
 
-                float bestBiomeDistance = bestBiome == null ? 0f : Mathf.Abs(Mathf.Pow((precipitationHeight - bestBiome.Precipitation) +
-                    (temperatureHeight - bestBiome.Temperature), 2f));
+                Vector2 mapVector = new Vector2(precipitationHeight, temperatureHeight);
+                Vector2 biomeVector = new Vector2(currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
+                float currentBiomeDistance = PVector.GetDistanceBetween(mapVector, biomeVector);
 
-                if (currentBiomeDistance > bestBiomeDistance)
+                if (bestBiomeDistance > currentBiomeDistance)
                 {
-                    bestBiome = currentBiomeObject;
+                    bestBiomeDistance = currentBiomeDistance;
+                    bestBiomeObject = currentBiomeObject;
                 }
             }
 
-            return bestBiome;
+            return bestBiomeObject;
         }
 
         private void GenerateBiomes()
@@ -217,19 +220,22 @@ namespace Philip.WorldGeneration
             float baronHeight = s_worldData.BaronMap[x, y];
             float tropicalHeight = s_worldData.TropicalityMap[x, y];
 
-            ResourceObject bestResourceObject = biomeObject.ResourceObjects[0];
+            ResourceObject bestResourceObject = null;
+            float bestResourceDistance = 100000f;
 
+            System.Random prng = new System.Random(Seed);
             for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
             {
                 ResourceObject resourceObject = biomeObject.ResourceObjects[i];
-                float currentResourceDistance = Mathf.Abs(Mathf.Pow((baronHeight - resourceObject.Baron) + 
-                    (tropicalHeight - resourceObject.Tropicality), 2f));
+                Vector2 mapVector = new Vector2(baronHeight, tropicalHeight);
+                Vector2 resourceVector = new Vector2(resourceObject.Baron, resourceObject.Tropicality);
 
-                float bestResourceDistance = bestResourceObject ==  null ? 0f : Mathf.Abs(Mathf.Pow((baronHeight - bestResourceObject.Baron) + 
-                    (tropicalHeight - bestResourceObject.Tropicality), 2f));
+                float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
 
-                if(currentResourceDistance > bestResourceDistance)
+
+                if (bestResourceDistance > currentResourceDistance)
                 {
+                    bestResourceDistance = currentResourceDistance;
                     bestResourceObject = resourceObject;
                 }
             }
@@ -239,7 +245,6 @@ namespace Philip.WorldGeneration
 
         private void GenerateWorldObjects()
         {
-            System.Random prng = new System.Random(Seed);
             for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
@@ -278,16 +283,12 @@ namespace Philip.WorldGeneration
 
         private void PlaceObjectAtNode(ResourceObject resourceObject, Vector3 worldPosition, ChunkNode chunk, Vector2Int givenCoords)
         {
-            if (resourceObject.Resource != ResourceObject.ResourceType.Nothing)
+            if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords))
             {
-                if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords))
-                {
-                    GameObject obj = Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
-                    IBuildable buildable = obj.GetComponentInChildren<IBuildable>();
-                    Placement<IBuildable>.Instance.PlaceObjectInNode(buildable, givenCoords);
-                }
+                GameObject obj = Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
+                IBuildable buildable = obj.GetComponentInChildren<IBuildable>();
+                Placement<IBuildable>.Instance.PlaceObjectInNode(buildable, givenCoords);
             }
         }
-
     }
 }

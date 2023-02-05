@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &558238606752464115
+--- !u!1 &209353824059961022
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2211216424613857763}
-  - component: {fileID: 8196931368374328698}
+  - component: {fileID: 2015172408243870638}
+  - component: {fileID: 8401989133687344951}
   m_Layer: 0
-  m_Name: rock_manager
+  m_Name: tree_1_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2211216424613857763
+--- !u!4 &2015172408243870638
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558238606752464115}
+  m_GameObject: {fileID: 209353824059961022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.905, y: 0.813, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3027055144185260097}
+  m_Father: {fileID: 3412259166767249932}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8196931368374328698
+--- !u!114 &8401989133687344951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558238606752464115}
+  m_GameObject: {fileID: 209353824059961022}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d36141703271c74bb4b37bc18a550d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BuiltObject>k__BackingField: {fileID: 7749478466168210182}
-  <StructureObjectSettings>k__BackingField: {fileID: 11400000, guid: 0691e24fe3eda0b459313679590b9d27, type: 2}
-  <NameToShow>k__BackingField: Rock
+  <BuiltObject>k__BackingField: {fileID: 7985771252426723659}
+  <StructureObjectSettings>k__BackingField: {fileID: 11400000, guid: e045fd8977dc77a4f9f06f51a211514a, type: 2}
+  <NameToShow>k__BackingField: Tree
   <InteractRange>k__BackingField: 3
-  <MaxHealth>k__BackingField: 20
-  <Health>k__BackingField: 20
-  <InteractObject>k__BackingField: {fileID: 7749478466168210182}
---- !u!1 &2265362148933414681
+  <MaxHealth>k__BackingField: 5
+  <Health>k__BackingField: 5
+  <InteractObject>k__BackingField: {fileID: 7985771252426723659}
+--- !u!1 &1884945425750801748
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,38 +59,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4029546919012621971}
-  - component: {fileID: 7391340265985973950}
-  - component: {fileID: 8109938425753553735}
+  - component: {fileID: 3653359025058303198}
+  - component: {fileID: 7191076457269398771}
+  - component: {fileID: 8490639037684635914}
   m_Layer: 0
-  m_Name: rock_sprite
+  m_Name: tree_1_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4029546919012621971
+--- !u!4 &3653359025058303198
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2265362148933414681}
+  m_GameObject: {fileID: 1884945425750801748}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3027055144185260097}
+  m_Father: {fileID: 3412259166767249932}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7391340265985973950
+--- !u!212 &7191076457269398771
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2265362148933414681}
+  m_GameObject: {fileID: 1884945425750801748}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -125,35 +125,35 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: b14adb350c0736a47a223956c33be0e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 292eb87f8c42f0045bed8e198838ea3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8109938425753553735
+--- !u!114 &8490639037684635914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2265362148933414681}
+  m_GameObject: {fileID: 1884945425750801748}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062bf159987fd4245a5b35981135e460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _adjustableSortingLayers:
-  - <SpriteRenderer>k__BackingField: {fileID: 7363237297190656381}
+  - <SpriteRenderer>k__BackingField: {fileID: 7167474893236325168}
     <LayerOffset>k__BackingField: -5
   _layerOffset: 0
   _alwaysUpdate: 0
---- !u!1 &4299980692995405477
+--- !u!1 &4536282163679749352
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,44 +161,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1466300485741346034}
-  - component: {fileID: 5410628626317107968}
+  - component: {fileID: 1225504366275686079}
+  - component: {fileID: 8584440259364162248}
   m_Layer: 0
-  m_Name: rock_collider
+  m_Name: tree_1_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1466300485741346034
+--- !u!4 &1225504366275686079
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299980692995405477}
+  m_GameObject: {fileID: 4536282163679749352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3027055144185260097}
+  m_Father: {fileID: 3412259166767249932}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &5410628626317107968
-PolygonCollider2D:
+--- !u!61 &8584440259364162248
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299980692995405477}
+  m_GameObject: {fileID: 4536282163679749352}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.49824524, y: 0.39248562}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -208,21 +208,10 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.5979961, y: 0.37633842}
-      - {x: 1.1780722, y: 0.24771619}
-      - {x: 0.62618256, y: 0.321032}
-      - {x: 0.21286862, y: 0.4377219}
-      - {x: 0.010095358, y: 0.540661}
-      - {x: 0.014822125, y: 0.37770164}
-      - {x: 0.21772936, y: 0.20857364}
-      - {x: 0.6270755, y: 0.11822635}
-      - {x: 1.2123806, y: 0.115143895}
-      - {x: 1.6266415, y: 0.25988853}
-      - {x: 2.0020652, y: 0.46038932}
-      - {x: 2.0008094, y: 0.69735396}
---- !u!1 &7580954180458836685
+  serializedVersion: 2
+  m_Size: {x: 0.25263214, y: 0.1821258}
+  m_EdgeRadius: 0
+--- !u!1 &7812743246833508480
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,37 +219,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3267171976310591491}
-  - component: {fileID: 7363237297190656381}
+  - component: {fileID: 2886761893145313870}
+  - component: {fileID: 7167474893236325168}
   m_Layer: 0
-  m_Name: rock_shadow
+  m_Name: tree_1_shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3267171976310591491
+--- !u!4 &2886761893145313870
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7580954180458836685}
+  m_GameObject: {fileID: 7812743246833508480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.101, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3027055144185260097}
+  m_Father: {fileID: 3412259166767249932}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7363237297190656381
+--- !u!212 &7167474893236325168
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7580954180458836685}
+  m_GameObject: {fileID: 7812743246833508480}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -295,18 +284,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f6c9887ce96d1214fa6c9d6de330849d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0305b0c19f71781429ada1b9a778bb77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.8125}
+  m_Size: {x: 0.16, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7749478466168210182
+--- !u!1 &7985771252426723659
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,30 +303,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3027055144185260097}
+  - component: {fileID: 3412259166767249932}
   m_Layer: 0
-  m_Name: object_rock_2
+  m_Name: object_tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3027055144185260097
+--- !u!4 &3412259166767249932
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7749478466168210182}
+  m_GameObject: {fileID: 7985771252426723659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4029546919012621971}
-  - {fileID: 3267171976310591491}
-  - {fileID: 2211216424613857763}
-  - {fileID: 1466300485741346034}
+  - {fileID: 3653359025058303198}
+  - {fileID: 2886761893145313870}
+  - {fileID: 2015172408243870638}
+  - {fileID: 1225504366275686079}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
