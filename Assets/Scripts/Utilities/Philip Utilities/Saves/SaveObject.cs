@@ -3,7 +3,11 @@ using UnityEngine;
 
 public abstract class SaveObject<TSaveableObject> : ScriptableObject
 {
+    public delegate void OnSaveUpdate(TSaveableObject saveableObject);
     [field: SerializeField] public TSaveableObject SaveableObject { private set; get; }
+    public OnSaveUpdate onLoad;
+    public OnSaveUpdate onSave;
+
     public void Save(string fileName)
     {
         string fullSavePath = $"{Application.persistentDataPath}/{fileName}.world";
@@ -14,6 +18,7 @@ public abstract class SaveObject<TSaveableObject> : ScriptableObject
 
         string json = JsonUtility.ToJson(SaveableObject);
         File.WriteAllText(fullSavePath, json);
+        onSave?.Invoke(SaveableObject);
     }
 
     public void Load(string fileName)
@@ -23,6 +28,7 @@ public abstract class SaveObject<TSaveableObject> : ScriptableObject
         {
             TSaveableObject saveableObject = JsonUtility.FromJson<TSaveableObject>(File.ReadAllText(fullSavePath));
             SaveableObject = saveableObject;
+            onLoad?.Invoke(SaveableObject);
         }
         else
         {

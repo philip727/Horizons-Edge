@@ -12,8 +12,6 @@ public class ItemObject : InventoryItemObject<Item, ItemGroup>
         Material,
         Pickaxe,
         Axe,
-        Sword,
-        Bow,
-        Staff
+        Weapon,
     }
 }

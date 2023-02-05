@@ -8,6 +8,7 @@ public class PlayerSaveObject : SaveObject<PlayerData>
 {
     public void Clear()
     {
+        SaveableObject.Equipment.Clear();
         SaveableObject.Inventory.Clear();
     }
 }
