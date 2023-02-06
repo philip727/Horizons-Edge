@@ -222,7 +222,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8823237858807770595}
   - component: {fileID: 8556561727857402150}
-  - component: {fileID: 8925337031017298054}
   m_Layer: 0
   m_Name: character_interaction_manager
   m_TagString: Untagged
@@ -266,29 +265,6 @@ MonoBehaviour:
   _topRightHighlight: {fileID: 7669530426733938551}
   _bottomLeftHighlight: {fileID: 596744686911790628}
   _bottomRightHighlight: {fileID: 1929026425158548839}
---- !u!114 &8925337031017298054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5560681622643548285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062bf159987fd4245a5b35981135e460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _adjustableSortingLayers:
-  - <SpriteRenderer>k__BackingField: {fileID: 7372152343159792705}
-    <PositionOffset>k__BackingField: 2
-  - <SpriteRenderer>k__BackingField: {fileID: 7989252391207774556}
-    <PositionOffset>k__BackingField: 2
-  - <SpriteRenderer>k__BackingField: {fileID: 8945668425746291480}
-    <PositionOffset>k__BackingField: -2
-  - <SpriteRenderer>k__BackingField: {fileID: 1268468229938726716}
-    <PositionOffset>k__BackingField: -2
-  _positionOffset: 0
-  _alwaysUpdate: 1
 --- !u!1 &6530273042997834095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7790856844226419000}
   - component: {fileID: 7372152343159792705}
+  - component: {fileID: 1036111667526129635}
   m_Layer: 0
   m_Name: character_interaction_top_left
   m_TagString: Untagged
@@ -1104,6 +1081,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1036111667526129635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434256844151386055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062bf159987fd4245a5b35981135e460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adjustableSortingLayers:
+  - <SpriteRenderer>k__BackingField: {fileID: 7989252391207774556}
+    <PositionOffset>k__BackingField: 0.5
+  - <SpriteRenderer>k__BackingField: {fileID: 8945668425746291480}
+    <PositionOffset>k__BackingField: -0.5
+  - <SpriteRenderer>k__BackingField: {fileID: 1268468229938726716}
+    <PositionOffset>k__BackingField: -0.5
+  _positionOffset: 0.5
+  _alwaysUpdate: 1
 --- !u!1 &8775565152573642106
 GameObject:
   m_ObjectHideFlags: 0

@@ -185,7 +185,7 @@ namespace Philip.WorldGeneration
             {
                 BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
 
-
+                // Euclidian distance which is absolute of ((a1 - b1) - (a2 - b2)) ^ 2
                 Vector2 mapVector = new Vector2(precipitationHeight, temperatureHeight);
                 Vector2 biomeVector = new Vector2(currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
                 float currentBiomeDistance = PVector.GetDistanceBetween(mapVector, biomeVector);
@@ -226,8 +226,6 @@ namespace Philip.WorldGeneration
             for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
             {
                 ResourceObject resourceObject = biomeObject.ResourceObjects[i];
-                Vector2 mapVector = new Vector2(baronHeight, tropicalHeight);
-                Vector2 resourceVector = new Vector2(resourceObject.Baron, resourceObject.Tropicality);
 
                 //float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
                 float currentResourceDistance = Mathf.Abs(tropicalHeight - resourceObject.Tropicality) + Mathf.Abs(baronHeight - resourceObject.Baron);

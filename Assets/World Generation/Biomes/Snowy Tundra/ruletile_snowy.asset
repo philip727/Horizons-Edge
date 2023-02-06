@@ -205,3 +205,39 @@ MonoBehaviour:
     <RequiredLandNodes>k__BackingField: 010000000200000005000000
     <RequiredNothingNodes>k__BackingField: 030000000800000000000000
     <AddColliders>k__BackingField: 
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: 9a6d2b502d8a472408eebd40baed8e7a, type: 2}
+    <RequiredLandNodes>k__BackingField: 010000000200000005000000
+    <RequiredNothingNodes>k__BackingField: 0300000007000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: da4cc40ed835dde4c98b54127a7c0e7c, type: 2}
+    <RequiredLandNodes>k__BackingField: 0000000001000000020000000300000005000000
+    <RequiredNothingNodes>k__BackingField: 07000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: 49eaf7b4b6bee6d4baebd88ac47793a9, type: 2}
+    <RequiredLandNodes>k__BackingField: 000000000100000003000000
+    <RequiredNothingNodes>k__BackingField: 0700000005000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: 46a53fffbe551c7459c85230d83a5a38, type: 2}
+    <RequiredLandNodes>k__BackingField: 01000000
+    <RequiredNothingNodes>k__BackingField: 030000000500000007000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: 0cc2b3cba7e5c364cbbc176320d50e3f, type: 2}
+    <RequiredLandNodes>k__BackingField: 03000000
+    <RequiredNothingNodes>k__BackingField: 010000000500000007000000
+    <AddColliders>k__BackingField: 04000000
+  - _spriteType: 1
+    tile: {fileID: 11400000, guid: 21beeabe81534fc40bea0523a890a4b6, type: 2}
+    animatedTile: {fileID: 11400000, guid: d691a923d22c36f4bbe50d78f054053a, type: 2}
+    <RequiredLandNodes>k__BackingField: 05000000
+    <RequiredNothingNodes>k__BackingField: 010000000300000007000000
+    <AddColliders>k__BackingField: 04000000

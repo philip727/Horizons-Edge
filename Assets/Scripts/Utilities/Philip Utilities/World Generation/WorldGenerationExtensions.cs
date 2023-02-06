@@ -11,7 +11,7 @@ namespace Philip.WorldGeneration
             {
                 if (!worldNode.Grid.IsValidCoordinate(worldNode.Coordinates + coordinate.Value))
                 {
-                    continue;
+                    return true;
                 }
 
                 if (worldNode.GetNeighbour(coordinate.Value).IsWater)
