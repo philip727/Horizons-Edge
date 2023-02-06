@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BreakableResource : StrictChunkBehaviour, IInteractable, IDamageable
+public class BreakableResource : FairChunkBehaviour, IInteractable, IDamageable
 {
     public delegate void OnItemInteractable(GameObject gameObject, bool canInteract);
     [field: SerializeField] public string NameToShow { private set; get; }
