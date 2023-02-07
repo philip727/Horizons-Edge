@@ -29,10 +29,14 @@ namespace Philip.Inventory
         protected abstract void CreateAllSlots();
 
 
+        protected virtual void CreateSlotDelegates(InventorySlot<TItem, TItemGroup> slot)
+        {
+            slot.OnAfterUpdate += OnSlotUpdate;
+        }
 
         protected virtual void OnSlotUpdate(InventorySlot<TItem, TItemGroup> slot)
         {
-
+            UpdateSlotAppearance(slot);
         }
 
 
