@@ -6,7 +6,7 @@ namespace Philip.Utilities.Math
 {
     public static class Noise
     {
-        public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, Vector2 offset, int octaves = 4, float persistence = 0.5f, float lacunarity = 2f, float scale = 1f)
+        public static float[,] GenerateMap(int mapWidth, int mapHeight, int seed, Vector2 offset, int octaves = 4, float persistence = 0.5f, float lacunarity = 2f, float scale = 1f)
         {
             float[,] noiseMap = new float[mapWidth, mapHeight];
 

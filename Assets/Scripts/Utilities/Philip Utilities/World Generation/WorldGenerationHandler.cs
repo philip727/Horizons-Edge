@@ -47,7 +47,7 @@ namespace Philip.WorldGeneration
         private WorldData GenerateWorldData(int seed)
         {
             // Generates the noise we use for water randomisation
-            float[,] waterNoiseMap = Noise.GenerateNoiseMap(
+            float[,] waterNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldWidth, 
                 WorldGenerationSettings.WorldHeight,
                 seed,
@@ -58,7 +58,7 @@ namespace Philip.WorldGeneration
                 LandSettings.NoiseScale);
 
             // Generates the noise we use for precipitation, this will affect biome generation
-            float[,] precipitationNoiseMap = Noise.GenerateNoiseMap(
+            float[,] precipitationNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldWidth,
                 WorldGenerationSettings.WorldHeight,
                 seed,
@@ -69,7 +69,7 @@ namespace Philip.WorldGeneration
                 PrecipitationSettings.NoiseScale);
 
             // Generates the noise we use for temperature, this will affect biome generation
-            float[,] temperatureNoiseMap = Noise.GenerateNoiseMap(
+            float[,] temperatureNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldWidth,
                 WorldGenerationSettings.WorldHeight,
                 seed,
@@ -79,7 +79,7 @@ namespace Philip.WorldGeneration
                 TemperatureSettings.Lacunarity,
                 TemperatureSettings.NoiseScale);
 
-            float[,] baronNoiseMap = Noise.GenerateNoiseMap(
+            float[,] baronNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldWidth,
                 WorldGenerationSettings.WorldHeight,
                 seed,
@@ -89,7 +89,7 @@ namespace Philip.WorldGeneration
                 BaronSettings.Lacunarity,
                 BaronSettings.NoiseScale);
 
-            float[,] tropicalityNoiseMap = Noise.GenerateNoiseMap(
+            float[,] tropicalityNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldWidth,
                 WorldGenerationSettings.WorldHeight,
                 seed,
@@ -99,7 +99,7 @@ namespace Philip.WorldGeneration
                 TropicalitySettings.Lacunarity,
                 TropicalitySettings.NoiseScale);
 
-            float[,] objectNoiseMap = Noise.GenerateNoiseMap(
+            float[,] objectNoiseMap = Noise.GenerateMap(
                 WorldGenerationSettings.WorldHeight,
                 WorldGenerationSettings.WorldWidth,
                 seed,

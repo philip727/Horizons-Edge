@@ -14,4 +14,15 @@ public class ItemObject : InventoryItemObject<Item, ItemGroup>
         Axe,
         Weapon,
     }
+
+    public enum Rarity
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Epic,
+        Legendary,
+        Ascendant,
+    }
+
 }

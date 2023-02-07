@@ -12,12 +12,22 @@ namespace Philip.Inventory
         {
             InventoryName = inventoryName;
             Slots = new InventorySlot<TItem, TItemType>[24];
+            ConstructSlots();
         }
 
         public Inventory(string inventoryName, int amountOfSlots)
         {
             InventoryName = inventoryName;
             Slots = new InventorySlot<TItem, TItemType>[amountOfSlots];
+            ConstructSlots();
+        }
+
+        private void ConstructSlots()
+        {
+            for (int i = 0; i < Slots.Length; i++)
+            {
+                Slots[i] = new InventorySlot<TItem, TItemType>(this);
+            }
         }
 
         // Gets the amount of empty slots
@@ -88,7 +98,7 @@ namespace Philip.Inventory
 
         public bool AddItem(InventoryItemObject<TItem, TItemType> itemObject, int amount, InventoryHandler<TItem, TItemType> inventoryHandler)
         {
-            return AddItem(itemObject.data, amount, inventoryHandler);
+            return AddItem(itemObject.Data, amount, inventoryHandler);
         }
 
         public void Clear()

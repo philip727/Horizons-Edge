@@ -13,7 +13,7 @@ namespace Philip.Inventory
         {
             for (int i = 0; i < Items.Length; i++)
             {
-                Items[i].data.SetID(i);
+                Items[i].Data.SetID(i);
             }
         }
     }

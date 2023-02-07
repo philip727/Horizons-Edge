@@ -10,7 +10,7 @@ namespace Philip.Inventory
         [field: SerializeField, TextArea(5, 7)] public string Description { private set; get; }
         [field: SerializeField] public TItemType ItemType { private set; get; }
 
-        public TItem data = new TItem();
+        [field: SerializeField] public TItem Data { get; } = new TItem();
         public virtual TItem CreateItem()
         {
             return new TItem();
