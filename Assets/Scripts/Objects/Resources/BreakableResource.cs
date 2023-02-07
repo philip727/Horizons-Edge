@@ -1,5 +1,5 @@
 using Philip.Building;
-using Philip.Utilities.Maths;
+using Philip.Utilities.Math;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;

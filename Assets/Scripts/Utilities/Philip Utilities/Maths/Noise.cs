@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Philip.Utilities.Maths 
+namespace Philip.Utilities.Math 
 {
     public static class Noise
     {

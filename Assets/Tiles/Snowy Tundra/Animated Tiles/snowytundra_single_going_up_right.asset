@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: snowytundra_single_going_down
+  m_Name: snowytundra_single_going_up_right
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -1077393687, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
-  - {fileID: -649682132, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
-  - {fileID: -1535513905, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
-  - {fileID: 588918445, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
-  - {fileID: 950093959, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
+  - {fileID: 1905550271, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
+  - {fileID: 1566780860, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
+  - {fileID: -1644063162, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
+  - {fileID: 160253664, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
+  - {fileID: 1254450684, guid: 4606852d0f05af64eab6348cc6871a63, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0

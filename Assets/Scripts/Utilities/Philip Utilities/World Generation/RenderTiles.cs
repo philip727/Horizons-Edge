@@ -11,6 +11,7 @@ namespace Philip.WorldGeneration
         [SerializeField] private WorldGenerationHandler _worldGenerationHandler;
 
         [SerializeField] private Tile _waterTile;
+        [SerializeField] private Tile _nonDeterminedTile;
 
         public void Awake()
         {
@@ -77,6 +78,10 @@ namespace Philip.WorldGeneration
 
                 // Creates the extra colliders
                 CreateCollidersPerTile(determinedTile, chunkNode, tilemapCoordinate);
+            }
+            else
+            {
+                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _nonDeterminedTile);
             }
         }
 

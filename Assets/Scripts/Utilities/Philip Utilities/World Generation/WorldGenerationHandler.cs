@@ -1,5 +1,5 @@
 using Philip.Grid;
-using Philip.Utilities.Maths;
+using Philip.Utilities.Math;
 using UnityEngine;
 using Philip.Utilities;
 using Philip.Building;
@@ -185,10 +185,8 @@ namespace Philip.WorldGeneration
             {
                 BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
 
-                // Euclidian distance which is absolute of ((a1 - b1) - (a2 - b2)) ^ 2
-                Vector2 mapVector = new Vector2(precipitationHeight, temperatureHeight);
-                Vector2 biomeVector = new Vector2(currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
-                float currentBiomeDistance = PVector.GetDistanceBetween(mapVector, biomeVector);
+           
+                float currentBiomeDistance = PMath.EuclidianDistance(precipitationHeight, temperatureHeight, currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
 
                 if (bestBiomeDistance > currentBiomeDistance)
                 {
@@ -228,7 +226,7 @@ namespace Philip.WorldGeneration
                 ResourceObject resourceObject = biomeObject.ResourceObjects[i];
 
                 //float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
-                float currentResourceDistance = Mathf.Abs(tropicalHeight - resourceObject.Tropicality) + Mathf.Abs(baronHeight - resourceObject.Baron);
+                float currentResourceDistance = PMath.EuclidianDistance(baronHeight, tropicalHeight, resourceObject.Baron, resourceObject.Tropicality);
 
                 if (bestResourceDistance > currentResourceDistance)
                 {

@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _worldGenerationHandler: {fileID: 1973751283}
   _waterTile: {fileID: 11400000, guid: 28c38b148eb4f14478d29851e9db89b8, type: 2}
+  _nonDeterminedTile: {fileID: 11400000, guid: ad3a0e99b744db44e8d4f1de7e9e7bb1, type: 2}
 --- !u!1001 &7246442752765443857
 PrefabInstance:
   m_ObjectHideFlags: 0
