@@ -28,9 +28,6 @@ namespace Philip.Inventory
         }
 
         [field: NonSerialized] public Inventory<TItem, TItemType> Container { get; }
-
-
-
         [System.NonSerialized] public InvetorySlotUpdate OnBeforeUpdate;
         [System.NonSerialized] public InvetorySlotUpdate OnAfterUpdate;
 
@@ -47,6 +44,7 @@ namespace Philip.Inventory
             Container = container;
             UpdateSlot(item, amount);
         }
+
 
         // Updates the inventory slot
         public void UpdateSlot(TItem item, long amount)

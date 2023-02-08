@@ -21,13 +21,14 @@ namespace Philip.Inventory
 
         }
 
-
         // Creates a slot for a single inventory slot
         protected abstract void CreateSlot(InventorySlot<TItem, TItemGroup> slot, GameObject obj);
 
         // Creates all the slots for the required inventories
         protected abstract void CreateAllSlots();
 
+        // Creates all the slots that need delegates
+        protected abstract void CreateAllSlotDelegates();
 
         protected virtual void CreateSlotDelegates(InventorySlot<TItem, TItemGroup> slot)
         {
@@ -39,23 +40,8 @@ namespace Philip.Inventory
             UpdateSlotAppearance(slot);
         }
 
-
-        protected virtual void UpdateSlotAppearance(InventorySlot<TItem, TItemGroup> slot)
-        {
-            if(slot.Item.ID >= 0)
-            {
-                if (slot.SlotDisplay == null) return;
-
-                // Once we create slot prefab we can do this
-
-            }
-            else
-            {
-                if (slot.SlotDisplay == null) return;
-
-                // Once we create slot prefab
-            }
-        }
+        protected abstract void UpdateSlotAppearance(InventorySlot<TItem, TItemGroup> slot);
+        
         protected virtual void OnSelect(GameObject obj)
         {
             throw new System.NotImplementedException("Not implemented OnSelect(GameObject)");
