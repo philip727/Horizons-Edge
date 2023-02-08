@@ -7,5 +7,11 @@ namespace Philip.Inventory
     public class InventoryHandler<TItem, TItemType> where TItem : InventoryItem, new() where TItemType : System.Enum
     {
         public InventoryItemDatabase<TItem, TItemType> Database;
+
+        public InventoryItemObject<TItem, TItemType> GetItem(int id)
+        {
+            return Database.Items[id];
+        }
+
     }
 }

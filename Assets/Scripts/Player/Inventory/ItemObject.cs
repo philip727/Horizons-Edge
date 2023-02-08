@@ -25,4 +25,5 @@ public class ItemObject : InventoryItemObject<Item, ItemGroup>
         Ascendant,
     }
 
+    [field:SerializeField] public Rarity ItemRarity { private set; get; }
 }

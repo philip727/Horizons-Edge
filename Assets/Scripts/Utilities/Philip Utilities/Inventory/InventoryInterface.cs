@@ -9,12 +9,13 @@ namespace Philip.Inventory
         protected Dictionary<GameObject, InventorySlot<TItem, TItemGroup>> _slotsOnInterface 
             = new Dictionary<GameObject, InventorySlot<TItem, TItemGroup>>();
 
-        [SerializeField] protected GameObject _slotPrefab;
+        [SerializeField, Header("Interface")] protected Transform _interfaceParent;
+
+        [SerializeField, Header("Save")] protected CharacterSaveManager _characterSaveManager;
+
+        [SerializeField, Header("Slots")] protected GameObject _slotPrefab;
         [SerializeField] protected Transform _slotsParent;
         [SerializeField] protected Transform _temporaryItemParent;
-
-
-        [SerializeField] protected CharacterSaveManager _characterSaveManager;
 
         protected virtual void Awake()
         {

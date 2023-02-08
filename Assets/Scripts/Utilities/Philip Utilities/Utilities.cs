@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 namespace Philip.Utilities
 {
-    
     namespace UI
     {
         public static class PEvent
