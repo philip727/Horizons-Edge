@@ -147,8 +147,7 @@ public class PlayerInventoryInterface : InventoryInterface<Item, ItemObject.Item
         {
             var currentInterface = InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver;
             var currentSlotHovered = InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver;
-            InventorySlot <Item, ItemObject.ItemGroup> mouseHoverSlotData = currentInterface.SlotsOnInterface[currentSlotHovered];
-            Debug.Log("swapping");
+            InventorySlot<Item, ItemObject.ItemGroup> mouseHoverSlotData = currentInterface.SlotsOnInterface[currentSlotHovered];
             mouseHoverSlotData.Container.SwapItems(SlotsOnInterface[obj], mouseHoverSlotData, _characterSaveManager.InventoryHandler);
         }
     }

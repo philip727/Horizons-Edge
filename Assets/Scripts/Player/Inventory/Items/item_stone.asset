@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c477ecb36be5424da3b535a8be2a11c, type: 3}
   m_Name: item_stone
   m_EditorClassIdentifier: 
-  <DisplaySprite>k__BackingField: {fileID: 0}
+  <DisplaySprite>k__BackingField: {fileID: 21300000, guid: ca2acf1b6a3b51143a157a8f6e1c3085, type: 3}
   <Stackable>k__BackingField: 1
   <Description>k__BackingField: 
   <ItemType>k__BackingField: 0
