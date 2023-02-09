@@ -20,6 +20,8 @@ public class BreakableResource : FairChunkBehaviour, IInteractable, IDamageable
 
     [field: SerializeField] public GameObject InteractObject { private set; get; }
 
+    [field: SerializeField] public bool SpatialInteraction { private set; get; } = false;
+
     private GameObject _player;
 
     private CharacterInteractionManager _characterInteraction;

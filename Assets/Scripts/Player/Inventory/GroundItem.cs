@@ -12,6 +12,8 @@ public class GroundItem : InventoryGroundItem<Item, ItemObject.ItemGroup>, IInte
 
     public GameObject InteractObject => throw new System.NotImplementedException();
 
+    public bool SpatialInteraction { private set; get; }
+
     public void OnAfterDeserialize()
     {
       
