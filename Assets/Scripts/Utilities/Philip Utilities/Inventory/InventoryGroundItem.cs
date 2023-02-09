@@ -1,9 +1,7 @@
 using Philip.Inventory;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InventoryGroundItem<TItem, TItemType> : MonoBehaviour where TItem : InventoryItem, new() where TItemType : System.Enum, IInteractable, ISerializationCallbackReceiver
+public abstract class InventoryGroundItem<TItem, TItemType> : MonoBehaviour where TItem : InventoryItem, new() where TItemType : System.Enum
 {
     [field: SerializeField] public InventoryItemObject<TItem, TItemType> ItemObject { private set; get; }
     [field: SerializeField] public long Amount { private set; get; }
@@ -13,13 +11,19 @@ public abstract class InventoryGroundItem<TItem, TItemType> : MonoBehaviour wher
     public void Init(InventoryItemObject<TItem, TItemType> itemObject, long amount)
     {
         ItemObject = itemObject;
-        Amount = amount;
-
+        Amount = System.Math.Clamp(amount, 1, long.MaxValue);
         UpdateSpriteRenderer();
     }
 
     protected void UpdateSpriteRenderer()
     {
         _spriteRenderer.sprite = ItemObject.DisplaySprite;
+    }
+
+    protected virtual void UpdateGameObject()
+    {
+        if (ItemObject == null) return;
+        gameObject.name = $"groundItem_{ItemObject.Data.Name}";
+        UpdateSpriteRenderer();
     }
 }

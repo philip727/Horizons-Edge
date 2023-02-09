@@ -8,6 +8,7 @@ namespace Philip.Inventory
         public string InventoryName { private set; get; }
         [field: SerializeField] public InventorySlot<TItem, TItemType>[] Slots { protected set; get; } = new InventorySlot<TItem, TItemType>[10];
 
+        // Creates the inventory with default amount
         public Inventory(string inventoryName)
         {
             InventoryName = inventoryName;
@@ -15,6 +16,7 @@ namespace Philip.Inventory
             ConstructSlots();
         }
 
+        // Creates the inventory with a specific amount of slots
         public Inventory(string inventoryName, int amountOfSlots)
         {
             InventoryName = inventoryName;
@@ -22,6 +24,7 @@ namespace Philip.Inventory
             ConstructSlots();
         }
 
+        // Makes sure the slots have the right containers
         private void ConstructSlots()
         {
             for (int i = 0; i < Slots.Length; i++)
@@ -109,7 +112,7 @@ namespace Philip.Inventory
         public bool AddItem(TItem item, int amount, InventoryHandler<TItem, TItemType> inventoryHandler)
         {
             InventorySlot<TItem, TItemType> inventorySlot = FindItem(item);
-            if (inventoryHandler.Database.Items[item.ID].Stackable && inventorySlot != null)
+            if (inventoryHandler.GetItem(item.ID).Stackable && inventorySlot != null)
             {
                 inventorySlot.AddAmount(amount);
                 return true;
@@ -118,7 +121,7 @@ namespace Philip.Inventory
             if (EmptySlotCount <= 0)
                 return false;
 
-            if (!inventoryHandler.Database.Items[item.ID].Stackable || inventorySlot == null)
+            if (!inventoryHandler.GetItem(item.ID).Stackable || inventorySlot == null)
             {
                 SetFirstEmptySlot(item, amount);
                 return true;
