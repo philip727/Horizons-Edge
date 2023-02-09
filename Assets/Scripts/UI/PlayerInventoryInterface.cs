@@ -51,7 +51,7 @@ public class PlayerInventoryInterface : InventoryInterface<Item, ItemObject.Item
         PEvent.AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
         PEvent.AddEvent(obj, EventTriggerType.Drag, delegate { WhilstDrag(obj); });
         slot.SetSlotDisplay = obj;
-        _slotsOnInterface.Add(obj, slot);
+        SlotsOnInterface.Add(obj, slot);
     }
 
     protected override void CreateAllSlotDelegates()
@@ -97,37 +97,77 @@ public class PlayerInventoryInterface : InventoryInterface<Item, ItemObject.Item
         }
     }
 
-    protected override void OnEnter(GameObject obj)
-    {
-        //throw new System.NotImplementedException();
-    }
-
     protected override void OnEnterInterface(GameObject obj)
     {
-        //throw new System.NotImplementedException();
-    }
-
-    protected override void OnExit(GameObject obj)
-    {
-        //throw new System.NotImplementedException();
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver = obj.GetComponent<InventoryInterface<Item, ItemObject.ItemGroup>>();
     }
 
     protected override void OnExitInterface(GameObject obj)
     {
-        //throw new System.NotImplementedException();
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver = null;
     }
 
-    protected override void WhilstDrag(GameObject obj)
+    protected override void OnEnter(GameObject obj)
     {
-        //throw new System.NotImplementedException();
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver = obj;
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver = this;
+
+        Debug.Log(InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver);
     }
-    protected override void OnDragEnd(GameObject obj)
+
+    protected override void OnExit(GameObject obj)
     {
-        //throw new System.NotImplementedException();
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver = null;
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver = this;
     }
 
     protected override void OnDragStart(GameObject obj)
     {
-        //throw new System.NotImplementedException();
+        InventoryMouseData<Item, ItemObject.ItemGroup>.s_TempItemBeingDragged = CreateTempItem(obj);
+    }
+
+    protected override void WhilstDrag(GameObject obj)
+    {
+        if(InventoryMouseData<Item, ItemObject.ItemGroup>.s_TempItemBeingDragged != null)
+        {
+            InventoryMouseData<Item, ItemObject.ItemGroup>.s_TempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
+        }
+    }
+
+    protected override void OnDragEnd(GameObject obj)
+    {
+        Destroy(InventoryMouseData<Item, ItemObject.ItemGroup>.s_TempItemBeingDragged);
+
+        if(InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver == null && SlotsOnInterface[obj] != null)
+        {
+            // do something
+        }
+
+        if(InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver)
+        {
+            var currentInterface = InventoryMouseData<Item, ItemObject.ItemGroup>.s_interfaceMouseIsOver;
+            var currentSlotHovered = InventoryMouseData<Item, ItemObject.ItemGroup>.s_slotHoveredOver;
+            InventorySlot <Item, ItemObject.ItemGroup> mouseHoverSlotData = currentInterface.SlotsOnInterface[currentSlotHovered];
+            Debug.Log("swapping");
+            mouseHoverSlotData.Container.SwapItems(SlotsOnInterface[obj], mouseHoverSlotData, _characterSaveManager.InventoryHandler);
+        }
+    }
+
+    protected override GameObject CreateTempItem(GameObject obj)
+    {
+        GameObject tempItem = null;
+        if (SlotsOnInterface[obj].Item.ID >= 0)
+        {
+            tempItem = new GameObject();
+            RectTransform tempItemRect = tempItem.AddComponent<RectTransform>();
+            tempItemRect.sizeDelta = new Vector2(50, 50);
+            tempItem.transform.SetParent(_temporaryItemParent);
+
+            Image tempItemImage = tempItem.AddComponent<Image>();
+            tempItemImage.sprite = _characterSaveManager.InventoryHandler.Database.Items[SlotsOnInterface[obj].Item.ID].DisplaySprite;
+            tempItemImage.raycastTarget = false;
+        }
+
+        return tempItem;
     }
 }

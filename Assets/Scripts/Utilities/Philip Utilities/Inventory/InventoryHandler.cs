@@ -10,6 +10,9 @@ namespace Philip.Inventory
 
         public InventoryItemObject<TItem, TItemType> GetItem(int id)
         {
+            if (id >= Database.Items.Length || id < 0)
+                return null;
+
             return Database.Items[id];
         }
 

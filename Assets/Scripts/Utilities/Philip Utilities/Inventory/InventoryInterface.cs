@@ -1,12 +1,14 @@
+using Philip.Utilities.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Philip.Inventory
 {
     public abstract class InventoryInterface<TItem, TItemGroup> : MonoBehaviour where TItem : InventoryItem, new() where TItemGroup : System.Enum
     {
-        protected Dictionary<GameObject, InventorySlot<TItem, TItemGroup>> _slotsOnInterface 
+        public Dictionary<GameObject, InventorySlot<TItem, TItemGroup>> SlotsOnInterface { protected set; get; }
             = new Dictionary<GameObject, InventorySlot<TItem, TItemGroup>>();
 
         [SerializeField, Header("Interface")] protected Transform _interfaceParent;
@@ -19,7 +21,8 @@ namespace Philip.Inventory
 
         protected virtual void Awake()
         {
-
+            PEvent.AddEvent(_slotsParent.gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(_interfaceParent.gameObject); });
+            PEvent.AddEvent(_slotsParent.gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(_interfaceParent.gameObject); });
         }
 
         // Creates a slot for a single inventory slot
@@ -49,33 +52,11 @@ namespace Philip.Inventory
         }
 
         protected abstract void OnEnterInterface(GameObject obj);
-
         protected abstract void OnExitInterface(GameObject obj);
-
         protected abstract void OnEnter(GameObject obj);
-
         protected abstract void OnExit(GameObject obj);
-
         protected abstract void OnDragStart(GameObject obj);
-
-        protected GameObject CreateTempItem(GameObject obj)
-        {
-            GameObject tempItem = null;
-            if (_slotsOnInterface[obj].Item.ID >= 0)
-            {
-                tempItem = new GameObject();
-                RectTransform tempItemRect = tempItem.AddComponent<RectTransform>();
-                tempItemRect.sizeDelta = new Vector2(50, 50);
-                tempItem.transform.SetParent(_temporaryItemParent);
-
-                Image tempItemImage = tempItem.AddComponent<Image>();
-                tempItemImage.sprite = _characterSaveManager.InventoryHandler.Database.Items[_slotsOnInterface[obj].Item.ID].DisplaySprite;
-                tempItemImage.raycastTarget = false;
-            }
-
-            return tempItem;
-        }
-
+        protected abstract GameObject CreateTempItem(GameObject obj);
         protected abstract void OnDragEnd(GameObject obj);
         protected abstract void WhilstDrag(GameObject obj);
 

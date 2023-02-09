@@ -19,11 +19,6 @@ public class CharacterInterfaceController : MonoBehaviour
     }
 
     private InputAction _inventory;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void OnEnable()
     {
@@ -46,11 +41,5 @@ public class CharacterInterfaceController : MonoBehaviour
     private void OnInventoryPressed(InputAction.CallbackContext obj)
     {
         _inventoryUI.SetActive(!_inventoryUI.activeSelf);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

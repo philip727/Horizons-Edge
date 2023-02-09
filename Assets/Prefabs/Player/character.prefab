@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1459163ea8f6045448a8423206c64fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interfaceParent: {fileID: 6141624623513168974}
+  _interfaceParent: {fileID: 1636426287227313270}
   _characterSaveManager: {fileID: 5433542588789956153}
   _slotPrefab: {fileID: 3551932654337532414, guid: 7c2f00dd53d30d94e8634b26e4ac0c90, type: 3}
   _slotsParent: {fileID: 6141624623513168974}

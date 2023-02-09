@@ -45,6 +45,27 @@ namespace Philip.Inventory
             UpdateSlot(item, amount);
         }
 
+        public InventorySlot(TItem item, long amount, Inventory<TItem, TItemType> container)
+        {
+            Container = container;
+            UpdateSlot(item, amount);
+        }
+
+        public bool CanPlaceInSlot(InventoryItemObject<TItem, TItemType> itemObject, TItem item)
+        {
+            if(AllowedItemTypes.Length <= 0 || itemObject == null || itemObject.Data.ID < 0)
+                return true;
+
+            for (int i = 0; i < AllowedItemTypes.Length; i++)
+            {
+                if (AllowedItemTypes[i].Equals(itemObject.ItemType))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         // Updates the inventory slot
         public void UpdateSlot(TItem item, long amount)
@@ -61,6 +82,11 @@ namespace Philip.Inventory
         }
 
         public void AddAmount(int value)
+        {
+            UpdateSlot(Item, Amount += value);
+        }
+
+        public void AddAmount(long value)
         {
             UpdateSlot(Item, Amount += value);
         }
