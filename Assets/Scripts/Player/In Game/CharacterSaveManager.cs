@@ -13,9 +13,13 @@ public class CharacterSaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) 
+        if (Input.GetKey(KeyCode.J)) 
         {
-            PlayerSaveObject.SaveableObject.Inventory.AddItem(InventoryHandler.Database.Items[0], 1, InventoryHandler);
+            PlayerSaveObject.SaveableObject.Inventory.AddItem(InventoryHandler.GetItem(0), 1, InventoryHandler);
+        }
+        if (Input.GetKey(KeyCode.K))
+        {
+            PlayerSaveObject.SaveableObject.Inventory.AddItem(InventoryHandler.GetItem(1), 1, InventoryHandler);
         }
     }
 

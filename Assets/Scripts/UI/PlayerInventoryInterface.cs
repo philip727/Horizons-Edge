@@ -76,7 +76,6 @@ public class PlayerInventoryInterface : InventoryInterface<Item, ItemObject.Item
 
     protected override void UpdateSlotAppearance(InventorySlot<Item, ItemObject.ItemGroup> slot)
     {
-        Debug.Log("UpdateSlotAppearance()");
         if(slot.Item.ID >= 0)
         {
             if (slot.SlotDisplay == null) return;
@@ -85,8 +84,7 @@ public class PlayerInventoryInterface : InventoryInterface<Item, ItemObject.Item
 
             slotImage.sprite = _characterSaveManager.InventoryHandler.GetItem(slot.Item.ID).DisplaySprite;
             slotImage.color = new Color(1, 1, 1, 1);
-            amountText.text = slot.Amount.FormatLong();
-            Debug.Log("ID >= 0");
+            amountText.text = slot.Amount.FormatLong("0:X");
         }
         else
         {
