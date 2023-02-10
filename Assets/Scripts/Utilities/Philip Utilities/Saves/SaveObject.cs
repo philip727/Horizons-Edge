@@ -21,7 +21,7 @@ public abstract class SaveObject<TSaveableObject> : ScriptableObject
         onSave?.Invoke(SaveableObject);
     }
 
-    public void Load(string fileName)
+    public virtual void Load(string fileName)
     {
         string fullSavePath = $"{Application.persistentDataPath}/{fileName}.world";
         if (File.Exists(fullSavePath))

@@ -250,12 +250,12 @@ GameObject:
   - component: {fileID: 794597383}
   - component: {fileID: 794597382}
   m_Layer: 0
-  m_Name: groundItem
+  m_Name: groundItem_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &794597382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f355d76a9eb64b840af24ebaa38e7b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemObject>k__BackingField: {fileID: 11400000, guid: f58dc4ae78bd88e49a5d2933e0c52ea4, type: 2}
-  <Amount>k__BackingField: 0
+  <ItemObject>k__BackingField: {fileID: 11400000, guid: 9c061eead1365e94b9090938d17629f3, type: 2}
+  <Amount>k__BackingField: 1
   _spriteRenderer: {fileID: 1532389724}
 --- !u!4 &794597383
 Transform:
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 1532389725}
   - component: {fileID: 1532389724}
   m_Layer: 0
-  m_Name: Square
+  m_Name: groundItem_sprite_renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -423,7 +423,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca2acf1b6a3b51143a157a8f6e1c3085, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

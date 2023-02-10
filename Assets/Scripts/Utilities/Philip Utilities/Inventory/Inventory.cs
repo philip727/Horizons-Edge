@@ -84,14 +84,12 @@ namespace Philip.Inventory
 
             if (slot2.CanPlaceInSlot(slot1ItemObject, slot1.Item) && slot1.CanPlaceInSlot(slot2ItemObject, slot2.Item))
             {
-                Debug.Log("Starting swap items");
                 if (slot1.Item.ID >= 0 && slot2.Item.ID >= 0)
                 {
                     if (slot2ItemObject.Stackable && slot1ItemObject.Stackable && (slot1.Item.ID == slot2.Item.ID))
                     {
                         if (slot1 == slot2)
                         {
-                            Debug.Log("Does it go here");
                             return;
                         }
 
@@ -100,7 +98,6 @@ namespace Philip.Inventory
                     }
                 }
 
-                Debug.Log("Updating slots");
                 InventorySlot<TItem, TItemType> temp = new InventorySlot<TItem, TItemType>(slot2.Item, slot2.Amount, this);
                 slot2.UpdateSlot(slot1.Item, slot1.Amount);
                 slot1.UpdateSlot(temp.Item, temp.Amount);
