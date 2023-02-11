@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da54f7c92a9dcd4e9809a47eeb4fcc9, type: 3}
   m_Name: default_world
   m_EditorClassIdentifier: 
-  <WorldWidth>k__BackingField: 10000
-  <WorldHeight>k__BackingField: 10000
+  <WorldWidth>k__BackingField: 512
+  <WorldHeight>k__BackingField: 512
   <TileSize>k__BackingField: 1
   <ChunkSize>k__BackingField: 16
   <BiomeObjects>k__BackingField:

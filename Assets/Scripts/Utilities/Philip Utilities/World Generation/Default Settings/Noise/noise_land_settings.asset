@@ -16,4 +16,4 @@ MonoBehaviour:
   <Octaves>k__BackingField: 4
   <Persistance>k__BackingField: 0.187
   <Lacunarity>k__BackingField: 2.87
-  <Offset>k__BackingField: {x: 0, y: 0}
+  <Offset>k__BackingField: {x: 1, y: 0}

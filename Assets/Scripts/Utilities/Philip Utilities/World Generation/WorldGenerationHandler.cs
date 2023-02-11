@@ -119,7 +119,7 @@ namespace Philip.WorldGeneration
             Grid<ChunkNode> chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.ChunkSize, 
-                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
+                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: false, originPosition: default);
 
             Placement<IBuildable> placement = new Placement<IBuildable>(
                 WorldGenerationSettings.WorldWidth,
