@@ -15,16 +15,6 @@ namespace Philip.WorldGeneration
         [SerializeField] private Tile _waterTile;
         [SerializeField] private Tile _nonDeterminedTile;
 
-        public void Awake()
-        {
-            //_worldGenerationHandler.onWorldGenerationFinished += OnWorldGenerationFinished;
-        }
-
-        private void OnWorldGenerationFinished()
-        {
-            
-        }
-
         private RuleTile DetermineTile(ChunkData chunkData, int x, int y)
         {
             return GetBestBiome(chunkData, x, y).TileRules.GetTileFromRule(chunkData, x, y);
@@ -32,10 +22,24 @@ namespace Philip.WorldGeneration
 
         private BiomeObject GetBestBiome(ChunkData chunkData, int x, int y)
         {
+            Vector2Int coords = chunkData.Coordinates + new Vector2Int(x, y);
             BiomeObject bestBiomeObject = null;
             float bestBiomeDistance = 99999f;
-            float precipitationHeight = chunkData.PrecipitationMap[x, y];
-            float temperatureHeight = chunkData.TemperatureMap[x, y];
+            float precipitationHeight = Noise.GenerateHeight(coords.x, coords.y,
+                _worldGenerationHandler.Seed,
+                _worldGenerationHandler.PrecipitationSettings.Offset,
+                _worldGenerationHandler.PrecipitationSettings.Octaves,
+                _worldGenerationHandler.PrecipitationSettings.Persistance,
+                _worldGenerationHandler.PrecipitationSettings.Lacunarity,
+                _worldGenerationHandler.PrecipitationSettings.NoiseScale);
+
+            float temperatureHeight = Noise.GenerateHeight(coords.x, coords.y,
+                _worldGenerationHandler.Seed,
+                _worldGenerationHandler.TemperatureSettings.Offset,
+                _worldGenerationHandler.TemperatureSettings.Octaves,
+                _worldGenerationHandler.TemperatureSettings.Persistance,
+                _worldGenerationHandler.TemperatureSettings.Lacunarity,
+                _worldGenerationHandler.TemperatureSettings.NoiseScale);
 
             for (int i = 0; i < _worldGenerationSettings.BiomeObjects.Length; i++)
             {

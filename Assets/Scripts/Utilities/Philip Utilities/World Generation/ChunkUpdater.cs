@@ -30,14 +30,27 @@ namespace Philip.WorldGeneration
         private void Update()
         {
             s_viewerPosition = new Vector2(Viewer.position.x, Viewer.position.y);
+            UpdateChunks();
+        }
+
+        private void UpdateChunks()
+        {
             int chunkX = Mathf.FloorToInt(s_viewerPosition.x / _worldGenerationSettings.ChunkSize);
             int chunkY = Mathf.FloorToInt(s_viewerPosition.y / _worldGenerationSettings.ChunkSize);
-            Vector2Int bottomLeftOfChunk = new Vector2Int(chunkX * _worldGenerationSettings.ChunkSize, chunkY * _worldGenerationSettings.ChunkSize);
-            Vector2Int playerCoords = new Vector2Int(Mathf.FloorToInt(s_viewerPosition.x), Mathf.FloorToInt(s_viewerPosition.y));
-            ChunkData chunkData = _worldGenerationHandler.RequestChunkData(bottomLeftOfChunk.x, bottomLeftOfChunk.y);
-            if (chunksLoaded.ContainsKey(bottomLeftOfChunk)) return;
-            CreateChunkFromData(chunkData);
-            chunksLoaded.Add(bottomLeftOfChunk, chunkData);
+            Vector2Int bottomLeftOfCurrentChunk = new Vector2Int(chunkX * _worldGenerationSettings.ChunkSize, chunkY * _worldGenerationSettings.ChunkSize);
+            for (int x = -MAX_VIEW_DISTANCE; x < MAX_VIEW_DISTANCE; x++)
+            {
+                for (int y = -MAX_VIEW_DISTANCE; y < MAX_VIEW_DISTANCE; y++)
+                {
+                    Vector2Int bottomLeftOfChunkInViewDist = new Vector2Int(bottomLeftOfCurrentChunk.x + (x * _worldGenerationSettings.ChunkSize),
+                                                                            bottomLeftOfCurrentChunk.y + (y * _worldGenerationSettings.ChunkSize));
+                    ChunkData chunkData = _worldGenerationHandler.RequestChunkData(bottomLeftOfChunkInViewDist.x, bottomLeftOfChunkInViewDist.y);
+                    if (chunksLoaded.ContainsKey(bottomLeftOfChunkInViewDist)) continue;
+                    CreateChunkFromData(chunkData);
+                    chunksLoaded.Add(bottomLeftOfChunkInViewDist, chunkData);
+                }
+
+            }
         }
 
         private void CreateChunkFromData(ChunkData chunkData)

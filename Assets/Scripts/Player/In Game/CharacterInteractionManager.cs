@@ -48,10 +48,10 @@ public class CharacterInteractionManager : MonoBehaviour
 
     private void OnInteractPressed(InputAction.CallbackContext obj)
     {
-        if (CheckCoords(_currentMouseNode.Coordinates, _lastCoordinates, _lastBestInteractable))
-        {
-            _lastBestInteractable.OnInteract(obj.control.displayName, this);
-        }
+        //if (CheckCoords(_currentMouseNode.Coordinates, _lastCoordinates, _lastBestInteractable))
+        //{
+        //    _lastBestInteractable.OnInteract(obj.control.displayName, this);
+        //}
     }
 
     private bool CheckCoords(Vector2Int givenCoordinates, Vector2Int coordinatesToCheck, IInteractable interactable)
