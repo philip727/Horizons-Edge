@@ -45,12 +45,12 @@ namespace Philip.Tilemaps
         }
 
         // Gets the tile in that worldnode, if it fits its requirements
-        public RuleTile GetTileFromRule(WorldNode worldNode)
+        public RuleTile GetTileFromRule(ChunkData chunkData, int x, int y)
         {
-            RuleTile result = Array.Find(RuleTiles, tile => tile.CheckIfMeetsRequirements(worldNode));
+            RuleTile result = Array.Find(RuleTiles, tile => tile.CheckIfMeetsRequirements(chunkData, x, y));
             if (result == null)
             {
-                Debug.LogError($"<color=#42ddf5>[TILEMAPS]</color> Could not determine tile in ({worldNode.X}, {worldNode.Y})");
+                Debug.LogError($"<color=#42ddf5>[TILEMAPS]</color> Could not determine tile in ({x}, {y})");
                 return null;
             }
 
@@ -75,14 +75,14 @@ namespace Philip.Tilemaps
             }
 
             // Checks through its needs, if it meets then it will be available
-            public bool CheckIfMeetsRequirements(WorldNode worldNode)
+            public bool CheckIfMeetsRequirements(ChunkData chunkData, int x, int y)
             {
                 foreach (RuleNodes requiredNode in RequiredLandNodes)
                 {
                     RuleNodesByCoordinate.TryGetValue(requiredNode, out Vector2Int offset);
-                    WorldNode worldNodeToCheck = worldNode.GetNeighbour(offset);
+                    Vector2Int coordinates = chunkData.Coordinates + new Vector2Int(x, y) + offset;
 
-                    if(worldNodeToCheck != null && !worldNodeToCheck.IsWater)
+                    if (!WorldGenerationHandler.Instance.IsCoordinateWater(coordinates))
                     {
                         continue;
                     }
@@ -93,8 +93,8 @@ namespace Philip.Tilemaps
                 foreach (RuleNodes requiredNothing in RequiredNothingNodes)
                 {
                     RuleNodesByCoordinate.TryGetValue(requiredNothing, out Vector2Int offset);
-                    WorldNode worldNodeToCheck = worldNode.GetNeighbour(offset);
-                    if(worldNodeToCheck == null || worldNodeToCheck.IsWater)
+                    Vector2Int coordinates = chunkData.Coordinates + new Vector2Int(x, y) + offset;
+                    if (WorldGenerationHandler.Instance.IsCoordinateWater(coordinates))
                     {
                         continue;
                     }

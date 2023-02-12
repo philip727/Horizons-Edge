@@ -3,65 +3,78 @@ using Philip.Grid;
 using static Philip.Tilemaps.RuleTileObject;
 using UnityEngine.Tilemaps;
 using RuleTile = Philip.Tilemaps.RuleTileObject.RuleTile;
+using Philip.Utilities.Math;
 
 namespace Philip.WorldGeneration
 {
     public class RenderTiles : MonoBehaviour
     {
         [SerializeField] private WorldGenerationHandler _worldGenerationHandler;
+        [SerializeField] private WorldGenerationSettings _worldGenerationSettings;
 
         [SerializeField] private Tile _waterTile;
         [SerializeField] private Tile _nonDeterminedTile;
 
         public void Awake()
         {
-            _worldGenerationHandler.onWorldGenerationFinished += OnWorldGenerationFinished;
+            //_worldGenerationHandler.onWorldGenerationFinished += OnWorldGenerationFinished;
         }
 
         private void OnWorldGenerationFinished()
         {
-            CreateTiles();
+            
         }
 
-        private RuleTile DetermineTile(int x, int y)
+        private RuleTile DetermineTile(ChunkData chunkData, int x, int y)
         {
-            WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
-            return DetermineTile(worldNode);
+            return GetBestBiome(chunkData, x, y).TileRules.GetTileFromRule(chunkData, x, y);
         }
 
-        private RuleTile DetermineTile(Vector2Int coordinates)
+        private BiomeObject GetBestBiome(ChunkData chunkData, int x, int y)
         {
-            WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(coordinates.x, coordinates.y);
-            return DetermineTile(worldNode);
-        }
+            BiomeObject bestBiomeObject = null;
+            float bestBiomeDistance = 99999f;
+            float precipitationHeight = chunkData.PrecipitationMap[x, y];
+            float temperatureHeight = chunkData.TemperatureMap[x, y];
 
-        private RuleTile DetermineTile(WorldNode worldNode)
-        {
-            return _worldGenerationHandler.WorldGenerationSettings.GetBiomeObject(worldNode.Biome).TileRules.GetTileFromRule(worldNode);
+            for (int i = 0; i < _worldGenerationSettings.BiomeObjects.Length; i++)
+            {
+                BiomeObject currentBiomeObject = _worldGenerationSettings.BiomeObjects[i];
+
+                float currentBiomeDistance = PMath.EuclidianDistance(precipitationHeight, temperatureHeight, currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
+                
+                if (bestBiomeDistance > currentBiomeDistance)
+                {
+                    bestBiomeDistance = currentBiomeDistance;
+                    bestBiomeObject = currentBiomeObject;
+                }
+            }
+
+            return bestBiomeObject;
         }
 
         // Adds the required colliders
-        private void CreateCollidersPerTile(RuleTile determinedTile, ChunkNode chunkNode, Vector3Int tilemapCoordinate)
+        private void CreateCollidersPerTile(RuleTile determinedTile, ChunkData chunkData, int x, int y)
         {
             // Adds colliders to the nothing nodes
             foreach (RuleNodes nothingRule in determinedTile.RequiredNothingNodes)
             {
-                Vector3Int tilemapOffset = tilemapCoordinate + determinedTile.ConvertRuleToOffset(nothingRule);
+                Vector3Int tilemapOffset =  new Vector3Int(x, y, 0) + determinedTile.ConvertRuleToOffset(nothingRule);
 
-                chunkNode.ColliderTilemap.SetTile(tilemapOffset, _waterTile);
+                chunkData.ColliderTilemap.SetTile(tilemapOffset, _waterTile);
             }
 
             // Adds colliders to the extra ones in the determined tile
             foreach (RuleNodes colliderRule in determinedTile.AddColliders)
             {
-                Vector3Int tilemapOffset = tilemapCoordinate + determinedTile.ConvertRuleToOffset(colliderRule);
+                Vector3Int tilemapOffset = new Vector3Int(x, y, 0) + determinedTile.ConvertRuleToOffset(colliderRule);
 
-                chunkNode.ColliderTilemap.SetTile(tilemapOffset, _waterTile);
+                chunkData.ColliderTilemap.SetTile(tilemapOffset, _waterTile);
             }
         }
 
         // Renders all the tiles
-        private void RenderTile(RuleTile determinedTile, ChunkNode chunkNode, Vector3Int tilemapCoordinate)
+        private void RenderTile(RuleTile determinedTile, ChunkData chunkData, int x, int y)
         {
             if (determinedTile != null)
             {
@@ -69,59 +82,35 @@ namespace Philip.WorldGeneration
                 switch (determinedTile.SpriteType)
                 {
                     case SpriteType.Default:
-                        chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile.tile);
+                        chunkData.WalkableTilemap.SetTile(new Vector3Int(x, y, 0), determinedTile.tile);
                         break;
                     case SpriteType.Animated:
-                        chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, determinedTile.animatedTile);
+                        chunkData.WalkableTilemap.SetTile(new Vector3Int(x, y, 0), determinedTile.animatedTile);
                         break;
                 }
 
                 // Creates the extra colliders
-                CreateCollidersPerTile(determinedTile, chunkNode, tilemapCoordinate);
+                CreateCollidersPerTile(determinedTile, chunkData, x, y);
             }
             else
             {
-                chunkNode.WalkableTilemap.SetTile(tilemapCoordinate, _nonDeterminedTile);
+                chunkData.WalkableTilemap.SetTile(new Vector3Int(x, y, 0), _nonDeterminedTile);
             }
         }
 
         // Sets up all the tiles
-        private void SetupTile(int x, int y)
+        public void SetupTile(ChunkData chunkData, int x, int y)
         {
-            // Gets the required objects
-            WorldNode worldNode = WorldGenerationHandler.s_worldData.WorldGrid.GetGridObject(x, y);
-            Vector3 worldPosition = WorldGenerationHandler.s_worldData.WorldGrid.GetWorldPosition(x, y);
-            ChunkNode chunkNode = WorldGenerationHandler.s_worldData.ChunkGrid.GetGridObject(worldPosition);
-
-            Vector3Int tilemapCoordinate = new Vector3Int(x - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.X,
-                                                          y - _worldGenerationHandler.WorldGenerationSettings.ChunkSize * chunkNode.Y);
-
             // Checks if its water
-            if (worldNode.IsWater)
+            if (_worldGenerationHandler.IsCoordinateWater(chunkData.Coordinates + new Vector2Int(x, y)))
             {
-                chunkNode.WaterTilemap.SetTile(tilemapCoordinate, _waterTile);
+                chunkData.WaterTilemap.SetTile(new Vector3Int(x, y), _waterTile);
                 return;
             }
 
             // Gets the right tile
-            RuleTile determinedTile = DetermineTile(worldNode);
-            RenderTile(determinedTile, chunkNode, tilemapCoordinate);
-        }
-
-
-        // Loops through all the tiles
-        private void CreateTiles()
-        {
-            WorldGenerationSettings worldSettings = _worldGenerationHandler.WorldGenerationSettings;
-
-            for (int y = 0; y < worldSettings.WorldHeight; y++)
-            {
-                for (int x = 0; x < worldSettings.WorldWidth; x++)
-                {
-                    SetupTile(x, y);
-                }
-            }
-
+            RuleTile determinedTile = DetermineTile(chunkData, x, y);
+            RenderTile(determinedTile, chunkData, x, y);
         }
     }
 }

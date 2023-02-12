@@ -5,6 +5,7 @@ using Philip.Utilities;
 using Philip.Building;
 using System.Collections.Generic;
 using UnityEngine.Analytics;
+using UnityEngine.Tilemaps;
 
 namespace Philip.WorldGeneration
 {
@@ -21,271 +22,128 @@ namespace Philip.WorldGeneration
         [field: SerializeField] public NoiseSettings BaronSettings { private set; get; }
         [field: SerializeField] public NoiseSettings TropicalitySettings { private set; get; }
         [field: SerializeField] public NoiseSettings ObjectSettings { private set; get; }
-        [field: SerializeField, Header("Chunk Setup")] public GameObject ChunkPrefab { private set; get; }
+        
 
         public void Start()
         {
-            s_worldData = GenerateWorldData(Seed);
-            CreateWorldFromData();
-            FinishWorldGeneration();
+
         }
 
-        private void FinishWorldGeneration()
+
+        private void Update()
         {
-            s_worldData.FinishWorldGeneration();
-            onWorldGenerationFinished?.Invoke();
         }
 
-        private void CreateWorldFromData()
+        public bool IsCoordinateWater(Vector2Int coordinates)
         {
-            GenerateChunkObjects();
-            GenerateWater();
-            GenerateBiomes();
-            GenerateWorldObjects();
-        }
-
-        private WorldData GenerateWorldData(int seed)
-        {
-            // Generates the noise we use for water randomisation
-            float[,] waterNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldWidth, 
-                WorldGenerationSettings.WorldHeight,
-                seed,
+            float currentHeight = Noise.GenerateHeight(
+                coordinates.x,
+                coordinates.y,
+                Seed,
                 LandSettings.Offset,
                 LandSettings.Octaves,
                 LandSettings.Persistance,
                 LandSettings.Lacunarity,
                 LandSettings.NoiseScale);
 
-            // Generates the noise we use for precipitation, this will affect biome generation
-            float[,] precipitationNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldWidth,
-                WorldGenerationSettings.WorldHeight,
-                seed,
-                PrecipitationSettings.Offset,
+            return currentHeight >= 0.1f;
+        }
+
+       
+        public ChunkData RequestChunkData(int x, int y)
+        {
+            Vector2Int coords = new Vector2Int(x, y);
+
+            float[,] precipMap = Noise.GenerateMap(
+                WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.ChunkSize,
+                Seed,
+                PrecipitationSettings.Offset + coords,
                 PrecipitationSettings.Octaves,
                 PrecipitationSettings.Persistance,
                 PrecipitationSettings.Lacunarity,
-                PrecipitationSettings.NoiseScale);
+                PrecipitationSettings.NoiseScale,
+                Noise.NormalizeMode.Global);
 
-            // Generates the noise we use for temperature, this will affect biome generation
-            float[,] temperatureNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldWidth,
-                WorldGenerationSettings.WorldHeight,
-                seed,
-                TemperatureSettings.Offset,
+            float[,] tempMap = Noise.GenerateMap(
+                WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.ChunkSize,
+                Seed,
+                TemperatureSettings.Offset + coords,
                 TemperatureSettings.Octaves,
                 TemperatureSettings.Persistance,
                 TemperatureSettings.Lacunarity,
-                TemperatureSettings.NoiseScale);
+                TemperatureSettings.NoiseScale,
+                Noise.NormalizeMode.Global);
 
-            float[,] baronNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldWidth,
-                WorldGenerationSettings.WorldHeight,
-                seed,
-                BaronSettings.Offset,
+            float[,] baronMap = Noise.GenerateMap(
+                WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.ChunkSize,
+                Seed,
+                BaronSettings.Offset + coords,
                 BaronSettings.Octaves,
                 BaronSettings.Persistance,
                 BaronSettings.Lacunarity,
-                BaronSettings.NoiseScale);
+                BaronSettings.NoiseScale,
+                Noise.NormalizeMode.Global);
 
-            float[,] tropicalityNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldWidth,
-                WorldGenerationSettings.WorldHeight,
-                seed,
-                TropicalitySettings.Offset,
+            float[,] tropicalMap = Noise.GenerateMap(
+                WorldGenerationSettings.ChunkSize,
+                WorldGenerationSettings.ChunkSize,
+                Seed,
+                TropicalitySettings.Offset + coords,
                 TropicalitySettings.Octaves,
                 TropicalitySettings.Persistance,
                 TropicalitySettings.Lacunarity,
-                TropicalitySettings.NoiseScale);
+                TropicalitySettings.NoiseScale,
+                Noise.NormalizeMode.Global);
 
-            float[,] objectNoiseMap = Noise.GenerateMap(
-                WorldGenerationSettings.WorldHeight,
-                WorldGenerationSettings.WorldWidth,
-                seed,
-                ObjectSettings.Offset,
-                ObjectSettings.Octaves,
-                ObjectSettings.Persistance,
-                ObjectSettings.Lacunarity,
-                ObjectSettings.NoiseScale);
 
-            // Creates the grid that we use for single tile placement
-            Grid<WorldNode> worldGrid = new Grid<WorldNode>(WorldGenerationSettings.WorldWidth, 
-                WorldGenerationSettings.WorldHeight, 
-                WorldGenerationSettings.TileSize, 
-                (Grid<WorldNode> g, int x, int y) => new WorldNode(g, x, y), debug: false, originPosition: default);
-            
-            // Creates the grid that we use for chunks which holds the tiles displayed
-            Grid<ChunkNode> chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
-                WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize,
-                WorldGenerationSettings.ChunkSize, 
-                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
-
-            Placement<IBuildable> placement = new Placement<IBuildable>(
-                WorldGenerationSettings.WorldWidth,
-                WorldGenerationSettings.WorldHeight,
-                WorldGenerationSettings.TileSize,
-                originPosition: default);
-
-            return new WorldData(worldGrid, chunkGrid, waterNoiseMap, precipitationNoiseMap, temperatureNoiseMap, baronNoiseMap, tropicalityNoiseMap, objectNoiseMap, placement);
-        }
-
-        private void GenerateChunkObjects()
-        {
-            Vector3 chunkOffset = new Vector3(0.5f, 0.5f, 0f);
-
-            // Creates each chunk
-            for (int y = 0; y < WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize; y++)
-            {
-                for (int x = 0; x < WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize; x++)
-                {
-                    // Gets the world position of the chunk
-                    ChunkNode chunkNode = s_worldData.ChunkGrid.GetGridObject(x, y);
-                    Vector3 worldPosition = s_worldData.ChunkGrid.GetWorldPosition(x, y);
-
-                    // Creates the chunk at the right position which we can use to display tiles
-                    GameObject chunkPrefab = Instantiate(ChunkPrefab, worldPosition + chunkOffset, Quaternion.identity, transform);
-                    chunkPrefab.name = $"chunk_{x}_{y}";
-
-                    // Adds the tilemaps to the chunks
-                    chunkNode.SetupChunk(chunkPrefab);
-                }
-            }
-        }
-
-        // Generates water and oceans
-        private void GenerateWater()
-        {
-            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
-            {
-                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
-                {
-                    float currentHeight = Noise.GenerateHeight(x, y, Seed, LandSettings.Offset, LandSettings.Octaves, LandSettings.Persistance, LandSettings.Lacunarity, LandSettings.NoiseScale);
-
-                    // Sets water tiles at right height
-                    if (currentHeight >= 0.1f)
-                    {
-                        s_worldData.WorldGrid.GetGridObject(x, y).SetIsWater(true);
-                        continue;
-                    }
-
-                    s_worldData.WorldGrid.GetGridObject(x, y).SetIsWater(false);
-                }
-            }
-        }
-
-        private BiomeObject GetBestBiome(int x, int y)
-        {
-            BiomeObject bestBiomeObject = null;
-            float bestBiomeDistance = 9999999f;
-            float precipitationHeight = s_worldData.PrecipitationMap[x, y];
-            float temperatureHeight = s_worldData.TemperatureMap[x, y];
-
-            for (int i = 0; i < WorldGenerationSettings.BiomeObjects.Length; i++)
-            {
-                BiomeObject currentBiomeObject = WorldGenerationSettings.BiomeObjects[i];
-
-           
-                float currentBiomeDistance = PMath.EuclidianDistance(precipitationHeight, temperatureHeight, currentBiomeObject.Precipitation, currentBiomeObject.Temperature);
-
-                if (bestBiomeDistance > currentBiomeDistance)
-                {
-                    bestBiomeDistance = currentBiomeDistance;
-                    bestBiomeObject = currentBiomeObject;
-                }
-            }
-
-            return bestBiomeObject;
-        }
-
-        private void GenerateBiomes()
-        {
-            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
-            {
-                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
-                {
-                    // Gets the precipitation and temp map and creates a default biome we can start with
-                    BiomeObject bestBiome = GetBestBiome(x, y);
-
-                    // Set biome
-                    s_worldData.WorldGrid.GetGridObject(x, y).SetBiome(bestBiome == null ? WorldGenerationSettings.BiomeObjects[0].Biome : bestBiome.Biome);
-                }
-            }
-        }
-
-        private ResourceObject GetBestResource(BiomeObject biomeObject, int x, int y)
-        {
-            float baronHeight = s_worldData.BaronMap[x, y];
-            float tropicalHeight = s_worldData.TropicalityMap[x, y];
-
-            ResourceObject bestResourceObject = null;
-            float bestResourceDistance = 100000f;
-
-            for (int i = 0; i < biomeObject.ResourceObjects.Length; i++)
-            {
-                ResourceObject resourceObject = biomeObject.ResourceObjects[i];
-
-                //float currentResourceDistance = PVector.GetDistanceBetween(mapVector, resourceVector);
-                float currentResourceDistance = PMath.EuclidianDistance(baronHeight, tropicalHeight, resourceObject.Baron, resourceObject.Tropicality);
-
-                if (bestResourceDistance > currentResourceDistance)
-                {
-                    bestResourceDistance = currentResourceDistance;
-                    bestResourceObject = resourceObject;
-                }
-            }
-
-            return bestResourceObject;
-        }
-
-        private void GenerateWorldObjects()
-        {
-            for (int y = 0; y < WorldGenerationSettings.WorldHeight; y++)
-            {
-                for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
-                {
-                    WorldNode worldNode = s_worldData.WorldGrid.GetGridObject(x, y);
-
-                    if (worldNode.HasWaterNeighbours())
-                    {
-                        continue;
-                    }
-
-                    if (s_worldData.ObjectMap[x, y] >= 0.2f)
-                    {
-                        continue;
-                    }
-
-                    Biome biome = worldNode.Biome;
-                    BiomeObject biomeObject = WorldGenerationSettings.GetBiomeObject(biome);
-
-                    if(biomeObject.ResourceObjects.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    int chunkX = x / WorldGenerationSettings.ChunkSize;
-                    int chunkY = y / WorldGenerationSettings.ChunkSize;
-
-                    ChunkNode chunk = s_worldData.ChunkGrid.GetGridObject(chunkX, chunkY);
-                    Vector3 worldPosition = s_worldData.WorldGrid.GetWorldPosition(x, y);
-
-                    //System.Random prng = new System.Random(Seed);
-                    ResourceObject resourceObject = GetBestResource(biomeObject, x, y);
-                    //ResourceObject resourceObject = biomeObject.ResourceObjects[prng.Next(0, biomeObject.ResourceObjects.Length - 1)];
-                    PlaceObjectAtNode(resourceObject, worldPosition, chunk, new Vector2Int(x, y));
-                }
-            }
-        }
-
-        private void PlaceObjectAtNode(ResourceObject resourceObject, Vector3 worldPosition, ChunkNode chunk, Vector2Int givenCoords)
-        {
-            if (s_worldData.Placement.CanPlaceBuildingAtNode(resourceObject.StructureObjectSettings, givenCoords))
-            {
-                GameObject obj = Instantiate(resourceObject.Prefab, worldPosition, Quaternion.identity, chunk.ChunkGameObject.transform);
-                IBuildable buildable = obj.GetComponentInChildren<IBuildable>();
-                Placement<IBuildable>.Instance.PlaceObjectInNode(buildable, givenCoords);
-            }
+            return new ChunkData(coords, precipMap, tempMap, baronMap, tropicalMap);
         }
     }
+
+    public class ChunkData
+    {
+        public Vector2Int Coordinates { private set; get; }
+        public float[,] PrecipitationMap { private set; get; }
+        public float[,] TemperatureMap { private set; get; }
+        public float[,] BaronMap { private set; get; }
+        public float[,] TropicalityMap { private set; get; }
+        public GameObject ChunkGameObject { private set; get; }
+        public Tilemap WalkableTilemap { private set; get; }
+        public Tilemap WaterTilemap { private set; get; }
+        public Tilemap ColliderTilemap { private set; get; }
+        public bool IsVisible
+        {
+            get
+            {
+                return ChunkGameObject.activeSelf;
+            }
+        }
+
+        public ChunkData(Vector2Int coordinates, float[,] precipitationMap, float[,] temperatureMap, float[,] baronMap, float[,] tropicalityMap)
+        {
+            Coordinates = coordinates;
+            PrecipitationMap = precipitationMap;
+            TemperatureMap = temperatureMap;
+            BaronMap = baronMap;
+            TropicalityMap = tropicalityMap;
+        }
+
+        public void SetupChunk(GameObject chunkObject)
+        {
+            ChunkGameObject = chunkObject;
+            WalkableTilemap = chunkObject.transform.GetChild(0).GetComponent<Tilemap>();
+            WaterTilemap = chunkObject.transform.GetChild(1).GetComponent<Tilemap>();
+            ColliderTilemap = chunkObject.transform.GetChild(2).GetComponent<Tilemap>();
+            //SetVisible(false);
+        }
+
+        public void SetVisible(bool value)
+        {
+            ChunkGameObject.SetActive(value);
+        }
+    }
+
 }

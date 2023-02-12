@@ -42,8 +42,8 @@ public class CharacterInteractionManager : MonoBehaviour
 
     public void Update()
     {
-        UpdateMouseNode();
-        InteractionHighlighter();
+        //UpdateMouseNode();
+        //InteractionHighlighter();
     }
 
     private void OnInteractPressed(InputAction.CallbackContext obj)

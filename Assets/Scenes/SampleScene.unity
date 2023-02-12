@@ -516,7 +516,6 @@ MonoBehaviour:
   <BaronSettings>k__BackingField: {fileID: 11400000, guid: b5b016238d0768d4c82f3328a38deb82, type: 2}
   <TropicalitySettings>k__BackingField: {fileID: 11400000, guid: fa8f21b5ca8c9a949bb18712c27bc022, type: 2}
   <ObjectSettings>k__BackingField: {fileID: 11400000, guid: 7f150f81578e2b543b22e4a81df5f287, type: 2}
-  <ChunkPrefab>k__BackingField: {fileID: 4678267260607809937, guid: 56e5549d830dddb4b838d3b24122a527, type: 3}
 --- !u!114 &1973751284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +529,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Viewer>k__BackingField: {fileID: 309662041}
+  _worldGenerationHandler: {fileID: 1973751283}
+  _worldGenerationSettings: {fileID: 11400000, guid: 3e3278ee16f152e429499adcffa99d6c, type: 2}
+  _tileRenderer: {fileID: 1973751285}
+  <ChunkPrefab>k__BackingField: {fileID: 4678267260607809937, guid: 56e5549d830dddb4b838d3b24122a527, type: 3}
 --- !u!114 &1973751285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _worldGenerationHandler: {fileID: 1973751283}
+  _worldGenerationSettings: {fileID: 11400000, guid: 3e3278ee16f152e429499adcffa99d6c, type: 2}
   _waterTile: {fileID: 11400000, guid: 28c38b148eb4f14478d29851e9db89b8, type: 2}
   _nonDeterminedTile: {fileID: 11400000, guid: ad3a0e99b744db44e8d4f1de7e9e7bb1, type: 2}
 --- !u!1001 &7246442752765443857
