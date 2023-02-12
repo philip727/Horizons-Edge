@@ -119,7 +119,7 @@ namespace Philip.WorldGeneration
             Grid<ChunkNode> chunkGrid = new Grid<ChunkNode>(WorldGenerationSettings.WorldWidth / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.WorldHeight / WorldGenerationSettings.ChunkSize,
                 WorldGenerationSettings.ChunkSize, 
-                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: false, originPosition: default);
+                (Grid<ChunkNode> g, int x, int y) => new ChunkNode(g, x, y), debug: true, originPosition: default);
 
             Placement<IBuildable> placement = new Placement<IBuildable>(
                 WorldGenerationSettings.WorldWidth,
@@ -160,10 +160,10 @@ namespace Philip.WorldGeneration
             {
                 for (int x = 0; x < WorldGenerationSettings.WorldWidth; x++)
                 {
-                    float currentHeight = s_worldData.HeightMap[x, y];
+                    float currentHeight = Noise.GenerateHeight(x, y, Seed, LandSettings.Offset, LandSettings.Octaves, LandSettings.Persistance, LandSettings.Lacunarity, LandSettings.NoiseScale);
 
                     // Sets water tiles at right height
-                    if (currentHeight <= 0.4f)
+                    if (currentHeight >= 0.1f)
                     {
                         s_worldData.WorldGrid.GetGridObject(x, y).SetIsWater(true);
                         continue;

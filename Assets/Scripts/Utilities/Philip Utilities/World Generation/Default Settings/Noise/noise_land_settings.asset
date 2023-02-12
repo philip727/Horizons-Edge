@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac8900fb75b6d4a88aac62230f54c2, type: 3}
   m_Name: noise_land_settings
   m_EditorClassIdentifier: 
-  <NoiseScale>k__BackingField: 50
-  <Octaves>k__BackingField: 4
-  <Persistance>k__BackingField: 0.187
-  <Lacunarity>k__BackingField: 2.87
-  <Offset>k__BackingField: {x: 1, y: 0}
+  <NoiseScale>k__BackingField: 29.2
+  <Octaves>k__BackingField: 2
+  <Persistance>k__BackingField: 0.077
+  <Lacunarity>k__BackingField: 7
+  <Offset>k__BackingField: {x: 2, y: 0}
