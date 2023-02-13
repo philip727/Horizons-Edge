@@ -20,7 +20,7 @@ namespace Philip.WorldGeneration
         //private readonly List<ChunkNode> _loadedChunksLastUpdate = new List<ChunkNode>();
         //private readonly List<ChunkNode> _chunksAlreadyLoadedOnFrame = new List<ChunkNode>();
 
-        private readonly Dictionary<Vector2Int, ChunkData> chunksLoaded = new Dictionary<Vector2Int, ChunkData>();
+        public readonly Dictionary<Vector2Int, ChunkData> chunksLoaded = new Dictionary<Vector2Int, ChunkData>();
 
         private void Start()
         {
@@ -38,14 +38,15 @@ namespace Philip.WorldGeneration
             int chunkX = Mathf.FloorToInt(s_viewerPosition.x / _worldGenerationSettings.ChunkSize);
             int chunkY = Mathf.FloorToInt(s_viewerPosition.y / _worldGenerationSettings.ChunkSize);
             Vector2Int bottomLeftOfCurrentChunk = new Vector2Int(chunkX * _worldGenerationSettings.ChunkSize, chunkY * _worldGenerationSettings.ChunkSize);
+
             for (int x = -MAX_VIEW_DISTANCE; x < MAX_VIEW_DISTANCE; x++)
             {
                 for (int y = -MAX_VIEW_DISTANCE; y < MAX_VIEW_DISTANCE; y++)
                 {
                     Vector2Int bottomLeftOfChunkInViewDist = new Vector2Int(bottomLeftOfCurrentChunk.x + (x * _worldGenerationSettings.ChunkSize),
                                                                             bottomLeftOfCurrentChunk.y + (y * _worldGenerationSettings.ChunkSize));
-                    ChunkData chunkData = _worldGenerationHandler.RequestChunkData(bottomLeftOfChunkInViewDist.x, bottomLeftOfChunkInViewDist.y);
                     if (chunksLoaded.ContainsKey(bottomLeftOfChunkInViewDist)) continue;
+                    ChunkData chunkData = _worldGenerationHandler.RequestChunkData(bottomLeftOfChunkInViewDist.x, bottomLeftOfChunkInViewDist.y);
                     CreateChunkFromData(chunkData);
                     chunksLoaded.Add(bottomLeftOfChunkInViewDist, chunkData);
                 }
@@ -53,7 +54,7 @@ namespace Philip.WorldGeneration
             }
         }
 
-        private void CreateChunkFromData(ChunkData chunkData)
+        private ChunkData CreateChunkFromData(ChunkData chunkData)
         {
             GameObject newChunkPrefab = Instantiate(ChunkPrefab, new Vector3(chunkData.Coordinates.x, chunkData.Coordinates.y, 0f), Quaternion.identity, transform);
             chunkData.SetupChunk(newChunkPrefab);
@@ -64,6 +65,11 @@ namespace Philip.WorldGeneration
                     _tileRenderer.SetupTile(chunkData, x, y);
                 }
             }
+
+            return chunkData;
         }
+
+
+
     }
 }
